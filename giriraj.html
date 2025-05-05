@@ -1,0 +1,2257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Giriraj Heights - Luxury Residential Project by Shri Giriraj Realty
+    </title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#1E3D6B", secondary: "#C5A572" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Raleway', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+          font-family: 'Playfair Display', serif;
+      }
+      input:focus, textarea:focus {
+          outline: none;
+          border-color: #1E3D6B;
+      }
+      .gallery-item:hover .gallery-overlay {
+          opacity: 1;
+      }
+      input[type="range"] {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 6px;
+          background: #e5e7eb;
+          border-radius: 5px;
+          outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+          background: #1E3D6B;
+          border-radius: 50%;
+          cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          background: #1E3D6B;
+          border-radius: 50%;
+          cursor: pointer;
+          border: none;
+      }
+      .custom-checkbox {
+          position: relative;
+          padding-left: 35px;
+          cursor: pointer;
+          user-select: none;
+      }
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+      }
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 24px;
+          width: 24px;
+          background-color: #fff;
+          border: 2px solid #e5e7eb;
+          border-radius: 4px;
+      }
+      .custom-checkbox:hover input ~ .checkmark {
+          border-color: #1E3D6B;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+          background-color: #1E3D6B;
+          border-color: #1E3D6B;
+      }
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+      .custom-checkbox .checkmark:after {
+          left: 9px;
+          top: 5px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 26px;
+      }
+      .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #e5e7eb;
+          transition: .4s;
+          border-radius: 34px;
+      }
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .slider {
+          background-color: #1E3D6B;
+      }
+      input:checked + .slider:before {
+          transform: translateX(24px);
+      }
+      .floor-plan-tab.active {
+          background-color: #1E3D6B;
+          color: white;
+      }
+      .gallery-tab.active {
+          color: #1E3D6B;
+          border-bottom: 2px solid #1E3D6B;
+      }
+      .amenity-icon {
+          transition: all 0.3s ease;
+      }
+      .amenity-icon:hover {
+          transform: translateY(-5px);
+      }
+      .project-gallery-slider {
+          scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <a
+            href="https://readdy.ai/home/1215cda4-fada-41a5-81ab-e830218f01df/5d10eb5e-ef39-4e65-90c8-c1ce6764556e"
+            data-readdy="true"
+            class="w-10 h-10 flex items-center justify-center mr-2 text-primary"
+          >
+            <i class="ri-arrow-left-line ri-lg"></i>
+          </a>
+          <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+          <a
+            href="#overview"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Overview</a
+          >
+          <a
+            href="#location"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Location</a
+          >
+          <a
+            href="#floor-plans"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Floor Plans</a
+          >
+          <a
+            href="#gallery"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Gallery</a
+          >
+          <a
+            href="#amenities"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Amenities</a
+          >
+          <a
+            href="#pricing"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Pricing</a
+          >
+          <a
+            href="#contact"
+            class="text-gray-800 hover:text-primary font-medium transition duration-300"
+            >Contact</a
+          >
+        </nav>
+        <div class="flex items-center space-x-4">
+          <button
+            class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary"
+          >
+            <i class="ri-share-line ri-lg"></i>
+          </button>
+          <button
+            class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary"
+          >
+            <i class="ri-bookmark-line ri-lg"></i>
+          </button>
+          <div class="md:hidden flex items-center">
+            <button
+              class="text-gray-800 focus:outline-none w-10 h-10 flex items-center justify-center"
+            >
+              <i class="ri-menu-line ri-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-20 relative">
+      <div class="w-full h-[600px] relative">
+        <img
+          src="https://readdy.ai/api/search-image?query=luxury%2520residential%2520apartment%2520building%2520with%2520modern%2520architecture%252C%2520glass%2520balconies%252C%2520beautiful%2520landscaping%252C%2520high-end%2520residential%2520complex%2520with%2520elegant%2520design%2520features%252C%2520professional%2520real%2520estate%2520photography%252C%2520clear%2520blue%2520sky%252C%2520stunning%2520facade&width=1920&height=1080&seq=hero1&orientation=landscape"
+          alt="Giriraj Heights Exterior"
+          class="w-full h-full object-cover object-top"
+        />
+        <div
+          class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end"
+        >
+          <div class="container mx-auto px-4 pb-12">
+            <div
+              class="flex flex-col md:flex-row items-start md:items-end justify-between"
+            >
+              <div>
+                <span
+                  class="inline-block bg-green-500 text-white px-4 py-1 rounded-full text-sm font-medium mb-4"
+                  >Ready to Move</span
+                >
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
+                  Giriraj Heights
+                </h1>
+                <p class="text-xl text-white flex items-center">
+                  <span class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-map-pin-line"></i>
+                  </span>
+                  Bandra West, Mumbai
+                </p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4 mt-6 md:mt-0">
+                <a
+                  href="#contact"
+                  class="bg-secondary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 text-center whitespace-nowrap"
+                  >Book a Site Visit</a
+                >
+                <button
+                  class="bg-white text-primary border border-white px-6 py-3 !rounded-button font-medium hover:bg-opacity-90 transition duration-300 flex items-center justify-center whitespace-nowrap"
+                >
+                  <span class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-download-line"></i>
+                  </span>
+                  Download Brochure
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section id="overview" class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <div
+            class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-center"
+          >
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Price Range</h3>
+            <p class="text-2xl font-bold text-primary">₹ 2.5 - 4.2 Cr</p>
+          </div>
+          <div
+            class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-center"
+          >
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Configuration</h3>
+            <p class="text-2xl font-bold text-primary">3 & 4 BHK</p>
+          </div>
+          <div
+            class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-center"
+          >
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Project Area</h3>
+            <p class="text-2xl font-bold text-primary">5.2 Acres</p>
+          </div>
+          <div
+            class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-center"
+          >
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Possession</h3>
+            <p class="text-2xl font-bold text-green-600">Ready to Move</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-12">
+          <div class="md:w-1/2">
+            <h2 class="text-3xl font-bold text-primary mb-6">
+              Project Overview
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              Giriraj Heights is a premium residential project offering
+              luxurious 3 & 4 BHK apartments in the heart of Bandra West,
+              Mumbai. Spread across 5.2 acres of prime land, this architectural
+              masterpiece combines elegant design with modern amenities to
+              provide an unparalleled living experience.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              Each residence is meticulously crafted with high-quality materials
+              and features spacious layouts, premium fittings, and abundant
+              natural light. The project boasts of world-class amenities
+              including a state-of-the-art fitness center, swimming pool,
+              landscaped gardens, children's play area, and 24/7 security.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              With its strategic location, Giriraj Heights offers excellent
+              connectivity to major business districts, educational
+              institutions, healthcare facilities, entertainment hubs, and
+              transportation networks, making it an ideal choice for discerning
+              homebuyers seeking a perfect blend of luxury, comfort, and
+              convenience.
+            </p>
+          </div>
+          <div class="md:w-1/2">
+            <h2 class="text-3xl font-bold text-primary mb-6">Key Highlights</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                >
+                  <i class="ri-building-line ri-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-1">Premium Location</h4>
+                  <p class="text-gray-600">
+                    Prime location in Bandra West with excellent connectivity
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                >
+                  <i class="ri-layout-line ri-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-1">Spacious Layouts</h4>
+                  <p class="text-gray-600">
+                    Thoughtfully designed 3 & 4 BHK apartments
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                >
+                  <i class="ri-home-gear-line ri-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-1">Modern Amenities</h4>
+                  <p class="text-gray-600">
+                    State-of-the-art facilities for recreation and wellness
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                >
+                  <i class="ri-shield-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-1">24/7 Security</h4>
+                  <p class="text-gray-600">
+                    Advanced security systems for peace of mind
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                >
+                  <i class="ri-parking-line ri-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-1">Ample Parking</h4>
+                  <p class="text-gray-600">
+                    Dedicated parking spaces for residents and visitors
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                >
+                  <i class="ri-leaf-line ri-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-1">Green Spaces</h4>
+                  <p class="text-gray-600">
+                    Beautifully landscaped gardens and open areas
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Advantages -->
+    <section id="location" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Location Advantages
+        </h2>
+
+        <div class="flex flex-col lg:flex-row gap-12">
+          <div class="lg:w-1/2">
+            <div class="rounded-lg overflow-hidden shadow-lg h-[450px]">
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png')"
+              ></div>
+            </div>
+          </div>
+
+          <div class="lg:w-1/2">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              Strategic Location
+            </h3>
+            <p class="text-gray-700 leading-relaxed mb-8">
+              Giriraj Heights is strategically located in Bandra West, one of
+              Mumbai's most sought-after neighborhoods. The project offers
+              excellent connectivity to major business districts, educational
+              institutions, healthcare facilities, entertainment hubs, and
+              transportation networks.
+            </p>
+
+            <h4 class="text-xl font-bold text-gray-800 mb-4">
+              Proximity to Key Landmarks
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-building-4-line"></i>
+                </div>
+                <p class="text-gray-700">Bandra Kurla Complex - 4.5 km</p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-plane-line"></i>
+                </div>
+                <p class="text-gray-700">Mumbai Airport - 12 km</p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-train-line"></i>
+                </div>
+                <p class="text-gray-700">Bandra Railway Station - 2 km</p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-hospital-line"></i>
+                </div>
+                <p class="text-gray-700">Lilavati Hospital - 3 km</p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-shopping-bag-3-line"></i>
+                </div>
+                <p class="text-gray-700">Linking Road - 1.5 km</p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-school-line"></i>
+                </div>
+                <p class="text-gray-700">St. Stanislaus School - 2.5 km</p>
+              </div>
+            </div>
+
+            <h4 class="text-xl font-bold text-gray-800 mb-4">Connectivity</h4>
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-road-map-line"></i>
+                </div>
+                <p class="text-gray-700">
+                  Easy access to Western Express Highway
+                </p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-subway-line"></i>
+                </div>
+                <p class="text-gray-700">Close proximity to Metro stations</p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-3 flex-shrink-0"
+                >
+                  <i class="ri-car-line"></i>
+                </div>
+                <p class="text-gray-700">
+                  Well-connected by public transportation
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="#contact"
+              class="inline-block bg-primary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 whitespace-nowrap"
+              >Schedule a Site Visit</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floor Plans -->
+    <section id="floor-plans" class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Floor Plans
+        </h2>
+
+        <div class="flex flex-wrap justify-center mb-8 gap-4">
+          <button
+            class="floor-plan-tab active bg-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap"
+          >
+            All Plans
+          </button>
+          <button
+            class="floor-plan-tab bg-white text-gray-700 border border-gray-300 px-6 py-3 !rounded-button font-medium hover:bg-gray-50 whitespace-nowrap"
+          >
+            3 BHK
+          </button>
+          <button
+            class="floor-plan-tab bg-white text-gray-700 border border-gray-300 px-6 py-3 !rounded-button font-medium hover:bg-gray-50 whitespace-nowrap"
+          >
+            4 BHK
+          </button>
+          <button
+            class="floor-plan-tab bg-white text-gray-700 border border-gray-300 px-6 py-3 !rounded-button font-medium hover:bg-gray-50 whitespace-nowrap"
+          >
+            Penthouse
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Floor Plan Viewer -->
+          <div
+            class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="p-6 border-b border-gray-200">
+              <h3 class="text-xl font-bold text-gray-900">
+                3 BHK Premium - Type A
+              </h3>
+              <p class="text-gray-600">1,850 sq. ft. | East Facing</p>
+            </div>
+            <div class="p-4 h-[500px] flex items-center justify-center">
+              <img
+                src="https://readdy.ai/api/search-image?query=3D%2520floor%2520plan%2520of%2520a%2520modern%25203%2520bedroom%2520apartment%252C%2520detailed%2520architectural%2520drawing%252C%2520top%2520view%2520with%2520furniture%2520layout%252C%2520clean%2520lines%252C%2520professional%2520floor%2520plan%2520design%252C%2520high%2520resolution%252C%2520white%2520background&width=800&height=600&seq=floorplan1&orientation=landscape"
+                alt="3 BHK Floor Plan"
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <div
+              class="p-6 border-t border-gray-200 flex justify-between items-center"
+            >
+              <div class="flex space-x-4">
+                <button
+                  class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-700 hover:bg-gray-200"
+                >
+                  <i class="ri-zoom-in-line"></i>
+                </button>
+                <button
+                  class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-700 hover:bg-gray-200"
+                >
+                  <i class="ri-fullscreen-line"></i>
+                </button>
+              </div>
+              <button class="flex items-center text-primary font-medium">
+                <span class="w-5 h-5 flex items-center justify-center mr-2">
+                  <i class="ri-download-line"></i>
+                </span>
+                Download Floor Plan
+              </button>
+            </div>
+          </div>
+
+          <!-- Floor Plan Options -->
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+              <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">
+                  Available Floor Plans
+                </h3>
+              </div>
+              <div class="p-4">
+                <div class="space-y-4">
+                  <div
+                    class="p-4 bg-primary bg-opacity-5 border-l-4 border-primary rounded cursor-pointer"
+                  >
+                    <h4 class="font-bold text-gray-900">
+                      3 BHK Premium - Type A
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                      1,850 sq. ft. | East Facing
+                    </p>
+                    <p class="text-primary font-medium text-sm mt-2">
+                      ₹ 2.5 Cr onwards
+                    </p>
+                  </div>
+                  <div
+                    class="p-4 bg-white border border-gray-200 rounded cursor-pointer hover:border-primary"
+                  >
+                    <h4 class="font-bold text-gray-900">
+                      3 BHK Premium - Type B
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                      1,950 sq. ft. | West Facing
+                    </p>
+                    <p class="text-primary font-medium text-sm mt-2">
+                      ₹ 2.7 Cr onwards
+                    </p>
+                  </div>
+                  <div
+                    class="p-4 bg-white border border-gray-200 rounded cursor-pointer hover:border-primary"
+                  >
+                    <h4 class="font-bold text-gray-900">
+                      4 BHK Luxury - Type A
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                      2,350 sq. ft. | South Facing
+                    </p>
+                    <p class="text-primary font-medium text-sm mt-2">
+                      ₹ 3.4 Cr onwards
+                    </p>
+                  </div>
+                  <div
+                    class="p-4 bg-white border border-gray-200 rounded cursor-pointer hover:border-primary"
+                  >
+                    <h4 class="font-bold text-gray-900">
+                      4 BHK Luxury - Type B
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                      2,450 sq. ft. | North Facing
+                    </p>
+                    <p class="text-primary font-medium text-sm mt-2">
+                      ₹ 3.6 Cr onwards
+                    </p>
+                  </div>
+                  <div
+                    class="p-4 bg-white border border-gray-200 rounded cursor-pointer hover:border-primary"
+                  >
+                    <h4 class="font-bold text-gray-900">4 BHK Penthouse</h4>
+                    <p class="text-gray-600 text-sm">
+                      3,200 sq. ft. | 360° View
+                    </p>
+                    <p class="text-primary font-medium text-sm mt-2">
+                      ₹ 4.2 Cr onwards
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">
+                  Need Assistance?
+                </h3>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-700 mb-4">
+                  Speak with our sales representative to get detailed
+                  information about floor plans and availability.
+                </p>
+                <a
+                  href="#contact"
+                  class="block bg-primary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 text-center whitespace-nowrap"
+                  >Contact Sales Team</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Project Gallery
+        </h2>
+
+        <div class="flex justify-center mb-8 border-b border-gray-200">
+          <div class="flex space-x-8">
+            <button
+              class="gallery-tab active px-4 py-3 text-lg font-medium border-b-2 border-transparent"
+            >
+              Exterior
+            </button>
+            <button
+              class="gallery-tab px-4 py-3 text-lg font-medium border-b-2 border-transparent"
+            >
+              Interior
+            </button>
+            <button
+              class="gallery-tab px-4 py-3 text-lg font-medium border-b-2 border-transparent"
+            >
+              Amenities
+            </button>
+            <button
+              class="gallery-tab px-4 py-3 text-lg font-medium border-b-2 border-transparent"
+            >
+              Construction
+            </button>
+          </div>
+        </div>
+
+        <div class="relative mb-8">
+          <div
+            class="project-gallery-slider flex overflow-x-auto pb-4 space-x-4 hide-scrollbar"
+          >
+            <div
+              class="gallery-item flex-shrink-0 w-[350px] h-[250px] relative rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury%2520residential%2520apartment%2520building%2520exterior%252C%2520modern%2520architecture%252C%2520glass%2520balconies%252C%2520beautiful%2520landscaping%252C%2520professional%2520real%2520estate%2520photography%252C%2520clear%2520blue%2520sky%252C%2520stunning%2520facade&width=600&height=400&seq=gallery1&orientation=landscape"
+                alt="Building Exterior"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-zoom-in-line text-primary ri-lg"></i>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-item flex-shrink-0 w-[350px] h-[250px] relative rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury%2520apartment%2520building%2520entrance%2520lobby%252C%2520elegant%2520reception%2520area%252C%2520modern%2520design%252C%2520high-end%2520finishes%252C%2520professional%2520real%2520estate%2520photography%252C%2520marble%2520flooring%252C%2520chandelier%252C%2520stylish%2520seating&width=600&height=400&seq=gallery2&orientation=landscape"
+                alt="Building Entrance"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-zoom-in-line text-primary ri-lg"></i>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-item flex-shrink-0 w-[350px] h-[250px] relative rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury%2520residential%2520complex%2520with%2520swimming%2520pool%252C%2520modern%2520architecture%252C%2520landscaped%2520gardens%252C%2520outdoor%2520amenities%252C%2520professional%2520real%2520estate%2520photography%252C%2520clear%2520blue%2520sky%252C%2520high-end%2520property&width=600&height=400&seq=gallery3&orientation=landscape"
+                alt="Swimming Pool"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-zoom-in-line text-primary ri-lg"></i>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-item flex-shrink-0 w-[350px] h-[250px] relative rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury%2520apartment%2520building%2520aerial%2520view%252C%2520residential%2520complex%2520from%2520above%252C%2520modern%2520architecture%252C%2520landscaped%2520surroundings%252C%2520professional%2520real%2520estate%2520photography%252C%2520clear%2520blue%2520sky%252C%2520high-end%2520property&width=600&height=400&seq=gallery4&orientation=landscape"
+                alt="Aerial View"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-zoom-in-line text-primary ri-lg"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-700 hover:text-primary z-10"
+          >
+            <i class="ri-arrow-left-s-line ri-lg"></i>
+          </button>
+          <button
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-700 hover:text-primary z-10"
+          >
+            <i class="ri-arrow-right-s-line ri-lg"></i>
+          </button>
+        </div>
+
+        <div class="flex justify-center space-x-6">
+          <button
+            class="flex items-center bg-white text-primary border border-primary px-6 py-3 !rounded-button font-medium hover:bg-primary hover:text-white transition duration-300 whitespace-nowrap"
+          >
+            <span class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-image-line"></i>
+            </span>
+            View All Photos
+          </button>
+          <button
+            class="flex items-center bg-white text-primary border border-primary px-6 py-3 !rounded-button font-medium hover:bg-primary hover:text-white transition duration-300 whitespace-nowrap"
+          >
+            <span class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-movie-line"></i>
+            </span>
+            Virtual Tour
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Amenities -->
+    <section id="amenities" class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Amenities & Features
+        </h2>
+
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12"
+        >
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-swimming-pool-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Swimming Pool</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-heart-pulse-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Fitness Center</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-community-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Clubhouse</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-gamepad-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Children's Play Area</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-parking-box-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Parking</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-shield-check-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">24/7 Security</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-landscape-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Garden</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-basketball-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Sports Court</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-restaurant-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Party Hall</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-film-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Mini Theater</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-wifi-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Wi-Fi Connectivity</h4>
+          </div>
+          <div class="amenity-icon flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-3"
+            >
+              <i class="ri-home-smile-line ri-lg"></i>
+            </div>
+            <h4 class="font-bold text-gray-800">Guest Rooms</h4>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">
+                Premium Specifications
+              </h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">Flooring</h4>
+                  <p class="text-gray-700">
+                    Imported marble flooring in living and dining areas. Premium
+                    vitrified tiles in bedrooms. Anti-skid ceramic tiles in
+                    bathrooms.
+                  </p>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">Kitchen</h4>
+                  <p class="text-gray-700">
+                    Modular kitchen with granite countertop. Premium stainless
+                    steel sink. Provision for water purifier, refrigerator, and
+                    microwave.
+                  </p>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">Bathrooms</h4>
+                  <p class="text-gray-700">
+                    Premium sanitary ware and CP fittings. Glass shower
+                    enclosures. Wall-mounted WC with concealed cistern.
+                  </p>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">Doors & Windows</h4>
+                  <p class="text-gray-700">
+                    Engineered wooden main door. Hardwood frame with flush doors
+                    for internal rooms. UPVC windows with toughened glass.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="h-[400px]">
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury%2520apartment%2520interior%252C%2520modern%2520living%2520room%2520with%2520large%2520windows%252C%2520high-end%2520furniture%252C%2520elegant%2520design%252C%2520professional%2520real%2520estate%2520photography%252C%2520spacious%2520and%2520bright%2520interior&width=800&height=600&seq=amenities1&orientation=landscape"
+                alt="Luxury Interior"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing & Payment -->
+    <section id="pricing" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Pricing & Payment Options
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+              <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">Price Breakup</h3>
+              </div>
+              <div class="p-6">
+                <div class="overflow-x-auto">
+                  <table class="w-full">
+                    <thead>
+                      <tr class="bg-gray-50">
+                        <th class="px-4 py-3 text-left text-gray-700 font-bold">
+                          Unit Type
+                        </th>
+                        <th class="px-4 py-3 text-left text-gray-700 font-bold">
+                          Area (sq. ft.)
+                        </th>
+                        <th class="px-4 py-3 text-left text-gray-700 font-bold">
+                          Base Price
+                        </th>
+                        <th class="px-4 py-3 text-left text-gray-700 font-bold">
+                          Floor Rise
+                        </th>
+                        <th class="px-4 py-3 text-left text-gray-700 font-bold">
+                          Total Price
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                      <tr>
+                        <td class="px-4 py-4 text-gray-700">
+                          3 BHK Premium - Type A
+                        </td>
+                        <td class="px-4 py-4 text-gray-700">1,850</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 2.35 Cr</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 15,000/floor</td>
+                        <td class="px-4 py-4 font-medium text-primary">
+                          ₹ 2.5 Cr onwards
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-4 text-gray-700">
+                          3 BHK Premium - Type B
+                        </td>
+                        <td class="px-4 py-4 text-gray-700">1,950</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 2.55 Cr</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 15,000/floor</td>
+                        <td class="px-4 py-4 font-medium text-primary">
+                          ₹ 2.7 Cr onwards
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-4 text-gray-700">
+                          4 BHK Luxury - Type A
+                        </td>
+                        <td class="px-4 py-4 text-gray-700">2,350</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 3.2 Cr</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 20,000/floor</td>
+                        <td class="px-4 py-4 font-medium text-primary">
+                          ₹ 3.4 Cr onwards
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-4 text-gray-700">
+                          4 BHK Luxury - Type B
+                        </td>
+                        <td class="px-4 py-4 text-gray-700">2,450</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 3.4 Cr</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 20,000/floor</td>
+                        <td class="px-4 py-4 font-medium text-primary">
+                          ₹ 3.6 Cr onwards
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-4 text-gray-700">4 BHK Penthouse</td>
+                        <td class="px-4 py-4 text-gray-700">3,200</td>
+                        <td class="px-4 py-4 text-gray-700">₹ 4.2 Cr</td>
+                        <td class="px-4 py-4 text-gray-700">-</td>
+                        <td class="px-4 py-4 font-medium text-primary">
+                          ₹ 4.2 Cr onwards
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">
+                  * Prices are subject to change without prior notice.
+                  Additional charges for car parking, club membership,
+                  maintenance deposit, GST, and stamp duty apply.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">Payment Plans</h3>
+              </div>
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="border border-gray-200 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">
+                      Construction Linked Plan
+                    </h4>
+                    <ul class="space-y-3 text-gray-700">
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% at Booking</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% within 30 days of Booking</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% on Completion of Foundation</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% on Completion of 4th Floor Slab</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% on Completion of 8th Floor Slab</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% on Completion of 12th Floor Slab</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% on Completion of Plaster</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% on Completion of Flooring</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>20% on Offer of Possession</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">
+                      Down Payment Plan (5% Discount)
+                    </h4>
+                    <ul class="space-y-3 text-gray-700">
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>10% at Booking</span>
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span
+                          >85% within 30 days of Booking (5% discount
+                          applicable)</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <div
+                          class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-primary"
+                        >
+                          <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <span>5% on Offer of Possession</span>
+                      </li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                      <h4 class="text-lg font-bold text-gray-900 mb-4">
+                        Bank Loan Available
+                      </h4>
+                      <div class="flex flex-wrap gap-4">
+                        <div class="w-16 h-16 flex items-center justify-center">
+                          <i class="ri-bank-fill ri-2x text-gray-700"></i>
+                        </div>
+                        <div class="w-16 h-16 flex items-center justify-center">
+                          <i class="ri-bank-card-fill ri-2x text-gray-700"></i>
+                        </div>
+                        <div class="w-16 h-16 flex items-center justify-center">
+                          <i
+                            class="ri-secure-payment-fill ri-2x text-gray-700"
+                          ></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+              <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">EMI Calculator</h3>
+              </div>
+              <div class="p-6">
+                <div class="mb-4">
+                  <label for="loan-amount" class="block text-gray-700 mb-2"
+                    >Loan Amount (₹)</label
+                  >
+                  <input
+                    type="text"
+                    id="loan-amount"
+                    value="2,50,00,000"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="interest-rate" class="block text-gray-700 mb-2"
+                    >Interest Rate (%)</label
+                  >
+                  <input
+                    type="text"
+                    id="interest-rate"
+                    value="7.5"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="loan-tenure" class="block text-gray-700 mb-2"
+                    >Loan Tenure (Years)</label
+                  >
+                  <input
+                    type="range"
+                    id="loan-tenure"
+                    min="5"
+                    max="30"
+                    value="20"
+                    class="w-full"
+                  />
+                  <div class="flex justify-between text-sm text-gray-600 mt-1">
+                    <span>5 Years</span>
+                    <span id="tenure-value">20 Years</span>
+                    <span>30 Years</span>
+                  </div>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg mb-4">
+                  <div class="flex justify-between mb-2">
+                    <span class="text-gray-700">Monthly EMI:</span>
+                    <span class="font-bold text-primary">₹ 1,99,125</span>
+                  </div>
+                  <div class="flex justify-between mb-2">
+                    <span class="text-gray-700">Total Interest:</span>
+                    <span class="font-bold text-gray-900">₹ 2,27,90,000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-700">Total Amount:</span>
+                    <span class="font-bold text-gray-900">₹ 4,77,90,000</span>
+                  </div>
+                </div>
+                <button
+                  class="bg-primary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 w-full whitespace-nowrap"
+                >
+                  Calculate EMI
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">
+                  Need Financial Assistance?
+                </h3>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-700 mb-6">
+                  Our financial advisors can help you choose the best payment
+                  plan and guide you through the home loan process.
+                </p>
+                <a
+                  href="#contact"
+                  class="block bg-primary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 text-center whitespace-nowrap"
+                  >Contact Financial Advisor</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Construction Status -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Construction Status
+        </h2>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
+          <div class="p-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+              <h3 class="text-xl font-bold text-gray-900">Current Progress</h3>
+              <span
+                class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full"
+                >Ready to Move</span
+              >
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="mb-8">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-gray-700">Overall Completion</span>
+                <span class="text-primary font-bold">100%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div
+                  class="bg-primary h-2.5 rounded-full"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="border border-gray-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-gray-800">Structure</h4>
+                  <span class="text-green-600 font-bold">100%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-green-600 h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+              </div>
+              <div class="border border-gray-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-gray-800">MEP Works</h4>
+                  <span class="text-green-600 font-bold">100%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-green-600 h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+              </div>
+              <div class="border border-gray-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-gray-800">Finishing</h4>
+                  <span class="text-green-600 font-bold">100%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-green-600 h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+              </div>
+              <div class="border border-gray-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-gray-800">Amenities</h4>
+                  <span class="text-green-600 font-bold">100%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-green-600 h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+              <h3 class="text-xl font-bold text-gray-900">Project Timeline</h3>
+            </div>
+            <div class="p-6">
+              <div class="relative pl-8">
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"
+                ></div>
+
+                <div class="relative mb-8">
+                  <div
+                    class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+                  ></div>
+                  <div class="mb-1 text-sm text-gray-500">January 2021</div>
+                  <h4 class="font-bold text-gray-800 mb-1">Project Launch</h4>
+                  <p class="text-gray-700 text-sm">
+                    Official launch of Giriraj Heights project
+                  </p>
+                </div>
+
+                <div class="relative mb-8">
+                  <div
+                    class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+                  ></div>
+                  <div class="mb-1 text-sm text-gray-500">March 2021</div>
+                  <h4 class="font-bold text-gray-800 mb-1">Foundation Work</h4>
+                  <p class="text-gray-700 text-sm">
+                    Completion of excavation and foundation work
+                  </p>
+                </div>
+
+                <div class="relative mb-8">
+                  <div
+                    class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+                  ></div>
+                  <div class="mb-1 text-sm text-gray-500">December 2021</div>
+                  <h4 class="font-bold text-gray-800 mb-1">
+                    Structure Completion
+                  </h4>
+                  <p class="text-gray-700 text-sm">
+                    Completion of structural framework
+                  </p>
+                </div>
+
+                <div class="relative mb-8">
+                  <div
+                    class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+                  ></div>
+                  <div class="mb-1 text-sm text-gray-500">June 2022</div>
+                  <h4 class="font-bold text-gray-800 mb-1">MEP Works</h4>
+                  <p class="text-gray-700 text-sm">
+                    Completion of mechanical, electrical, and plumbing works
+                  </p>
+                </div>
+
+                <div class="relative mb-8">
+                  <div
+                    class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+                  ></div>
+                  <div class="mb-1 text-sm text-gray-500">December 2022</div>
+                  <h4 class="font-bold text-gray-800 mb-1">
+                    Interior Finishing
+                  </h4>
+                  <p class="text-gray-700 text-sm">
+                    Completion of interior works and finishes
+                  </p>
+                </div>
+
+                <div class="relative">
+                  <div
+                    class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+                  ></div>
+                  <div class="mb-1 text-sm text-gray-500">March 2023</div>
+                  <h4 class="font-bold text-gray-800 mb-1">Project Handover</h4>
+                  <p class="text-gray-700 text-sm">
+                    Completion of project and handover to residents
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+              <h3 class="text-xl font-bold text-gray-900">
+                Approvals & Certifications
+              </h3>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div
+                    class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">RERA Approved</h4>
+                    <p class="text-gray-700 text-sm">
+                      Registration No: MH/REA/MUMBAI/BANDRA/12345/2021
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">BMC Approved</h4>
+                    <p class="text-gray-700 text-sm">
+                      All necessary approvals from Brihanmumbai Municipal
+                      Corporation
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">
+                      Environmental Clearance
+                    </h4>
+                    <p class="text-gray-700 text-sm">
+                      Approved by State Environmental Impact Assessment
+                      Authority
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">Fire NOC</h4>
+                    <p class="text-gray-700 text-sm">
+                      No Objection Certificate from Fire Department
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">
+                      Occupation Certificate
+                    </h4>
+                    <p class="text-gray-700 text-sm">
+                      OC received for all towers
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <button class="flex items-center text-primary font-medium">
+                  <span class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-download-line"></i>
+                  </span>
+                  Download Approvals
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Contact Us
+        </h2>
+
+        <div class="flex flex-col lg:flex-row gap-12">
+          <!-- Contact Form -->
+          <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Enquire Now</h3>
+            <form>
+              <div class="mb-6">
+                <label for="name" class="block text-gray-700 mb-2"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block text-gray-700 mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="phone" class="block text-gray-700 mb-2"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+              <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Interested In</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <label class="custom-checkbox"
+                    >3 BHK
+                    <input type="checkbox" checked />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="custom-checkbox"
+                    >4 BHK
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="custom-checkbox"
+                    >Penthouse
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block text-gray-700 mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="w-full px-4 py-3 border border-gray-300 rounded resize-none focus:border-primary"
+                  placeholder="Enter your message"
+                ></textarea>
+              </div>
+              <div class="mb-6">
+                <label class="flex items-center">
+                  <label class="switch mr-3">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                  </label>
+                  <span class="text-gray-700"
+                    >I agree to receive updates via WhatsApp</span
+                  >
+                </label>
+              </div>
+              <button
+                type="submit"
+                class="bg-primary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 w-full whitespace-nowrap"
+              >
+                Submit Enquiry
+              </button>
+            </form>
+          </div>
+
+          <!-- Contact Info & Site Visit -->
+          <div class="lg:w-1/2">
+            <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">
+                Sales Office
+              </h3>
+              <div class="space-y-4 mb-6">
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-map-pin-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Address</h4>
+                    <p class="text-gray-600">
+                      Giriraj Heights, Plot No. 45, 16th Road, Bandra West,
+                      Mumbai, Maharashtra 400050, India
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-phone-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Phone</h4>
+                    <p class="text-gray-600">+91-9876543210</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-mail-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Email</h4>
+                    <p class="text-gray-600">
+                      sales.girirajheights@shrigirirajrealty.com
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-time-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Sales Office Hours</h4>
+                    <p class="text-gray-600">
+                      Monday - Sunday: 10:00 AM - 7:00 PM
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex space-x-4">
+                <a
+                  href="#"
+                  class="flex items-center justify-center bg-[#25D366] text-white px-4 py-2 rounded-lg font-medium"
+                >
+                  <span class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-whatsapp-line"></i>
+                  </span>
+                  WhatsApp
+                </a>
+                <a
+                  href="tel:+919876543210"
+                  class="flex items-center justify-center bg-primary text-white px-4 py-2 rounded-lg font-medium"
+                >
+                  <span class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-phone-line"></i>
+                  </span>
+                  Call Now
+                </a>
+              </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">
+                Book a Site Visit
+              </h3>
+              <p class="text-gray-700 mb-6">
+                Schedule a site visit to experience Giriraj Heights in person.
+                Our sales representatives will be happy to show you around and
+                answer all your questions.
+              </p>
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                  <label for="visit-date" class="block text-gray-700 mb-2"
+                    >Preferred Date</label
+                  >
+                  <input
+                    type="date"
+                    id="visit-date"
+                    class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label for="visit-time" class="block text-gray-700 mb-2"
+                    >Preferred Time</label
+                  >
+                  <select
+                    id="visit-time"
+                    class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary pr-8"
+                  >
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>1:00 PM</option>
+                    <option>2:00 PM</option>
+                    <option>3:00 PM</option>
+                    <option>4:00 PM</option>
+                    <option>5:00 PM</option>
+                    <option>6:00 PM</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="bg-secondary hover:bg-opacity-90 text-white px-6 py-3 !rounded-button font-medium transition duration-300 w-full whitespace-nowrap"
+              >
+                Book Site Visit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Document Downloads -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-primary mb-12 text-center">
+          Download Project Documents
+        </h2>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+        >
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-4"
+              >
+                <i class="ri-file-text-line ri-lg"></i>
+              </div>
+              <h4 class="font-bold text-gray-800 mb-4">Project Brochure</h4>
+              <button class="text-primary font-medium flex items-center">
+                <span class="w-5 h-5 flex items-center justify-center mr-1">
+                  <i class="ri-download-line"></i>
+                </span>
+                Download
+              </button>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-4"
+              >
+                <i class="ri-layout-line ri-lg"></i>
+              </div>
+              <h4 class="font-bold text-gray-800 mb-4">Floor Plans</h4>
+              <button class="text-primary font-medium flex items-center">
+                <span class="w-5 h-5 flex items-center justify-center mr-1">
+                  <i class="ri-download-line"></i>
+                </span>
+                Download
+              </button>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-4"
+              >
+                <i class="ri-price-tag-3-line ri-lg"></i>
+              </div>
+              <h4 class="font-bold text-gray-800 mb-4">Price List</h4>
+              <button class="text-primary font-medium flex items-center">
+                <span class="w-5 h-5 flex items-center justify-center mr-1">
+                  <i class="ri-download-line"></i>
+                </span>
+                Download
+              </button>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-4"
+              >
+                <i class="ri-home-4-line ri-lg"></i>
+              </div>
+              <h4 class="font-bold text-gray-800 mb-4">Sample Flat Layout</h4>
+              <button class="text-primary font-medium flex items-center">
+                <span class="w-5 h-5 flex items-center justify-center mr-1">
+                  <i class="ri-download-line"></i>
+                </span>
+                Download
+              </button>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary mb-4"
+              >
+                <i class="ri-file-list-3-line ri-lg"></i>
+              </div>
+              <h4 class="font-bold text-gray-800 mb-4">
+                Approvals & Certificates
+              </h4>
+              <button class="text-primary font-medium flex items-center">
+                <span class="w-5 h-5 flex items-center justify-center mr-1">
+                  <i class="ri-download-line"></i>
+                </span>
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Company Info -->
+          <div>
+            <h3 class="text-2xl font-['Pacifico'] mb-6">logo</h3>
+            <p class="text-gray-300 mb-6">
+              Shri Giriraj Realty is committed to delivering exceptional real
+              estate properties that exceed expectations and create lasting
+              value for our customers.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition duration-300"
+              >
+                <div class="w-8 h-8 flex items-center justify-center">
+                  <i class="ri-facebook-fill"></i>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition duration-300"
+              >
+                <div class="w-8 h-8 flex items-center justify-center">
+                  <i class="ri-instagram-line"></i>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition duration-300"
+              >
+                <div class="w-8 h-8 flex items-center justify-center">
+                  <i class="ri-linkedin-fill"></i>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition duration-300"
+              >
+                <div class="w-8 h-8 flex items-center justify-center">
+                  <i class="ri-twitter-x-line"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#overview"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Overview</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#location"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Location</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#floor-plans"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Floor Plans</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#gallery"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Gallery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#amenities"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Amenities</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#pricing"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Projects -->
+          <div>
+            <h4 class="text-xl font-bold mb-6">Our Projects</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="https://readdy.ai/home/1215cda4-fada-41a5-81ab-e830218f01df/5d10eb5e-ef39-4e65-90c8-c1ce6764556e"
+                  data-readdy="true"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Giriraj Heights</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Giriraj Business Park</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Giriraj Villas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Giriraj Harmony</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Giriraj Retail Plaza</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition duration-300"
+                  >Giriraj Skyline</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Contact -->
+          <div>
+            <h4 class="text-xl font-bold mb-6">Contact Us</h4>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <div class="w-5 h-5 flex items-center justify-center mr-3 mt-1">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-300"
+                  >501-502, Platinum Tower, Andheri West, Mumbai, Maharashtra
+                  400053, India</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-300">+91-9876543210</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-300">info@shrigirirajrealty.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-gray-700 text-center">
+          <p class="text-gray-400 text-sm mb-4">
+            © 2025 Shri Giriraj Realty. All Rights Reserved.
+          </p>
+          <p class="text-gray-400 text-xs">
+            RERA Registration No: MH/REA/MUMBAI/BANDRA/12345/2021
+          </p>
+          <div class="flex justify-center space-x-4 mt-4">
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-visa-fill ri-lg text-gray-300"></i>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-mastercard-fill ri-lg text-gray-300"></i>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-paypal-fill ri-lg text-gray-300"></i>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-bank-card-fill ri-lg text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sticky Header
+        const header = document.querySelector("header");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            header.classList.add("shadow-md");
+          } else {
+            header.classList.remove("shadow-md");
+          }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Floor Plan Tabs
+        const floorPlanTabs = document.querySelectorAll(".floor-plan-tab");
+        floorPlanTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            floorPlanTabs.forEach((t) =>
+              t.classList.remove("active", "bg-primary", "text-white"),
+            );
+            floorPlanTabs.forEach((t) =>
+              t.classList.add(
+                "bg-white",
+                "text-gray-700",
+                "border",
+                "border-gray-300",
+              ),
+            );
+            this.classList.remove(
+              "bg-white",
+              "text-gray-700",
+              "border",
+              "border-gray-300",
+            );
+            this.classList.add("active", "bg-primary", "text-white");
+          });
+        });
+
+        // Gallery Tabs
+        const galleryTabs = document.querySelectorAll(".gallery-tab");
+        galleryTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            galleryTabs.forEach((t) =>
+              t.classList.remove("active", "text-primary", "border-primary"),
+            );
+            this.classList.add("active", "text-primary", "border-primary");
+          });
+        });
+
+        // Loan Tenure Slider
+        const loanTenureSlider = document.getElementById("loan-tenure");
+        const tenureValue = document.getElementById("tenure-value");
+        if (loanTenureSlider && tenureValue) {
+          loanTenureSlider.addEventListener("input", function () {
+            tenureValue.textContent = this.value + " Years";
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
