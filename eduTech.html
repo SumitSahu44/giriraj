@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnWave - Learn New Skills. Anytime. Anywhere.</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#4361ee", secondary: "#7209b7" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Inter', sans-serif;
+      }
+      .course-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .instructor-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #4361ee;
+          cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #4361ee;
+          cursor: pointer;
+      }
+      .custom-checkbox {
+          position: relative;
+          padding-left: 28px;
+          cursor: pointer;
+          user-select: none;
+      }
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+      }
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #e5e7eb;
+          border-radius: 4px;
+      }
+      .custom-checkbox:hover input ~ .checkmark {
+          border-color: #4361ee;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+          background-color: #4361ee;
+          border-color: #4361ee;
+      }
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+      .custom-checkbox .checkmark:after {
+          left: 6px;
+          top: 2px;
+          width: 6px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .toggle-switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 24px;
+      }
+      .toggle-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .toggle-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #e5e7eb;
+          transition: .4s;
+          border-radius: 34px;
+      }
+      .toggle-slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .toggle-slider {
+          background-color: #4361ee;
+      }
+      input:checked + .toggle-slider:before {
+          transform: translateX(26px);
+      }
+      .tab-active {
+          color: #4361ee;
+          border-bottom: 2px solid #4361ee;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center">
+          <a href="#" class="text-3xl font-['Pacifico'] text-primary mr-10"
+            >logo</a
+          >
+          <nav class="hidden lg:flex space-x-8">
+            <a
+              href="#"
+              class="text-gray-900 font-medium hover:text-primary transition"
+              >Home</a
+            >
+            <div class="relative group">
+              <button
+                class="text-gray-900 font-medium hover:text-primary transition flex items-center"
+              >
+                Courses
+                <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                  <i class="ri-arrow-down-s-line"></i>
+                </div>
+              </button>
+              <div
+                class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50"
+              >
+                <div class="py-2">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >Programming</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >Design</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >Marketing</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >Business</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >Language</a
+                  >
+                </div>
+              </div>
+            </div>
+            <a
+              href="#"
+              class="text-gray-900 font-medium hover:text-primary transition"
+              >About Us</a
+            >
+            <a
+              href="#"
+              class="text-gray-900 font-medium hover:text-primary transition"
+              >Instructors</a
+            >
+            <a
+              href="#"
+              class="text-gray-900 font-medium hover:text-primary transition"
+              >Blog</a
+            >
+            <a
+              href="#"
+              class="text-gray-900 font-medium hover:text-primary transition"
+              >Contact</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button
+            class="text-gray-900 font-medium hover:text-primary transition whitespace-nowrap !rounded-button"
+          >
+            Login
+          </button>
+          <button
+            class="bg-primary text-white px-6 py-2 font-medium transition hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+          >
+            Sign Up
+          </button>
+          <button class="lg:hidden w-10 h-10 flex items-center justify-center">
+            <i class="ri-menu-line text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="pt-24 relative overflow-hidden"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%20modern%20e-learning%20scene%20with%20a%20gradient%20blue%20background%20that%20smoothly%20transitions%20from%20light%20blue%20on%20the%20left%20to%20a%20deeper%20blue%20on%20the%20right.%20The%20right%20side%20shows%20a%20diverse%20student%20using%20a%20laptop%20with%20digital%20education%20elements%20floating%20around.%20The%20left%20side%20has%20ample%20clean%20space%20for%20text%20placement.%20Professional%2C%20inspiring%20educational%20technology%20atmosphere.&width=1920&height=800&seq=hero123&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"
+      ></div>
+      <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="w-full md:w-1/2 mb-10 md:mb-0">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6"
+            >
+              Learn New Skills.<br />
+              <span class="text-primary">Anytime. Anywhere.</span>
+            </h1>
+            <p class="text-lg text-gray-700 mb-8 max-w-lg">
+              Unlock your potential with our expert-led courses. Join thousands
+              of students already learning with us and take your skills to the
+              next level.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="bg-primary text-white px-8 py-3 font-medium transition hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+              >
+                Browse Courses
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-900 px-8 py-3 font-medium transition hover:border-primary hover:text-primary whitespace-nowrap !rounded-button"
+              >
+                Start Free Trial
+              </button>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <!-- Hero image is part of the background -->
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-5 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <div class="w-10 h-10 flex items-center justify-center text-primary">
+          <i class="ri-arrow-down-line ri-xl"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Search/Filter -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-10">
+            Find Your Perfect Course
+          </h2>
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+              <div class="flex-1 relative">
+                <div
+                  class="absolute inset-y-0 left-3 flex items-center pointer-events-none"
+                >
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-gray-400"
+                  >
+                    <i class="ri-search-line"></i>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search for courses..."
+                  class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                />
+              </div>
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 right-3 flex items-center pointer-events-none"
+                >
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-gray-400"
+                  >
+                    <i class="ri-arrow-down-s-line"></i>
+                  </div>
+                </div>
+                <div class="relative">
+                  <button
+                    class="w-full md:w-48 px-4 py-3 bg-white border border-gray-300 rounded text-left focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm pr-8 whitespace-nowrap !rounded-button"
+                  >
+                    All Categories
+                  </button>
+                  <!-- Dropdown would be implemented with JavaScript -->
+                </div>
+              </div>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6"
+            >
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Price Range</label
+                >
+                <div class="px-2">
+                  <input
+                    type="range"
+                    min="0"
+                    max="200"
+                    value="100"
+                    class="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer"
+                  />
+                </div>
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>$0</span>
+                  <span>$200</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Level</label
+                >
+                <div class="space-y-2">
+                  <label class="custom-checkbox block text-sm">
+                    Beginner
+                    <input type="checkbox" checked />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="custom-checkbox block text-sm">
+                    Intermediate
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="custom-checkbox block text-sm">
+                    Advanced
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Duration</label
+                >
+                <div class="space-y-2">
+                  <label class="custom-checkbox block text-sm">
+                    0-2 Hours
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="custom-checkbox block text-sm">
+                    3-6 Hours
+                    <input type="checkbox" checked />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="custom-checkbox block text-sm">
+                    7+ Hours
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Rating</label
+                >
+                <div class="flex items-center space-x-1 mb-2">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-5 h-5 flex items-center justify-center text-gray-300"
+                  >
+                    <i class="ri-star-line"></i>
+                  </div>
+                  <span class="text-sm text-gray-600 ml-1">& Up</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center">
+              <button
+                class="bg-primary text-white px-8 py-3 font-medium transition hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Courses Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-10">
+          <h2 class="text-3xl font-bold">Top Courses</h2>
+          <a href="#" class="text-primary font-medium hover:underline"
+            >View All</a
+          >
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          <!-- Course Card 1 -->
+          <div
+            class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20UI%2FUX%20design%20workspace%20with%20a%20clean%2C%20minimal%20aesthetic.%20A%20computer%20screen%20displays%20a%20modern%20website%20design%20with%20wireframes%20and%20color%20palettes.%20Design%20tools%20and%20elements%20are%20neatly%20arranged.%20The%20image%20has%20soft%20lighting%20and%20a%20contemporary%20feel%2C%20perfect%20for%20a%20design%20course%20thumbnail.&width=400&height=225&seq=course1&orientation=landscape"
+                alt="UI/UX Design Masterclass"
+                class="w-full h-48 object-cover object-top"
+              />
+              <span
+                class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                >Design</span
+              >
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                UI/UX Design Masterclass
+              </h3>
+              <div class="flex items-center mb-3">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20female%20design%20instructor%20with%20glasses%2C%20short%20dark%20hair%2C%20and%20a%20friendly%20smile%20against%20a%20neutral%20background.%20The%20image%20is%20well-lit%20with%20soft%20lighting%20and%20has%20a%20professional%2C%20approachable%20quality.&width=100&height=100&seq=inst1&orientation=squarish"
+                  alt="Sarah Johnson"
+                  class="w-8 h-8 rounded-full object-cover mr-2"
+                />
+                <span class="text-sm text-gray-600">Sarah Johnson</span>
+              </div>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-half-fill"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1"
+                  >(4.5) 2,345 reviews</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-lg font-bold text-gray-900">$89.99</span>
+                  <span class="text-sm text-gray-500 line-through ml-2"
+                    >$129.99</span
+                  >
+                </div>
+                <button
+                  class="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Card 2 -->
+          <div
+            class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20coding%20workspace%20with%20a%20computer%20screen%20displaying%20colorful%20JavaScript%20code.%20The%20desk%20has%20a%20clean%2C%20organized%20setup%20with%20a%20keyboard%2C%20coffee%20mug%2C%20and%20notebook.%20The%20lighting%20is%20modern%20and%20tech-focused%20with%20a%20blue-tinted%20ambiance%2C%20perfect%20for%20a%20programming%20course%20thumbnail.&width=400&height=225&seq=course2&orientation=landscape"
+                alt="JavaScript for Beginners"
+                class="w-full h-48 object-cover object-top"
+              />
+              <span
+                class="absolute top-3 left-3 bg-indigo-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                >Programming</span
+              >
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                JavaScript for Beginners
+              </h3>
+              <div class="flex items-center mb-3">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20male%20programming%20instructor%20with%20short%20brown%20hair%20and%20a%20beard%2C%20wearing%20glasses%20and%20a%20casual%20button-up%20shirt.%20The%20image%20has%20professional%20lighting%20against%20a%20neutral%20background%20and%20conveys%20expertise%20and%20approachability.&width=100&height=100&seq=inst2&orientation=squarish"
+                  alt="David Chen"
+                  class="w-8 h-8 rounded-full object-cover mr-2"
+                />
+                <span class="text-sm text-gray-600">David Chen</span>
+              </div>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1"
+                  >(5.0) 3,127 reviews</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-lg font-bold text-gray-900">$69.99</span>
+                  <span class="text-sm text-gray-500 line-through ml-2"
+                    >$99.99</span
+                  >
+                </div>
+                <button
+                  class="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Card 3 -->
+          <div
+            class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20digital%20marketing%20workspace%20with%20analytics%20dashboards%20displayed%20on%20a%20computer%20screen.%20Social%20media%20icons%20and%20marketing%20strategy%20documents%20are%20visible.%20The%20scene%20has%20modern%20lighting%20with%20a%20marketing-focused%20aesthetic%2C%20perfect%20for%20a%20digital%20marketing%20course%20thumbnail.&width=400&height=225&seq=course3&orientation=landscape"
+                alt="Digital Marketing Fundamentals"
+                class="w-full h-48 object-cover object-top"
+              />
+              <span
+                class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                >Marketing</span
+              >
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                Digital Marketing Fundamentals
+              </h3>
+              <div class="flex items-center mb-3">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20female%20marketing%20instructor%20with%20long%20blonde%20hair%20and%20a%20confident%20smile.%20Shes%20wearing%20business%20casual%20attire%20against%20a%20neutral%20background%20with%20professional%20lighting%20that%20conveys%20marketing%20expertise%20and%20approachability.&width=100&height=100&seq=inst3&orientation=squarish"
+                  alt="Emily Rodriguez"
+                  class="w-8 h-8 rounded-full object-cover mr-2"
+                />
+                <span class="text-sm text-gray-600">Emily Rodriguez</span>
+              </div>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-gray-300"
+                  >
+                    <i class="ri-star-line"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1"
+                  >(4.0) 1,856 reviews</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-lg font-bold text-gray-900">$79.99</span>
+                  <span class="text-sm text-gray-500 line-through ml-2"
+                    >$119.99</span
+                  >
+                </div>
+                <button
+                  class="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Card 4 -->
+          <div
+            class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20business%20strategy%20workspace%20with%20financial%20charts%2C%20business%20plans%2C%20and%20strategy%20documents%20neatly%20arranged.%20A%20laptop%20displays%20growth%20charts%20and%20business%20metrics.%20The%20scene%20has%20professional%20lighting%20with%20a%20business-focused%20aesthetic%2C%20perfect%20for%20a%20business%20strategy%20course%20thumbnail.&width=400&height=225&seq=course4&orientation=landscape"
+                alt="Business Strategy Masterclass"
+                class="w-full h-48 object-cover object-top"
+              />
+              <span
+                class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                >Business</span
+              >
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                Business Strategy Masterclass
+              </h3>
+              <div class="flex items-center mb-3">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20male%20business%20instructor%20in%20his%2040s%20wearing%20a%20suit%20and%20tie%20with%20a%20confident%20expression.%20The%20image%20has%20professional%20lighting%20against%20a%20neutral%20background%20and%20conveys%20business%20expertise%20and%20professionalism.&width=100&height=100&seq=inst4&orientation=squarish"
+                  alt="Michael Thompson"
+                  class="w-8 h-8 rounded-full object-cover mr-2"
+                />
+                <span class="text-sm text-gray-600">Michael Thompson</span>
+              </div>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-half-fill"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1"
+                  >(4.5) 2,789 reviews</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-lg font-bold text-gray-900">$99.99</span>
+                  <span class="text-sm text-gray-500 line-through ml-2"
+                    >$149.99</span
+                  >
+                </div>
+                <button
+                  class="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-16">Why Choose Us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white rounded-lg p-8 text-center shadow-md">
+            <div
+              class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-blue-100 text-primary rounded-full"
+            >
+              <i class="ri-user-star-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Certified Instructors</h3>
+            <p class="text-gray-600">
+              Learn from industry experts who bring real-world experience to
+              every lesson. Our instructors are carefully selected for their
+              expertise and teaching ability.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="bg-white rounded-lg p-8 text-center shadow-md">
+            <div
+              class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-green-100 text-primary rounded-full"
+            >
+              <i class="ri-time-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Lifetime Access</h3>
+            <p class="text-gray-600">
+              Buy once, learn forever. Get unlimited access to your courses,
+              including all future updates and additional materials at no extra
+              cost.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="bg-white rounded-lg p-8 text-center shadow-md">
+            <div
+              class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-purple-100 text-primary rounded-full"
+            >
+              <i class="ri-speed-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Learn at Your Pace</h3>
+            <p class="text-gray-600">
+              Study when and where it suits you. Our flexible platform allows
+              you to learn at your own pace, with no deadlines or pressure.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+          <div class="text-center">
+            <div
+              class="text-4xl font-bold text-primary mb-2"
+              id="student-count"
+            >
+              50,000+
+            </div>
+            <p class="text-gray-600">Students Worldwide</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary mb-2" id="course-count">
+              500+
+            </div>
+            <p class="text-gray-600">Courses Available</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="text-4xl font-bold text-primary mb-2"
+              id="instructor-count"
+            >
+              150+
+            </div>
+            <p class="text-gray-600">Expert Instructors</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="text-4xl font-bold text-primary mb-2"
+              id="satisfaction-rate"
+            >
+              95%
+            </div>
+            <p class="text-gray-600">Satisfaction Rate</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Instructors -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">Meet Our Featured Instructors</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Learn from industry leaders with years of experience. Our
+            instructors are passionate about sharing their knowledge and helping
+            you succeed.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Instructor 1 -->
+          <div
+            class="instructor-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20female%20design%20instructor%20with%20glasses%2C%20short%20dark%20hair%2C%20and%20a%20friendly%20smile%20against%20a%20neutral%20background.%20The%20image%20is%20well-lit%20with%20soft%20lighting%20and%20has%20a%20professional%2C%20approachable%20quality.&width=400&height=400&seq=inst1full&orientation=squarish"
+              alt="Sarah Johnson"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold mb-1">Sarah Johnson</h3>
+              <p class="text-primary font-medium mb-2">UI/UX Design Expert</p>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-half-fill"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1">15,432 students</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">
+                Former Lead Designer at Google with over 10 years of experience
+                in creating user-centered digital experiences.
+              </p>
+              <a href="#" class="text-primary font-medium hover:underline"
+                >View Profile</a
+              >
+            </div>
+          </div>
+
+          <!-- Instructor 2 -->
+          <div
+            class="instructor-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20male%20programming%20instructor%20with%20short%20brown%20hair%20and%20a%20beard%2C%20wearing%20glasses%20and%20a%20casual%20button-up%20shirt.%20The%20image%20has%20professional%20lighting%20against%20a%20neutral%20background%20and%20conveys%20expertise%20and%20approachability.&width=400&height=400&seq=inst2full&orientation=squarish"
+              alt="David Chen"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold mb-1">David Chen</h3>
+              <p class="text-primary font-medium mb-2">Full-Stack Developer</p>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1">23,789 students</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">
+                Senior Developer with expertise in JavaScript, React, and
+                Node.js. Passionate about teaching coding in a simple, practical
+                way.
+              </p>
+              <a href="#" class="text-primary font-medium hover:underline"
+                >View Profile</a
+              >
+            </div>
+          </div>
+
+          <!-- Instructor 3 -->
+          <div
+            class="instructor-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20female%20marketing%20instructor%20with%20long%20blonde%20hair%20and%20a%20confident%20smile.%20Shes%20wearing%20business%20casual%20attire%20against%20a%20neutral%20background%20with%20professional%20lighting%20that%20conveys%20marketing%20expertise%20and%20approachability.&width=400&height=400&seq=inst3full&orientation=squarish"
+              alt="Emily Rodriguez"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold mb-1">Emily Rodriguez</h3>
+              <p class="text-primary font-medium mb-2">
+                Digital Marketing Strategist
+              </p>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-gray-300"
+                  >
+                    <i class="ri-star-line"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1">18,345 students</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">
+                Marketing Director with 12+ years of experience in digital
+                marketing, SEO, and social media strategy for Fortune 500
+                companies.
+              </p>
+              <a href="#" class="text-primary font-medium hover:underline"
+                >View Profile</a
+              >
+            </div>
+          </div>
+
+          <!-- Instructor 4 -->
+          <div
+            class="instructor-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20male%20business%20instructor%20in%20his%2040s%20wearing%20a%20suit%20and%20tie%20with%20a%20confident%20expression.%20The%20image%20has%20professional%20lighting%20against%20a%20neutral%20background%20and%20conveys%20business%20expertise%20and%20professionalism.&width=400&height=400&seq=inst4full&orientation=squarish"
+              alt="Michael Thompson"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold mb-1">Michael Thompson</h3>
+              <p class="text-primary font-medium mb-2">Business Consultant</p>
+              <div class="flex items-center mb-3">
+                <div class="flex">
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <div
+                    class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                  >
+                    <i class="ri-star-half-fill"></i>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-600 ml-1">20,567 students</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">
+                MBA and former CEO with expertise in business strategy,
+                entrepreneurship, and leadership. Helped launch 50+ successful
+                startups.
+              </p>
+              <a href="#" class="text-primary font-medium hover:underline"
+                >View Profile</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-16">
+          What Our Students Say
+        </h2>
+
+        <div class="relative max-w-4xl mx-auto">
+          <div class="testimonial-slider overflow-hidden">
+            <!-- Current Testimonial -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+              <div
+                class="flex flex-col md:flex-row items-center md:items-start gap-6"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20Asian%20woman%20with%20long%20black%20hair%20and%20a%20friendly%20smile%2C%20wearing%20business%20casual%20attire.%20The%20image%20has%20professional%20lighting%20against%20a%20neutral%20background%20and%20conveys%20a%20satisfied%20student%20testimonial.&width=200&height=200&seq=test1&orientation=squarish"
+                  alt="Jennifer Lee"
+                  class="w-24 h-24 rounded-full object-cover"
+                />
+                <div>
+                  <div class="flex mb-4">
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                  </div>
+                  <blockquote class="text-gray-700 italic mb-6">
+                    "The UI/UX Design Masterclass completely transformed my
+                    career. I went from knowing almost nothing about design to
+                    landing a job at a top tech company within 3 months of
+                    completing the course. Sarah is an incredible instructor who
+                    explains complex concepts in a way that's easy to
+                    understand. The course projects were challenging but
+                    extremely valuable for building my portfolio."
+                  </blockquote>
+                  <div>
+                    <h4 class="font-semibold text-lg">Jennifer Lee</h4>
+                    <p class="text-gray-600">UX Designer at Spotify</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Dots -->
+          <div class="flex justify-center mt-8">
+            <button class="w-3 h-3 rounded-full bg-primary mx-1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 mx-1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 mx-1"></button>
+          </div>
+
+          <!-- Navigation Arrows -->
+          <button
+            class="absolute top-1/2 -left-4 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-gray-700 hover:text-primary"
+          >
+            <i class="ri-arrow-left-s-line ri-lg"></i>
+          </button>
+          <button
+            class="absolute top-1/2 -right-4 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-gray-700 hover:text-primary"
+          >
+            <i class="ri-arrow-right-s-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Success Stories -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">Student Success Stories</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Discover how our courses have helped students transform their
+            careers and achieve their goals.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Success Story 1 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20a%20young%20man%20working%20on%20web%20development%20at%20a%20modern%20office%20desk%20with%20multiple%20monitors%20displaying%20code.%20He%20appears%20focused%20and%20successful.%20The%20lighting%20is%20bright%20and%20professional%2C%20conveying%20a%20success%20story%20atmosphere.&width=400&height=225&seq=success1&orientation=landscape"
+                alt="James Wilson Success Story"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-90 rounded-full text-white cursor-pointer"
+                >
+                  <i class="ri-play-fill ri-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                From Beginner to Senior Developer
+              </h3>
+              <p class="text-gray-600 mb-4">
+                James went from zero coding knowledge to Senior Developer at a
+                tech startup in just 18 months after taking our programming
+                courses.
+              </p>
+              <div class="flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-time-line"></i>
+                </div>
+                <span>Course: JavaScript for Beginners</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Success Story 2 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20a%20woman%20presenting%20a%20marketing%20strategy%20in%20a%20modern%20office%20meeting%20room.%20Shes%20standing%20confidently%20by%20a%20whiteboard%20with%20charts%20and%20appears%20successful.%20The%20lighting%20is%20bright%20and%20professional%2C%20conveying%20a%20success%20story%20atmosphere.&width=400&height=225&seq=success2&orientation=landscape"
+                alt="Sophia Martinez Success Story"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-90 rounded-full text-white cursor-pointer"
+                >
+                  <i class="ri-play-fill ri-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                Doubled Marketing ROI in 3 Months
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Sophia applied strategies from our Digital Marketing course to
+                double her company's marketing ROI and earn a promotion.
+              </p>
+              <div class="flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-time-line"></i>
+                </div>
+                <span>Course: Digital Marketing Fundamentals</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Success Story 3 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20a%20man%20in%20business%20attire%20presenting%20to%20investors%20in%20a%20modern%20conference%20room.%20Charts%20showing%20business%20growth%20are%20visible%20on%20screens.%20He%20appears%20confident%20and%20successful.%20The%20lighting%20is%20bright%20and%20professional%2C%20conveying%20a%20success%20story%20atmosphere.&width=400&height=225&seq=success3&orientation=landscape"
+                alt="Robert Kim Success Story"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-90 rounded-full text-white cursor-pointer"
+                >
+                  <i class="ri-play-fill ri-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold mb-2">
+                Launched Successful Startup
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Robert used knowledge from our Business Strategy course to
+                launch his startup, which secured $2M in funding within a year.
+              </p>
+              <div class="flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-time-line"></i>
+                </div>
+                <span>Course: Business Strategy Masterclass</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter & CTA -->
+    <section
+      class="py-16 bg-gray-50"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%20subtle%2C%20abstract%20pattern%20background%20with%20light%20blue%20and%20purple%20gradient%20shapes.%20The%20design%20is%20minimal%20and%20modern%20with%20soft%20geometric%20elements%20that%20dont%20distract%20from%20text%20overlay.%20Perfect%20for%20a%20newsletter%20subscription%20background%20with%20ample%20space%20for%20content.&width=1920&height=400&seq=newsletter&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-4">Get Weekly Learning Tips</h2>
+          <p class="text-gray-600 mb-8">
+            Join our newsletter and receive weekly tips, course updates, and
+            special offers to help you on your learning journey.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <input
+              type="email"
+              placeholder="Your email address"
+              class="flex-1 px-4 py-3 border-none rounded focus:outline-none focus:ring-2 focus:ring-primary shadow-sm text-sm"
+            />
+            <button
+              class="bg-primary text-white px-8 py-3 font-medium transition hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+            >
+              Subscribe
+            </button>
+          </div>
+          <p class="text-xs text-gray-500 mt-4">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Company Info -->
+          <div>
+            <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 block"
+              >logo</a
+            >
+            <p class="text-gray-400 mb-6">
+              Empowering learners worldwide with high-quality online education
+              since 2020.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+              >
+                <i class="ri-twitter-x-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Courses</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Instructors</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-400"
+                  >123 Education St, San Francisco, CA 94107</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-400">+1 (555) 123-4567</span>
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-400">support@learnwave.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Newsletter</h3>
+            <p class="text-gray-400 mb-4">
+              Subscribe to get special offers, free giveaways, and course
+              updates.
+            </p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="px-4 py-2 bg-gray-800 border-none rounded-l focus:outline-none focus:ring-2 focus:ring-primary text-gray-200 text-sm flex-1"
+              />
+              <button
+                class="bg-primary text-white px-4 py-2 rounded-r font-medium transition hover:bg-opacity-90 whitespace-nowrap !rounded-button"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-800 text-center">
+          <div class="flex justify-center space-x-6 mb-6">
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-visa-fill ri-lg"></i>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-mastercard-fill ri-lg"></i>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-paypal-fill ri-lg"></i>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-apple-fill ri-lg"></i>
+            </div>
+          </div>
+          <p class="text-gray-500 text-sm">
+            &copy; 2025 LearnWave. All rights reserved. |
+            <a href="#" class="hover:text-white">Privacy Policy</a> |
+            <a href="#" class="hover:text-white">Terms of Service</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile menu toggle
+        const menuButton = document.querySelector(".lg\\:hidden");
+        // Implementation would go here
+
+        // Course filter implementation
+        const priceRange = document.querySelector('input[type="range"]');
+        // Implementation would go here
+
+        // Testimonial slider
+        const testimonialDots = document.querySelectorAll(
+          ".flex.justify-center button",
+        );
+        const testimonialArrows = document.querySelectorAll(".absolute.top-1\\/2");
+        // Implementation would go here
+      });
+    </script>
+  </body>
+</html>
