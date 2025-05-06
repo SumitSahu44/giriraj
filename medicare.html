@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare - Your Health, Our Priority</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#4299e1", secondary: "#48bb78" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Poppins', sans-serif;
+          scroll-behavior: smooth;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      .hero-section {
+          background-image: url('https://readdy.ai/api/search-image?query=Professional%20medical%20scene%20with%20a%20doctor%20in%20white%20coat%20consulting%20with%20patient%2C%20clean%20modern%20hospital%20environment%2C%20soft%20lighting%2C%20medical%20equipment%20visible%2C%20professional%20setting%2C%20gradient%20light%20blue%20to%20white%20background%20on%20left%20side%20for%20text%20overlay%2C%20high%20quality%20professional%20photography&width=1920&height=800&seq=1&orientation=landscape');
+          background-size: cover;
+          background-position: center;
+      }
+      .service-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+      .doctor-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+      .product-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+      .custom-checkbox {
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          user-select: none;
+      }
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+      }
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #e2e8f0;
+          border-radius: 4px;
+      }
+      .custom-checkbox:hover input ~ .checkmark {
+          border-color: #4299e1;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+          background-color: #4299e1;
+          border-color: #4299e1;
+      }
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+      .custom-checkbox .checkmark:after {
+          left: 6px;
+          top: 2px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .custom-switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 24px;
+      }
+      .custom-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #e2e8f0;
+          transition: .4s;
+          border-radius: 24px;
+      }
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .slider {
+          background-color: #4299e1;
+      }
+      input:checked + .slider:before {
+          transform: translateX(26px);
+      }
+      .range-slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 6px;
+          border-radius: 5px;
+          background: #e2e8f0;
+          outline: none;
+      }
+      .range-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #4299e1;
+          cursor: pointer;
+      }
+      .range-slider::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #4299e1;
+          cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="#" class="text-2xl font-['Pacifico'] text-primary"
+              >MediCare</a
+            >
+          </div>
+
+          <nav class="hidden md:flex space-x-8">
+            <a href="#" class="text-gray-900 hover:text-primary font-medium"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="text-gray-600 hover:text-primary font-medium"
+              >About Us</a
+            >
+            <div class="relative group">
+              <button
+                class="text-gray-600 hover:text-primary font-medium flex items-center"
+              >
+                Services
+                <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                  <i class="ri-arrow-down-s-line"></i>
+                </div>
+              </button>
+              <div
+                class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
+              >
+                <div class="py-1">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >General Consultation</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Pediatrics</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Dermatology</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Cardiology</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Pharmacy</a
+                  >
+                </div>
+              </div>
+            </div>
+            <a
+              href="#doctors"
+              class="text-gray-600 hover:text-primary font-medium"
+              >Doctors</a
+            >
+            <a
+              href="#appointment"
+              class="text-gray-600 hover:text-primary font-medium"
+              >Book Appointment</a
+            >
+            <a
+              href="#contact"
+              class="text-gray-600 hover:text-primary font-medium"
+              >Contact</a
+            >
+          </nav>
+
+          <div class="hidden md:flex">
+            <a
+              href="#appointment"
+              class="bg-secondary text-white px-6 py-2 !rounded-button shadow-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              >Book Appointment</a
+            >
+          </div>
+
+          <div class="md:hidden flex items-center">
+            <button
+              type="button"
+              class="text-gray-600 hover:text-gray-900 focus:outline-none"
+              id="mobileMenuButton"
+            >
+              <div class="w-6 h-6 flex items-center justify-center">
+                <i class="ri-menu-line ri-lg"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="md:hidden hidden bg-white border-t" id="mobileMenu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#"
+            class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50"
+            >About Us</a
+          >
+          <button
+            class="w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 flex justify-between items-center"
+            id="mobileServicesButton"
+          >
+            Services
+            <div class="w-4 h-4 flex items-center justify-center">
+              <i class="ri-arrow-down-s-line"></i>
+            </div>
+          </button>
+          <div class="hidden pl-4 space-y-1" id="mobileServicesMenu">
+            <a
+              href="#"
+              class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >General Consultation</a
+            >
+            <a
+              href="#"
+              class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >Pediatrics</a
+            >
+            <a
+              href="#"
+              class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >Dermatology</a
+            >
+            <a
+              href="#"
+              class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >Cardiology</a
+            >
+            <a
+              href="#"
+              class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >Pharmacy</a
+            >
+          </div>
+          <a
+            href="#doctors"
+            class="block px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50"
+            >Doctors</a
+          >
+          <a
+            href="#appointment"
+            class="block px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50"
+            >Book Appointment</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50"
+            >Contact</a
+          >
+          <div class="pt-2">
+            <a
+              href="#appointment"
+              class="block w-full text-center bg-secondary text-white px-4 py-2 !rounded-button shadow-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              >Book Appointment</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-16 relative">
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"
+      ></div>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row items-center min-h-[600px] py-16">
+          <div class="w-full md:w-1/2 text-left mb-10 md:mb-0">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+            >
+              Your Health, Our Priority
+            </h1>
+            <p class="text-lg text-gray-700 mb-8 max-w-lg">
+              Experience world-class healthcare with our team of expert doctors
+              and state-of-the-art facilities. We're committed to providing
+              compassionate care for you and your family.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#appointment"
+                class="bg-secondary text-white px-6 py-3 !rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >Book Appointment</a
+              >
+              <a
+                href="#services"
+                class="bg-white text-gray-800 border border-gray-300 px-6 py-3 !rounded-button shadow-sm hover:bg-gray-50 transition-all duration-300 whitespace-nowrap"
+                >View Services</a
+              >
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <!-- Hero image is set as background -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Services -->
+    <section id="services" class="py-16 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Our Medical Services
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            We offer a comprehensive range of medical services to meet all your
+            healthcare needs with the highest standards of care.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Service 1 -->
+          <div
+            class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300"
+          >
+            <div
+              class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-heart-pulse-line ri-lg"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Cardiology</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive heart care with advanced diagnostics and treatments
+              for all cardiac conditions.
+            </p>
+            <a href="#" class="text-primary font-medium flex items-center">
+              Learn More
+              <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                <i class="ri-arrow-right-line"></i>
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 2 -->
+          <div
+            class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300"
+          >
+            <div
+              class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-mental-health-line ri-lg"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Neurology</h3>
+            <p class="text-gray-600 mb-4">
+              Expert care for neurological disorders with the latest diagnostic
+              technology and treatment options.
+            </p>
+            <a href="#" class="text-primary font-medium flex items-center">
+              Learn More
+              <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                <i class="ri-arrow-right-line"></i>
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 3 -->
+          <div
+            class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300"
+          >
+            <div
+              class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-psychotherapy-line ri-lg"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pediatrics</h3>
+            <p class="text-gray-600 mb-4">
+              Specialized healthcare for infants, children and adolescents in a
+              child-friendly environment.
+            </p>
+            <a href="#" class="text-primary font-medium flex items-center">
+              Learn More
+              <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                <i class="ri-arrow-right-line"></i>
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 4 -->
+          <div
+            class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300"
+          >
+            <div
+              class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-capsule-line ri-lg"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pharmacy</h3>
+            <p class="text-gray-600 mb-4">
+              Full-service pharmacy with prescription medications,
+              over-the-counter products, and expert pharmacists.
+            </p>
+            <a href="#" class="text-primary font-medium flex items-center">
+              Learn More
+              <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                <i class="ri-arrow-right-line"></i>
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 5 -->
+          <div
+            class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300"
+          >
+            <div
+              class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-microscope-line ri-lg"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Laboratory</h3>
+            <p class="text-gray-600 mb-4">
+              State-of-the-art diagnostic laboratory offering a wide range of
+              tests with accurate and timely results.
+            </p>
+            <a href="#" class="text-primary font-medium flex items-center">
+              Learn More
+              <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                <i class="ri-arrow-right-line"></i>
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 6 -->
+          <div
+            class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300"
+          >
+            <div
+              class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-surgical-mask-line ri-lg"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Surgery</h3>
+            <p class="text-gray-600 mb-4">
+              Advanced surgical procedures performed by experienced surgeons
+              using minimally invasive techniques.
+            </p>
+            <a href="#" class="text-primary font-medium flex items-center">
+              Learn More
+              <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                <i class="ri-arrow-right-line"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="about" class="py-16 bg-blue-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            We are committed to providing exceptional healthcare with a focus on
+            patient comfort and the latest medical advancements.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-6">
+              Our Commitment to Excellence
+            </h3>
+            <p class="text-gray-600 mb-6">
+              At MediCare, we believe in providing healthcare that treats not
+              just the illness but the whole person. Our team of experienced
+              medical professionals is dedicated to delivering personalized care
+              with compassion and respect.
+            </p>
+            <p class="text-gray-600 mb-6">
+              We continuously invest in the latest medical technologies and
+              training to ensure our patients receive the highest standard of
+              care. Our facilities are designed with patient comfort in mind,
+              creating a healing environment that promotes recovery and
+              wellbeing.
+            </p>
+            <div class="flex items-center">
+              <a
+                href="#"
+                class="bg-primary text-white px-6 py-2 !rounded-button shadow-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >Learn More About Us</a
+              >
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6">
+            <!-- Stat 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+              <div class="text-4xl font-bold text-primary mb-2">25+</div>
+              <div class="text-gray-600">Years of Experience</div>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+              <div class="text-4xl font-bold text-primary mb-2">50+</div>
+              <div class="text-gray-600">Expert Doctors</div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+              <div class="text-4xl font-bold text-primary mb-2">10k+</div>
+              <div class="text-gray-600">Satisfied Patients</div>
+            </div>
+
+            <!-- Stat 4 -->
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+              <div class="text-4xl font-bold text-primary mb-2">24/7</div>
+              <div class="text-gray-600">Emergency Care</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-6 text-center">
+            What Our Patients Say
+          </h3>
+
+          <div class="relative" id="testimonialSlider">
+            <div class="overflow-hidden">
+              <div
+                class="flex transition-transform duration-500"
+                id="testimonialWrapper"
+              >
+                <!-- Testimonial 1 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                  <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex mb-4">
+                      <div class="text-yellow-400 flex">
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                      "The care I received at MediCare was exceptional. The
+                      doctors took the time to listen to my concerns and
+                      developed a treatment plan specifically for me. The staff
+                      was friendly and professional throughout my stay."
+                    </p>
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden mr-3"
+                      >
+                        <img
+                          src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20woman%20with%20short%20brown%20hair%2C%20smiling%20naturally%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=2&orientation=squarish"
+                          alt="Patient"
+                          class="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                      <div>
+                        <div class="font-medium text-gray-900">
+                          Emily Richardson
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Cardiology Patient
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                  <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex mb-4">
+                      <div class="text-yellow-400 flex">
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                      "I brought my daughter to the pediatric department and was
+                      impressed by how child-friendly the environment was. The
+                      doctor was patient and kind, making my daughter feel
+                      comfortable during the examination."
+                    </p>
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden mr-3"
+                      >
+                        <img
+                          src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20an%20Asian%20man%20in%20his%2040s%20with%20glasses%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=3&orientation=squarish"
+                          alt="Patient"
+                          class="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                      <div>
+                        <div class="font-medium text-gray-900">
+                          Michael Chen
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Parent of Pediatric Patient
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                  <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex mb-4">
+                      <div class="text-yellow-400 flex">
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-star-half-fill"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                      "The online appointment booking system was easy to use,
+                      and I appreciated the reminder texts. My appointment was
+                      on time, and the doctor was thorough in explaining my
+                      condition and treatment options."
+                    </p>
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden mr-3"
+                      >
+                        <img
+                          src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20an%20African%20American%20woman%20in%20her%2030s%20with%20natural%20hair%2C%20smiling%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=4&orientation=squarish"
+                          alt="Patient"
+                          class="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                      <div>
+                        <div class="font-medium text-gray-900">
+                          Olivia Johnson
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Dermatology Patient
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Dots -->
+            <div class="flex justify-center mt-6">
+              <button
+                class="w-3 h-3 rounded-full bg-primary mx-1 testimonial-dot active"
+                data-index="0"
+              ></button>
+              <button
+                class="w-3 h-3 rounded-full bg-gray-300 mx-1 testimonial-dot"
+                data-index="1"
+              ></button>
+              <button
+                class="w-3 h-3 rounded-full bg-gray-300 mx-1 testimonial-dot"
+                data-index="2"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meet Our Doctors -->
+    <section id="doctors" class="py-16 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Meet Our Doctors
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Our team of experienced and dedicated doctors is committed to
+            providing the highest quality of care to all our patients.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Doctor 1 -->
+          <div
+            class="doctor-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20male%20doctor%20in%20white%20coat%20with%20stethoscope%2C%20confident%20pose%2C%20hospital%20background%2C%20professional%20medical%20portrait%2C%20high%20quality&width=400&height=500&seq=5&orientation=portrait"
+                alt="Dr. James Wilson"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Dr. James Wilson
+              </h3>
+              <p class="text-primary font-medium mb-3">Cardiologist</p>
+              <p class="text-gray-600 text-sm mb-4">
+                Specializing in interventional cardiology with over 15 years of
+                experience in treating complex cardiac conditions.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-linkedin-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-twitter-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-mail-line"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 2 -->
+          <div
+            class="doctor-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20female%20doctor%20in%20white%20coat%20with%20stethoscope%2C%20confident%20pose%2C%20hospital%20background%2C%20professional%20medical%20portrait%2C%20high%20quality&width=400&height=500&seq=6&orientation=portrait"
+                alt="Dr. Sarah Martinez"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Dr. Sarah Martinez
+              </h3>
+              <p class="text-primary font-medium mb-3">Pediatrician</p>
+              <p class="text-gray-600 text-sm mb-4">
+                Dedicated to children's health with a special focus on
+                developmental pediatrics and preventive care.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-linkedin-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-twitter-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-mail-line"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 3 -->
+          <div
+            class="doctor-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20male%20doctor%20of%20African%20descent%20in%20white%20coat%20with%20stethoscope%2C%20confident%20pose%2C%20hospital%20background%2C%20professional%20medical%20portrait%2C%20high%20quality&width=400&height=500&seq=7&orientation=portrait"
+                alt="Dr. David Okafor"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Dr. David Okafor
+              </h3>
+              <p class="text-primary font-medium mb-3">Neurologist</p>
+              <p class="text-gray-600 text-sm mb-4">
+                Expert in diagnosing and treating complex neurological disorders
+                with a research background in stroke prevention.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-linkedin-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-twitter-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-mail-line"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 4 -->
+          <div
+            class="doctor-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20female%20Asian%20doctor%20in%20white%20coat%20with%20stethoscope%2C%20confident%20pose%2C%20hospital%20background%2C%20professional%20medical%20portrait%2C%20high%20quality&width=400&height=500&seq=8&orientation=portrait"
+                alt="Dr. Jennifer Kim"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Dr. Jennifer Kim
+              </h3>
+              <p class="text-primary font-medium mb-3">Dermatologist</p>
+              <p class="text-gray-600 text-sm mb-4">
+                Specializing in medical and cosmetic dermatology with expertise
+                in treating various skin conditions and performing minimally
+                invasive procedures.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-linkedin-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-twitter-fill"></i>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary"
+                >
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-mail-line"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <a
+            href="#"
+            class="bg-white text-primary border border-primary px-6 py-2 !rounded-button shadow-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
+            >View All Doctors</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Medicine Shop -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Medicine Shop</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Browse our selection of high-quality medications and healthcare
+            products, available for in-store pickup or delivery.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap -mx-4 mb-8">
+          <div class="w-full px-4">
+            <div
+              class="bg-white rounded-lg shadow-sm p-4 flex overflow-x-auto space-x-4"
+            >
+              <button
+                class="bg-primary text-white px-4 py-2 !rounded-full whitespace-nowrap"
+              >
+                All Products
+              </button>
+              <button
+                class="bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 !rounded-full whitespace-nowrap"
+              >
+                Medications
+              </button>
+              <button
+                class="bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 !rounded-full whitespace-nowrap"
+              >
+                Vitamins & Supplements
+              </button>
+              <button
+                class="bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 !rounded-full whitespace-nowrap"
+              >
+                Personal Care
+              </button>
+              <button
+                class="bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 !rounded-full whitespace-nowrap"
+              >
+                First Aid
+              </button>
+              <button
+                class="bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 !rounded-full whitespace-nowrap"
+              >
+                Baby Care
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Product 1 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=high%20quality%20image%20of%20multivitamin%20bottle%2C%20professional%20product%20photography%2C%20clean%20white%20background%2C%20medical%20product%2C%20pharmaceutical%20packaging&width=400&height=300&seq=9&orientation=landscape"
+                alt="Multivitamin Complex"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  Multivitamin Complex
+                </h3>
+                <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded"
+                  >Popular</span
+                >
+              </div>
+              <p class="text-gray-600 text-sm mb-3">
+                Complete daily vitamin supplement with essential minerals for
+                overall health.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-gray-900">$24.99</span>
+                <button
+                  class="bg-secondary text-white px-3 py-1 !rounded-button text-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=high%20quality%20image%20of%20digital%20thermometer%2C%20professional%20product%20photography%2C%20clean%20white%20background%2C%20medical%20device%2C%20healthcare%20product&width=400&height=300&seq=10&orientation=landscape"
+                alt="Digital Thermometer"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  Digital Thermometer
+                </h3>
+                <span
+                  class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded"
+                  >New</span
+                >
+              </div>
+              <p class="text-gray-600 text-sm mb-3">
+                Fast-reading digital thermometer with LCD display and fever
+                alert.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-gray-900">$19.95</span>
+                <button
+                  class="bg-secondary text-white px-3 py-1 !rounded-button text-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=high%20quality%20image%20of%20first%20aid%20kit%2C%20professional%20product%20photography%2C%20clean%20white%20background%2C%20medical%20supplies%2C%20emergency%20kit&width=400&height=300&seq=11&orientation=landscape"
+                alt="First Aid Kit"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  First Aid Kit
+                </h3>
+                <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded"
+                  >Essential</span
+                >
+              </div>
+              <p class="text-gray-600 text-sm mb-3">
+                Comprehensive first aid kit with 100+ items for emergency
+                situations.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-gray-900">$34.50</span>
+                <button
+                  class="bg-secondary text-white px-3 py-1 !rounded-button text-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=high%20quality%20image%20of%20blood%20pressure%20monitor%2C%20professional%20product%20photography%2C%20clean%20white%20background%2C%20medical%20device%2C%20healthcare%20product&width=400&height=300&seq=12&orientation=landscape"
+                alt="Blood Pressure Monitor"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-semibold text-gray-900">BP Monitor</h3>
+                <span
+                  class="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded"
+                  >Sale</span
+                >
+              </div>
+              <p class="text-gray-600 text-sm mb-3">
+                Digital blood pressure monitor with memory function and
+                irregular heartbeat detection.
+              </p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-lg font-bold text-gray-900">$49.99</span>
+                  <span class="text-sm text-gray-500 line-through ml-2"
+                    >$69.99</span
+                  >
+                </div>
+                <button
+                  class="bg-secondary text-white px-3 py-1 !rounded-button text-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <a
+            href="#"
+            class="bg-white text-primary border border-primary px-6 py-2 !rounded-button shadow-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
+            >View All Products</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Appointment Booking -->
+    <section id="appointment" class="py-16 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Book an Appointment
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Schedule a consultation with our experienced doctors. We offer
+            flexible appointment times to accommodate your busy schedule.
+          </p>
+        </div>
+
+        <div class="bg-blue-50 rounded-lg shadow-md overflow-hidden">
+          <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 p-8">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-6">
+                Appointment Request
+              </h3>
+              <form>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      for="fullName"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Full Name</label
+                    >
+                    <input
+                      type="text"
+                      id="fullName"
+                      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="email"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Email Address</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      for="phone"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Phone Number</label
+                    >
+                    <input
+                      type="tel"
+                      id="phone"
+                      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="(123) 456-7890"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="department"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Department</label
+                    >
+                    <div class="relative">
+                      <select
+                        id="department"
+                        class="w-full px-4 py-2 border border-gray-300 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
+                      >
+                        <option value="">Select Department</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="neurology">Neurology</option>
+                        <option value="pediatrics">Pediatrics</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="orthopedics">Orthopedics</option>
+                      </select>
+                      <div
+                        class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                      >
+                        <div
+                          class="w-4 h-4 flex items-center justify-center text-gray-500"
+                        >
+                          <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      for="doctor"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Preferred Doctor</label
+                    >
+                    <div class="relative">
+                      <select
+                        id="doctor"
+                        class="w-full px-4 py-2 border border-gray-300 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
+                      >
+                        <option value="">Select Doctor</option>
+                        <option value="dr-wilson">Dr. James Wilson</option>
+                        <option value="dr-martinez">Dr. Sarah Martinez</option>
+                        <option value="dr-okafor">Dr. David Okafor</option>
+                        <option value="dr-kim">Dr. Jennifer Kim</option>
+                      </select>
+                      <div
+                        class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                      >
+                        <div
+                          class="w-4 h-4 flex items-center justify-center text-gray-500"
+                        >
+                          <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      for="date"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Preferred Date</label
+                    >
+                    <input
+                      type="date"
+                      id="date"
+                      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label
+                    for="message"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Reason for Visit</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Please briefly describe your symptoms or reason for appointment"
+                  ></textarea>
+                </div>
+
+                <div class="mb-6">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                    <span class="text-sm text-gray-700"
+                      >I agree to the
+                      <a href="#" class="text-primary">terms and conditions</a>
+                      and
+                      <a href="#" class="text-primary">privacy policy</a>.</span
+                    >
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  class="bg-primary text-white px-6 py-3 !rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 w-full sm:w-auto whitespace-nowrap"
+                >
+                  Request Appointment
+                </button>
+              </form>
+            </div>
+
+            <div class="w-full md:w-1/2 bg-primary p-8 text-white">
+              <h3 class="text-2xl font-semibold mb-6">Working Hours</h3>
+
+              <div class="space-y-4 mb-8">
+                <div
+                  class="flex justify-between items-center pb-2 border-b border-white border-opacity-20"
+                >
+                  <span>Monday - Friday</span>
+                  <span class="font-medium">8:00 AM - 8:00 PM</span>
+                </div>
+                <div
+                  class="flex justify-between items-center pb-2 border-b border-white border-opacity-20"
+                >
+                  <span>Saturday</span>
+                  <span class="font-medium">9:00 AM - 6:00 PM</span>
+                </div>
+                <div
+                  class="flex justify-between items-center pb-2 border-b border-white border-opacity-20"
+                >
+                  <span>Sunday</span>
+                  <span class="font-medium">10:00 AM - 4:00 PM</span>
+                </div>
+              </div>
+
+              <h3 class="text-2xl font-semibold mb-6">Emergency? Call Us</h3>
+
+              <div class="bg-white bg-opacity-10 rounded-lg p-6 mb-8">
+                <div class="flex items-center mb-4">
+                  <div
+                    class="w-12 h-12 rounded-full bg-white flex items-center justify-center mr-4"
+                  >
+                    <div
+                      class="w-6 h-6 flex items-center justify-center text-primary"
+                    >
+                      <i class="ri-phone-fill"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="text-sm opacity-80">Emergency Hotline</p>
+                    <p class="text-xl font-bold">+1 (800) 123-4567</p>
+                  </div>
+                </div>
+                <p class="text-sm opacity-80">
+                  Our emergency line is available 24/7. For non-urgent matters,
+                  please schedule an appointment during regular hours.
+                </p>
+              </div>
+
+              <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                <h4 class="font-semibold mb-4">Insurance Partners</h4>
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="flex items-center justify-center">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-shield-check-fill ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-sm">BlueCross</span>
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-shield-check-fill ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-sm">Aetna</span>
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-shield-check-fill ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-sm">Cigna</span>
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-shield-check-fill ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-sm">UnitedHealth</span>
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-shield-check-fill ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-sm">Humana</span>
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-shield-check-fill ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-sm">Kaiser</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Tips Blog -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Health Tips & News
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Stay informed with the latest health tips, medical advancements, and
+            wellness advice from our experts.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Blog Post 1 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=healthy%20eating%2C%20fruits%20and%20vegetables%20on%20plate%2C%20balanced%20diet%2C%20nutrition%20concept%2C%20healthy%20lifestyle%2C%20high%20quality%20food%20photography&width=600&height=400&seq=13&orientation=landscape"
+                alt="Healthy Eating Tips"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-gray-500 mb-3">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>May 4, 2025</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-user-line"></i>
+                </div>
+                <span>Dr. Sarah Martinez</span>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                10 Nutrition Tips for a Healthier Heart
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Discover the best foods and dietary habits to maintain optimal
+                heart health and reduce the risk of cardiovascular disease.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Read More
+                <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Blog Post 2 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=person%20sleeping%20peacefully%20in%20bed%2C%20comfortable%20bedroom%2C%20sleep%20quality%20concept%2C%20restful%20night%2C%20healthy%20sleep%20habits%2C%20high%20quality%20lifestyle%20photography&width=600&height=400&seq=14&orientation=landscape"
+                alt="Sleep Quality Tips"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-gray-500 mb-3">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>May 1, 2025</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-user-line"></i>
+                </div>
+                <span>Dr. David Okafor</span>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                The Science of Better Sleep: 7 Expert Tips
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Learn how quality sleep affects your overall health and discover
+                proven strategies to improve your sleep patterns.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Read More
+                <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Blog Post 3 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=person%20exercising%20outdoors%2C%20morning%20jog%20in%20park%2C%20fitness%20activity%2C%20healthy%20lifestyle%2C%20wellness%20concept%2C%20high%20quality%20lifestyle%20photography&width=600&height=400&seq=15&orientation=landscape"
+                alt="Exercise Benefits"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-gray-500 mb-3">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>April 28, 2025</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-user-line"></i>
+                </div>
+                <span>Dr. James Wilson</span>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Exercise and Mental Health: The Vital Connection
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Explore the powerful relationship between regular physical
+                activity and improved mental wellbeing.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Read More
+                <div class="w-4 h-4 ml-1 flex items-center justify-center">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <a
+            href="#"
+            class="bg-white text-primary border border-primary px-6 py-2 !rounded-button shadow-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
+            >View All Articles</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-gray-900">Our Partners</h2>
+        </div>
+
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+          <div
+            class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+          >
+            <div class="w-8 h-8 flex items-center justify-center mr-2">
+              <i class="ri-hospital-fill ri-2x text-gray-400"></i>
+            </div>
+            <span class="text-lg font-medium text-gray-500">City Hospital</span>
+          </div>
+          <div
+            class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+          >
+            <div class="w-8 h-8 flex items-center justify-center mr-2">
+              <i class="ri-heart-fill ri-2x text-gray-400"></i>
+            </div>
+            <span class="text-lg font-medium text-gray-500"
+              >Heart Institute</span
+            >
+          </div>
+          <div
+            class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+          >
+            <div class="w-8 h-8 flex items-center justify-center mr-2">
+              <i class="ri-medicine-bottle-fill ri-2x text-gray-400"></i>
+            </div>
+            <span class="text-lg font-medium text-gray-500">PharmaCare</span>
+          </div>
+          <div
+            class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+          >
+            <div class="w-8 h-8 flex items-center justify-center mr-2">
+              <i class="ri-mental-health-fill ri-2x text-gray-400"></i>
+            </div>
+            <span class="text-lg font-medium text-gray-500">NeuroCenter</span>
+          </div>
+          <div
+            class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+          >
+            <div class="w-8 h-8 flex items-center justify-center mr-2">
+              <i class="ri-microscope-fill ri-2x text-gray-400"></i>
+            </div>
+            <span class="text-lg font-medium text-gray-500">LabWorks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Banner -->
+    <section class="bg-primary text-white py-4 sticky bottom-0 z-40">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 sm:mb-0">
+            <div
+              class="w-10 h-10 rounded-full bg-white flex items-center justify-center mr-4"
+            >
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary"
+              >
+                <i class="ri-phone-fill"></i>
+              </div>
+            </div>
+            <div>
+              <p class="text-sm font-medium">24/7 Emergency Hotline</p>
+              <p class="text-xl font-bold">+1 (800) 123-4567</p>
+            </div>
+          </div>
+          <div class="flex space-x-4">
+            <a
+              href="#appointment"
+              class="bg-white text-primary px-4 py-2 !rounded-button shadow-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              >Book Appointment</a
+            >
+            <a
+              href="#contact"
+              class="bg-secondary text-white px-4 py-2 !rounded-button shadow-sm hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div>
+            <a
+              href="#"
+              class="text-2xl font-['Pacifico'] text-white mb-6 inline-block"
+              >MediCare</a
+            >
+            <p class="text-gray-400 mb-6">
+              Providing exceptional healthcare services with compassion and
+              expertise since 2000. Your health is our priority.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300"
+              >
+                <div class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-facebook-fill"></i>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300"
+              >
+                <div class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-twitter-fill"></i>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300"
+              >
+                <div class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-instagram-fill"></i>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300"
+              >
+                <div class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-linkedin-fill"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Our Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#doctors"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Our Doctors</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#appointment"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Our Services</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >General Consultation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Cardiology</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Pediatrics</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Neurology</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Dermatology</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Laboratory Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Pharmacy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Contact Information</h3>
+            <ul class="space-y-4">
+              <li class="flex">
+                <div
+                  class="w-5 h-5 flex items-center justify-center mr-3 text-primary"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-400"
+                  >123 Healthcare Blvd, Medical District, New York, NY
+                  10001</span
+                >
+              </li>
+              <li class="flex">
+                <div
+                  class="w-5 h-5 flex items-center justify-center mr-3 text-primary"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-400">+1 (800) 123-4567</span>
+              </li>
+              <li class="flex">
+                <div
+                  class="w-5 h-5 flex items-center justify-center mr-3 text-primary"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-400">info@medicare-clinic.com</span>
+              </li>
+              <li class="flex">
+                <div
+                  class="w-5 h-5 flex items-center justify-center mr-3 text-primary"
+                >
+                  <i class="ri-time-line"></i>
+                </div>
+                <div class="text-gray-400">
+                  <p>Mon-Fri: 8:00 AM - 8:00 PM</p>
+                  <p>Sat: 9:00 AM - 6:00 PM</p>
+                  <p>Sun: 10:00 AM - 4:00 PM</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+              <p class="text-gray-400">
+                &copy; 2025 MediCare. All rights reserved.
+              </p>
+            </div>
+
+            <div class="flex space-x-6">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+                >Terms of Service</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+                >Privacy Policy</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+                >Cookie Policy</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+        });
+
+        // Mobile services submenu toggle
+        const mobileServicesButton = document.getElementById("mobileServicesButton");
+        const mobileServicesMenu = document.getElementById("mobileServicesMenu");
+
+        mobileServicesButton.addEventListener("click", function () {
+          mobileServicesMenu.classList.toggle("hidden");
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Testimonial slider
+        const testimonialWrapper = document.getElementById("testimonialWrapper");
+        const testimonialDots = document.querySelectorAll(".testimonial-dot");
+        let currentIndex = 0;
+
+        function updateSlider(index) {
+          const slideWidth = document.querySelector(
+            "#testimonialWrapper > div",
+          ).offsetWidth;
+          testimonialWrapper.style.transform = `translateX(-${index * slideWidth}px)`;
+
+          // Update active dot
+          testimonialDots.forEach((dot, i) => {
+            if (i === index) {
+              dot.classList.add("bg-primary");
+              dot.classList.remove("bg-gray-300");
+            } else {
+              dot.classList.remove("bg-primary");
+              dot.classList.add("bg-gray-300");
+            }
+          });
+        }
+
+        // Add click event to dots
+        testimonialDots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            currentIndex = index;
+            updateSlider(currentIndex);
+          });
+        });
+
+        // Auto slide
+        setInterval(() => {
+          currentIndex = (currentIndex + 1) % testimonialDots.length;
+          updateSlider(currentIndex);
+        }, 5000);
+      });
+    </script>
+  </body>
+</html>
