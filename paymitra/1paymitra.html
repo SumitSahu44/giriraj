@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinPay - Your All-in-One Financial Solution</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#3B82F6", secondary: "#94A3B8" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0A0F29 0%, #1A1F3F 100%);
+      color: #fff;
+      min-height: 100vh;
+      }
+      .gradient-text {
+      background: linear-gradient(90deg, #3B82F6, #60A5FA);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      }
+      .card-gradient {
+      background: linear-gradient(135deg, rgba(26, 32, 63, 0.7) 0%, rgba(20, 24, 45, 0.7) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .service-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      }
+      .progress-bar {
+      transition: width 1s ease-in-out;
+      }
+      .custom-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      }
+      .custom-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      }
+      .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: .4s;
+      border-radius: 34px;
+      }
+      .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      }
+      input:checked + .slider {
+      background-color: #3B82F6;
+      }
+      input:checked + .slider:before {
+      transform: translateX(26px);
+      }
+      .custom-radio {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      }
+      .custom-radio-input {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      margin-right: 8px;
+      position: relative;
+      cursor: pointer;
+      }
+      .custom-radio-input:checked {
+      border-color: #3B82F6;
+      }
+      .custom-radio-input:checked::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: #3B82F6;
+      border-radius: 50%;
+      }
+      .custom-checkbox {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      margin-right: 8px;
+      position: relative;
+      cursor: pointer;
+      }
+      .custom-checkbox:checked {
+      background-color: #3B82F6;
+      border-color: #3B82F6;
+      }
+      .custom-checkbox:checked::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+      }
+      .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #3B82F6;
+      cursor: pointer;
+      border: 2px solid white;
+      }
+      .range-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #3B82F6;
+      cursor: pointer;
+      border: 2px solid white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header
+      class="w-full px-4 py-4 bg-opacity-10 backdrop-blur-md border-b border-white/10 sticky top-0 z-50"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <h1 class="font-['Pacifico'] text-2xl text-white">logo</h1>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+          <a href="#" class="text-white hover:text-primary transition-colors"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="text-secondary hover:text-primary transition-colors"
+            >Services</a
+          >
+          <a
+            href="#"
+            class="text-secondary hover:text-primary transition-colors"
+            >Shop</a
+          >
+          <a
+            href="#"
+            class="text-secondary hover:text-primary transition-colors"
+            >Dashboard</a
+          >
+          <a
+            href="#"
+            class="text-secondary hover:text-primary transition-colors"
+            >Support</a
+          >
+        </nav>
+        <div class="flex items-center space-x-4">
+<a href="./signup.html"
+          <button
+            id=""
+            class="text-white bg-transparent border border-white/20 hover:border-primary hover:text-primary px-4 py-2 !rounded-button transition-all"
+          >
+            Sign In
+          </button>
+</a>
+          <div
+            id="signInModal"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50"
+          >
+            <div
+              class="card-gradient rounded-xl w-full max-w-md p-8 relative mx-4"
+            >
+              <button
+                id="closeSignInModal"
+                class="absolute right-4 top-4 w-8 h-8 flex items-center justify-center text-secondary hover:text-white transition-colors"
+              >
+                <i class="ri-close-line ri-lg"></i>
+              </button>
+            <a href="./signup.html">  <h2 class="text-2xl font-semibold mb-6">Sign In</h2> </a> 
+              <form id="signInForm">
+                <div class="space-y-4">
+                  <div>
+                    <label
+                      for="email"
+                      class="block text-sm font-medium text-secondary mb-1"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="w-full bg-white/5 border border-white/10 rounded-button px-4 py-2.5 text-white outline-none focus:border-primary text-sm"
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="password"
+                      class="block text-sm font-medium text-secondary mb-1"
+                      >Password</label
+                    >
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      class="w-full bg-white/5 border border-white/10 rounded-button px-4 py-2.5 text-white outline-none focus:border-primary text-sm"
+                      placeholder="Enter your password"
+                      required
+                    />
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="remember"
+                        name="remember"
+                        class="custom-checkbox"
+                      />
+                      <span class="text-sm text-secondary">Remember me</span>
+                    </label>
+                    <a
+                      href="#"
+                      class="text-sm text-primary hover:text-primary/80 transition-colors"
+                      >Forgot password?</a
+                    >
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full bg-primary hover:bg-primary/90 text-white py-2.5 !rounded-button font-medium transition-all"
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </form>
+              <div class="mt-6 text-center">
+                <p class="text-secondary">
+                  Don't have an account?
+                  <a
+                    href="https://readdy.ai/home/5988b5c9-fc71-4978-b413-791afd6fa1a8/705f420a-cbe7-4c67-8a12-835609fe52f4"
+                    data-readdy="true"
+                    class="text-primary hover:text-primary/80 transition-colors"
+                    >Sign up</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="text-white bg-primary hover:bg-primary/90 px-4 py-2 !rounded-button transition-all whitespace-nowrap"
+          >
+            Get Started
+          </button>
+          <div class="md:hidden w-10 h-10 flex items-center justify-center">
+            <i class="ri-menu-line ri-lg"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section
+      class="w-full relative overflow-hidden"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%20modern%20fintech%20app%20interface%20with%20deep%20navy%20blue%20gradient%20background%2C%20floating%203D%20payment%20cards%2C%20glowing%20blue%20accents%2C%20and%20abstract%20financial%20data%20visualizations.%20The%20image%20has%20a%20clean%2C%20minimal%20design%20with%20soft%20rounded%20elements%20and%20transparent%20UI%20components.%20The%20left%20side%20has%20empty%20space%20for%20text%20content%20while%20the%20right%20side%20showcases%20the%20sleek%20interface.&width=1600&height=800&seq=hero1&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#0A0F29]/90 to-[#0A0F29]/30"
+      ></div>
+      <div class="max-w-7xl mx-auto px-4 py-24 md:py-32 relative z-10">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="w-full md:w-1/2 mb-12 md:mb-0">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Your All-in-One
+              <span class="gradient-text">Financial Solution</span>
+            </h1>
+            <p class="text-secondary text-lg md:text-xl mb-8 max-w-lg">
+              Pay bills, shop online, and manage your finances with a single
+              app. Join millions of users who trust FinPay for their daily
+              transactions.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="bg-gradient-to-r from-primary to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-8 py-3 !rounded-button font-medium transition-all transform hover:scale-105 whitespace-nowrap"
+              >
+                Get Started
+              </button>
+              <button
+                class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-8 py-3 !rounded-button font-medium transition-all flex items-center whitespace-nowrap"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                  <i class="ri-play-circle-line"></i>
+                </div>
+                Watch Demo
+              </button>
+            </div>
+            <div class="flex items-center mt-12">
+              <div class="flex -space-x-3">
+                <img
+                  src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20diverse%20man%20with%20short%20dark%20hair%20and%20a%20friendly%20smile%20on%20a%20simple%20light%20background&width=100&height=100&seq=user1&orientation=squarish"
+                  alt="User"
+                  class="w-10 h-10 rounded-full border-2 border-[#0A0F29]"
+                />
+                <img
+                  src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20asian%20woman%20with%20medium%20length%20black%20hair%20and%20a%20friendly%20smile%20on%20a%20simple%20light%20background&width=100&height=100&seq=user2&orientation=squarish"
+                  alt="User"
+                  class="w-10 h-10 rounded-full border-2 border-[#0A0F29]"
+                />
+                <img
+                  src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20black%20man%20with%20glasses%20and%20a%20confident%20expression%20on%20a%20simple%20light%20background&width=100&height=100&seq=user3&orientation=squarish"
+                  alt="User"
+                  class="w-10 h-10 rounded-full border-2 border-[#0A0F29]"
+                />
+              </div>
+              <div class="ml-4">
+                <p class="text-white font-medium">Trusted by 2M+ users</p>
+                <div class="flex items-center">
+                  <div class="flex">
+                    <div
+                      class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-fill"></i>
+                    </div>
+                    <div
+                      class="w-4 h-4 flex items-center justify-center text-yellow-400"
+                    >
+                      <i class="ri-star-half-fill"></i>
+                    </div>
+                  </div>
+                  <span class="ml-2 text-secondary text-sm">4.8/5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services Grid Section -->
+    <section class="w-full py-20 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Recharge & Pay Bills
+          </h2>
+          <p class="text-secondary text-lg max-w-2xl mx-auto">
+            Complete all your payments in seconds with our seamless and secure
+            payment gateway.
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
+        >
+          <!-- Service Card 1 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-smartphone-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Mobile Recharge</h3>
+          </div>
+          <!-- Service Card 2 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-tv-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">DTH</h3>
+          </div>
+          <!-- Service Card 3 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-flashlight-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Electricity</h3>
+          </div>
+          <!-- Service Card 4 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-water-flash-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Water</h3>
+          </div>
+          <!-- Service Card 5 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-gas-station-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Gas</h3>
+          </div>
+          <!-- Service Card 6 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-bank-card-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Credit Card</h3>
+          </div>
+          <!-- Service Card 7 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-money-dollar-circle-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Loan Repayment</h3>
+          </div>
+          <!-- Service Card 8 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-router-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Broadband</h3>
+          </div>
+          <!-- Service Card 9 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-gift-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Gift Cards</h3>
+          </div>
+          <!-- Service Card 10 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-bus-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Transport</h3>
+          </div>
+          <!-- Service Card 11 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-hospital-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">Health</h3>
+          </div>
+          <!-- Service Card 12 -->
+          <div
+            class="service-card card-gradient p-6 rounded-lg text-center transition-all duration-300 cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-more-line ri-2x"></i>
+            </div>
+            <h3 class="text-white font-medium">More</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Shop Online Section -->
+    <section class="w-full py-20 px-4 bg-[#0D1331]">
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12"
+        >
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Shop Online</h2>
+            <p class="text-secondary text-lg max-w-2xl">
+              Discover amazing deals on your favorite products across
+              categories.
+            </p>
+          </div>
+       <a href="./1shoping.html">    <button
+            class="mt-4 md:mt-0 text-primary hover:text-white bg-primary/10 hover:bg-primary px-6 py-2 !rounded-button transition-all whitespace-nowrap flex items-center"
+          >
+            View All
+            <div class="w-5 h-5 flex items-center justify-center ml-2">
+              <i class="ri-arrow-right-line"></i>
+            </div>
+          </button>
+</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Category 1 -->
+          <div
+            class="card-gradient rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 group cursor-pointer"
+          >
+            <div class="h-48 relative overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Modern%20electronics%20collection%20including%20smartphones%2C%20laptops%2C%20headphones%2C%20and%20smartwatches%20arranged%20in%20a%20clean%2C%20minimal%20layout%20against%20a%20deep%20blue%20background.%20The%20items%20are%20professionally%20photographed%20with%20soft%20lighting%20highlighting%20their%20sleek%20designs.&width=600&height=400&seq=electronics&orientation=landscape"
+                alt="Electronics"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#0A0F29]/90 to-transparent"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Electronics</h3>
+              <p class="text-secondary mb-4">Latest gadgets and devices</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary">Up to 40% off</span>
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full text-primary"
+                >
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Category 2 -->
+          <div
+            class="card-gradient rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 group cursor-pointer"
+          >
+            <div class="h-48 relative overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Stylish%20fashion%20items%20including%20clothing%2C%20shoes%2C%20and%20accessories%20arranged%20in%20a%20clean%2C%20minimal%20layout%20against%20a%20deep%20blue%20background.%20The%20items%20feature%20modern%20designs%20with%20a%20focus%20on%20contemporary%20styles%20for%20both%20men%20and%20women.&width=600&height=400&seq=fashion&orientation=landscape"
+                alt="Fashion"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#0A0F29]/90 to-transparent"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Fashion</h3>
+              <p class="text-secondary mb-4">Trendy clothing & accessories</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary">Up to 50% off</span>
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full text-primary"
+                >
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Category 3 -->
+          <div
+            class="card-gradient rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 group cursor-pointer"
+          >
+            <div class="h-48 relative overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Modern%20home%20decor%20items%20including%20furniture%2C%20lighting%2C%20and%20decorative%20pieces%20arranged%20in%20a%20clean%2C%20minimal%20layout%20against%20a%20deep%20blue%20background.%20The%20items%20feature%20contemporary%20designs%20with%20a%20focus%20on%20sleek%2C%20minimalist%20aesthetics.&width=600&height=400&seq=home&orientation=landscape"
+                alt="Home"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#0A0F29]/90 to-transparent"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Home & Living</h3>
+              <p class="text-secondary mb-4">Furniture & home decor</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary">Up to 35% off</span>
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full text-primary"
+                >
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Category 4 -->
+          <div
+            class="card-gradient rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 group cursor-pointer"
+          >
+            <div class="h-48 relative overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Beauty%20and%20personal%20care%20products%20including%20skincare%2C%20makeup%2C%20and%20fragrances%20arranged%20in%20a%20clean%2C%20minimal%20layout%20against%20a%20deep%20blue%20background.%20The%20items%20feature%20luxury%20brands%20with%20elegant%20packaging%20and%20modern%20designs.&width=600&height=400&seq=beauty&orientation=landscape"
+                alt="Beauty"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#0A0F29]/90 to-transparent"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Beauty & Personal Care</h3>
+              <p class="text-secondary mb-4">Skincare, makeup & more</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary">Up to 45% off</span>
+                <div
+                  class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full text-primary"
+                >
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Dashboard Section -->
+    <section class="w-full py-20 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Manage Everything in One Place
+          </h2>
+          <p class="text-secondary text-lg max-w-2xl mx-auto">
+            Track your spending, manage bills, and control your finances with
+            our intuitive dashboard.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Upcoming Bills -->
+          <div class="card-gradient p-8 rounded-xl">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-xl font-semibold">Upcoming Bills</h3>
+              <button
+                class="text-primary hover:text-white bg-primary/10 hover:bg-primary px-4 py-1.5 !rounded-button text-sm transition-all whitespace-nowrap"
+              >
+                View All
+              </button>
+            </div>
+            <div class="space-y-6">
+              <!-- Bill 1 -->
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-blue-500/20 rounded-full text-blue-500 mr-4"
+                >
+                  <i class="ri-flashlight-line"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <div>
+                      <h4 class="font-medium">Electricity Bill</h4>
+                      <p class="text-secondary text-sm">Due in 3 days</p>
+                    </div>
+                    <span class="font-semibold">$78.35</span>
+                  </div>
+                  <div class="w-full bg-white/10 rounded-full h-2 mt-2">
+                    <div
+                      class="bg-blue-500 h-2 rounded-full progress-bar"
+                      style="width: 75%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bill 2 -->
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-purple-500/20 rounded-full text-purple-500 mr-4"
+                >
+                  <i class="ri-wifi-line"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <div>
+                      <h4 class="font-medium">Internet Bill</h4>
+                      <p class="text-secondary text-sm">Due in 5 days</p>
+                    </div>
+                    <span class="font-semibold">$45.99</span>
+                  </div>
+                  <div class="w-full bg-white/10 rounded-full h-2 mt-2">
+                    <div
+                      class="bg-purple-500 h-2 rounded-full progress-bar"
+                      style="width: 60%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bill 3 -->
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-green-500/20 rounded-full text-green-500 mr-4"
+                >
+                  <i class="ri-smartphone-line"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <div>
+                      <h4 class="font-medium">Mobile Bill</h4>
+                      <p class="text-secondary text-sm">Due in 10 days</p>
+                    </div>
+                    <span class="font-semibold">$29.99</span>
+                  </div>
+                  <div class="w-full bg-white/10 rounded-full h-2 mt-2">
+                    <div
+                      class="bg-green-500 h-2 rounded-full progress-bar"
+                      style="width: 40%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bill 4 -->
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-red-500/20 rounded-full text-red-500 mr-4"
+                >
+                  <i class="ri-bank-card-line"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <div>
+                      <h4 class="font-medium">Credit Card</h4>
+                      <p class="text-secondary text-sm">Due in 12 days</p>
+                    </div>
+                    <span class="font-semibold">$320.50</span>
+                  </div>
+                  <div class="w-full bg-white/10 rounded-full h-2 mt-2">
+                    <div
+                      class="bg-red-500 h-2 rounded-full progress-bar"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Quick Actions -->
+          <div class="card-gradient p-8 rounded-xl">
+            <h3 class="text-xl font-semibold mb-6">Quick Actions</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <!-- Action 1 -->
+              <button
+                class="service-card flex flex-col items-center justify-center p-4 bg-white/5 hover:bg-primary/20 rounded-lg transition-all duration-300 whitespace-nowrap"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-primary mb-3"
+                >
+                  <i class="ri-money-dollar-circle-line ri-lg"></i>
+                </div>
+                <span class="text-sm font-medium">Send Money</span>
+              </button>
+              <!-- Action 2 -->
+              <button
+                class="service-card flex flex-col items-center justify-center p-4 bg-white/5 hover:bg-primary/20 rounded-lg transition-all duration-300 whitespace-nowrap"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-primary mb-3"
+                >
+                  <i class="ri-bank-card-line ri-lg"></i>
+                </div>
+                <span class="text-sm font-medium">Add Card</span>
+              </button>
+              <!-- Action 3 -->
+              <button
+                class="service-card flex flex-col items-center justify-center p-4 bg-white/5 hover:bg-primary/20 rounded-lg transition-all duration-300 whitespace-nowrap"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-primary mb-3"
+                >
+                  <i class="ri-qr-code-line ri-lg"></i>
+                </div>
+                <span class="text-sm font-medium">Scan & Pay</span>
+              </button>
+              <!-- Action 4 -->
+              <button
+                class="service-card flex flex-col items-center justify-center p-4 bg-white/5 hover:bg-primary/20 rounded-lg transition-all duration-300 whitespace-nowrap"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-primary mb-3"
+                >
+                  <i class="ri-bill-line ri-lg"></i>
+                </div>
+                <span class="text-sm font-medium">Pay Bills</span>
+              </button>
+              <!-- Action 5 -->
+              <button
+                class="service-card flex flex-col items-center justify-center p-4 bg-white/5 hover:bg-primary/20 rounded-lg transition-all duration-300 whitespace-nowrap"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-primary mb-3"
+                >
+                  <i class="ri-gift-line ri-lg"></i>
+                </div>
+                <span class="text-sm font-medium">Rewards</span>
+              </button>
+              <!-- Action 6 -->
+              <button
+                class="service-card flex flex-col items-center justify-center p-4 bg-white/5 hover:bg-primary/20 rounded-lg transition-all duration-300 whitespace-nowrap"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-primary mb-3"
+                >
+                  <i class="ri-settings-line ri-lg"></i>
+                </div>
+                <span class="text-sm font-medium">Settings</span>
+              </button>
+            </div>
+            <div class="mt-8">
+              <h4 class="font-medium mb-4">Monthly Spending</h4>
+              <div id="spendingChart" class="w-full h-64"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features Section -->
+    <section class="w-full py-20 px-4 bg-[#0D1331]">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose FinPay</h2>
+          <p class="text-secondary text-lg max-w-2xl mx-auto">
+            Experience the best in digital payments with our feature-rich
+            platform.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="card-gradient p-8 rounded-xl">
+            <div
+              class="w-14 h-14 flex items-center justify-center bg-primary/20 rounded-full text-primary mb-6"
+            >
+              <i class="ri-shield-check-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Secure Transactions</h3>
+            <p class="text-secondary">
+              Bank-grade security with end-to-end encryption for all your
+              transactions and personal data.
+            </p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="card-gradient p-8 rounded-xl">
+            <div
+              class="w-14 h-14 flex items-center justify-center bg-primary/20 rounded-full text-primary mb-6"
+            >
+              <i class="ri-flashlight-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Lightning Fast</h3>
+            <p class="text-secondary">
+              Complete transactions in seconds with our optimized payment
+              gateway and minimal loading times.
+            </p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="card-gradient p-8 rounded-xl">
+            <div
+              class="w-14 h-14 flex items-center justify-center bg-primary/20 rounded-full text-primary mb-6"
+            >
+              <i class="ri-24-hours-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">24/7 Support</h3>
+            <p class="text-secondary">
+              Our dedicated customer support team is available round the clock
+              to assist you with any issues.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="w-full py-20 px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-secondary text-lg">
+            Find answers to common questions about our services.
+          </p>
+        </div>
+        <div class="space-y-4" id="faqAccordion">
+          <!-- FAQ Item 1 -->
+          <div class="card-gradient rounded-xl overflow-hidden">
+            <button
+              class="faq-toggle w-full flex justify-between items-center p-6 text-left"
+              data-target="faq1"
+            >
+              <h3 class="text-lg font-medium">
+                How secure are the transactions on FinPay?
+              </h3>
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary transition-transform duration-300"
+              >
+                <i class="ri-add-line"></i>
+              </div>
+            </button>
+            <div id="faq1" class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary">
+                FinPay uses bank-grade security protocols with 256-bit
+                encryption for all transactions. We're PCI-DSS compliant and
+                implement multiple layers of security including biometric
+                authentication, OTP verification, and real-time fraud detection
+                systems to ensure your money and data remain completely secure.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ Item 2 -->
+          <div class="card-gradient rounded-xl overflow-hidden">
+            <button
+              class="faq-toggle w-full flex justify-between items-center p-6 text-left"
+              data-target="faq2"
+            >
+              <h3 class="text-lg font-medium">
+                What payment methods are accepted?
+              </h3>
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary transition-transform duration-300"
+              >
+                <i class="ri-add-line"></i>
+              </div>
+            </button>
+            <div id="faq2" class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary">
+                FinPay accepts a wide range of payment methods including
+                credit/debit cards (Visa, Mastercard, American Express), UPI,
+                net banking, digital wallets, and even cash on delivery for
+                certain services. You can also link your bank accounts directly
+                for seamless transactions.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ Item 3 -->
+          <div class="card-gradient rounded-xl overflow-hidden">
+            <button
+              class="faq-toggle w-full flex justify-between items-center p-6 text-left"
+              data-target="faq3"
+            >
+              <h3 class="text-lg font-medium">
+                How do I contact customer support?
+              </h3>
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary transition-transform duration-300"
+              >
+                <i class="ri-add-line"></i>
+              </div>
+            </button>
+            <div id="faq3" class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary">
+                Our customer support is available 24/7 through multiple
+                channels. You can reach us via in-app chat support, email at
+                support@finpay.com, or call our toll-free number 1-800-FINPAY.
+                For urgent issues, our live chat typically responds within 2
+                minutes.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ Item 4 -->
+          <div class="card-gradient rounded-xl overflow-hidden">
+            <button
+              class="faq-toggle w-full flex justify-between items-center p-6 text-left"
+              data-target="faq4"
+            >
+              <h3 class="text-lg font-medium">
+                Are there any transaction fees?
+              </h3>
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary transition-transform duration-300"
+              >
+                <i class="ri-add-line"></i>
+              </div>
+            </button>
+            <div id="faq4" class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary">
+                Most transactions on FinPay are completely free, including UPI
+                payments, mobile recharges, and utility bill payments. For
+                certain premium services like instant money transfers to
+                non-FinPay users or international transactions, a small
+                convenience fee may apply. All fees are clearly displayed before
+                you confirm any transaction.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ Item 5 -->
+          <div class="card-gradient rounded-xl overflow-hidden">
+            <button
+              class="faq-toggle w-full flex justify-between items-center p-6 text-left"
+              data-target="faq5"
+            >
+              <h3 class="text-lg font-medium">
+                How do I earn and redeem rewards?
+              </h3>
+              <div
+                class="w-6 h-6 flex items-center justify-center text-primary transition-transform duration-300"
+              >
+                <i class="ri-add-line"></i>
+              </div>
+            </button>
+            <div id="faq5" class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary">
+                You earn FinPay points on every transaction, with bonus points
+                for referring friends, completing challenges, and shopping from
+                partner merchants. Points can be redeemed for cashback, discount
+                vouchers, or exclusive offers in our rewards section. Premium
+                users earn points at 2x the regular rate and get access to
+                special rewards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="w-full py-20 px-4 bg-[#0D1331]">
+      <div class="max-w-7xl mx-auto">
+        <div class="card-gradient p-12 rounded-2xl relative overflow-hidden">
+          <div
+            class="absolute top-0 right-0 w-full h-full opacity-10"
+            style="background-image: url('https://readdy.ai/api/search-image?query=Abstract%20digital%20payment%20concept%20with%20flowing%20data%20visualization%2C%20glowing%20blue%20particles%20and%20network%20connections%20on%20a%20deep%20navy%20blue%20background.%20The%20image%20has%20a%20modern%2C%20minimal%20design%20with%20soft%20rounded%20elements%20and%20transparent%20UI%20components.&width=1200&height=600&seq=cta&orientation=landscape'); background-size: cover; background-position: center;"
+          ></div>
+          <div
+            class="relative z-10 flex flex-col md:flex-row items-center justify-between"
+          >
+            <div class="mb-8 md:mb-0 md:mr-8">
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Ready to simplify your financial life?
+              </h2>
+              <p class="text-secondary text-lg max-w-xl">
+                Join millions of users who trust FinPay for their daily
+                transactions. Download the app now and get started in minutes.
+              </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button
+                class="bg-white text-[#0A0F29] hover:bg-gray-100 px-8 py-3 !rounded-button font-medium transition-all flex items-center whitespace-nowrap"
+              >
+                <div class="w-6 h-6 flex items-center justify-center mr-2">
+                  <i class="ri-apple-fill"></i>
+                </div>
+                App Store
+              </button>
+              <button
+                class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-all flex items-center whitespace-nowrap"
+              >
+                <div class="w-6 h-6 flex items-center justify-center mr-2">
+                  <i class="ri-google-play-fill"></i>
+                </div>
+                Google Play
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w-full pt-16 pb-8 px-4 border-t border-white/10">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Column 1 -->
+          <div>
+            <h1 class="font-['Pacifico'] text-2xl text-white mb-6">logo</h1>
+            <p class="text-secondary mb-6">
+              Your all-in-one financial solution for payments, shopping, and
+              managing your money.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-primary/20 rounded-full text-white hover:text-primary transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-primary/20 rounded-full text-white hover:text-primary transition-colors"
+              >
+                <i class="ri-twitter-x-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-primary/20 rounded-full text-white hover:text-primary transition-colors"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-primary/20 rounded-full text-white hover:text-primary transition-colors"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Column 2 -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Company</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Press</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Partners</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Column 3 -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Support</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary transition-colors"
+                  >Legal</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Column 4 -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Subscribe</h3>
+            <p class="text-secondary mb-4">Get the latest news and updates</p>
+            <form class="mb-4">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  class="flex-1 bg-white/5 border border-white/10 rounded-l-button px-4 py-2 text-white outline-none focus:border-primary"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary hover:bg-primary/90 text-white px-4 py-2 !rounded-r-button font-medium transition-all whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+            <div class="flex flex-wrap gap-2">
+              <div class="w-8 h-5 flex items-center justify-center">
+                <i class="ri-visa-fill text-white"></i>
+              </div>
+              <div class="w-8 h-5 flex items-center justify-center">
+                <i class="ri-mastercard-fill text-white"></i>
+              </div>
+              <div class="w-8 h-5 flex items-center justify-center">
+                <i class="ri-paypal-fill text-white"></i>
+              </div>
+              <div class="w-8 h-5 flex items-center justify-center">
+                <i class="ri-apple-fill text-white"></i>
+              </div>
+              <div class="w-8 h-5 flex items-center justify-center">
+                <i class="ri-google-fill text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-white/10 text-center">
+          <p class="text-secondary text-sm">
+            © 2025 FinPay. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sign In Modal
+        const signInButton = document.getElementById("signInButton");
+        const signInModal = document.getElementById("signInModal");
+        const closeSignInModal = document.getElementById("closeSignInModal");
+        const signInForm = document.getElementById("signInForm");
+        const toggleModal = () => {
+          signInModal.classList.toggle("hidden");
+          signInModal.classList.toggle("flex");
+        };
+        signInButton.addEventListener("click", toggleModal);
+        closeSignInModal.addEventListener("click", toggleModal);
+        signInModal.addEventListener("click", (e) => {
+          if (e.target === signInModal) {
+            toggleModal();
+          }
+        });
+        signInForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const formData = new FormData(signInForm);
+          const data = Object.fromEntries(formData);
+          console.log("Form submitted:", data);
+          // Add your sign in logic here
+        });
+        // FAQ Accordion
+        const faqToggles = document.querySelectorAll(".faq-toggle");
+        faqToggles.forEach((toggle) => {
+          toggle.addEventListener("click", function () {
+            const targetId = this.getAttribute("data-target");
+            const content = document.getElementById(targetId);
+            const icon = this.querySelector("i");
+            // Close all other FAQs
+            document.querySelectorAll(".faq-content").forEach((item) => {
+              if (item.id !== targetId) {
+                item.classList.add("hidden");
+                const otherToggle = document.querySelector(
+                  `[data-target="${item.id}"]`,
+                );
+                otherToggle.querySelector("i").classList.remove("ri-subtract-line");
+                otherToggle.querySelector("i").classList.add("ri-add-line");
+              }
+            });
+            // Toggle current FAQ
+            content.classList.toggle("hidden");
+            if (content.classList.contains("hidden")) {
+              icon.classList.remove("ri-subtract-line");
+              icon.classList.add("ri-add-line");
+            } else {
+              icon.classList.remove("ri-add-line");
+              icon.classList.add("ri-subtract-line");
+            }
+          });
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize spending chart
+        const spendingChart = echarts.init(document.getElementById("spendingChart"));
+        const option = {
+          animation: false,
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            textStyle: {
+              color: "#1f2937",
+            },
+          },
+          grid: {
+            top: 10,
+            right: 0,
+            bottom: 30,
+            left: 0,
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            axisLine: {
+              lineStyle: {
+                color: "rgba(255, 255, 255, 0.2)",
+              },
+            },
+            axisLabel: {
+              color: "rgba(255, 255, 255, 0.6)",
+            },
+          },
+          yAxis: {
+            type: "value",
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: "rgba(255, 255, 255, 0.6)",
+            },
+            splitLine: {
+              lineStyle: {
+                color: "rgba(255, 255, 255, 0.1)",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Spending",
+              type: "line",
+              smooth: true,
+              symbol: "none",
+              lineStyle: {
+                width: 3,
+                color: "rgba(87, 181, 231, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "rgba(87, 181, 231, 0.3)",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(87, 181, 231, 0.1)",
+                  },
+                ]),
+              },
+              data: [820, 932, 901, 934, 1290, 1130],
+            },
+          ],
+        };
+        spendingChart.setOption(option);
+        // Responsive chart
+        window.addEventListener("resize", function () {
+          spendingChart.resize();
+        });
+      });
+    </script>
+  </body>
+</html>
