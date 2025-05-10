@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayEase - Shop</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#3b82f6", secondary: "#6366f1" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+      }
+      .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      }
+      .custom-checkbox {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      }
+      .custom-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      }
+      .checkmark {
+      height: 20px;
+      width: 20px;
+      background-color: #fff;
+      border: 2px solid #e2e8f0;
+      border-radius: 4px;
+      position: relative;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+      background-color: #3b82f6;
+      border-color: #3b82f6;
+      }
+      .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+      display: block;
+      }
+      .custom-range {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      outline: none;
+      }
+      .custom-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: #3b82f6;
+      border-radius: 50%;
+      cursor: pointer;
+      }
+      .custom-range::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: #3b82f6;
+      border-radius: 50%;
+      cursor: pointer;
+      }
+      .product-card {
+      transition: all 0.3s ease;
+      }
+      .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .product-card .quick-view {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      }
+      .product-card:hover .quick-view {
+      opacity: 1;
+      transform: translateY(0);
+      }
+      .product-card .wishlist-icon {
+      opacity: 0;
+      transition: all 0.3s ease;
+      }
+      .product-card:hover .wishlist-icon {
+      opacity: 1;
+      }
+      .product-image {
+      transition: transform 0.5s ease;
+      }
+      .product-card:hover .product-image {
+      transform: scale(1.05);
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+      .mini-cart {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      }
+      .mini-cart.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="w-full bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+          </div>
+          <nav class="hidden md:flex space-x-8">
+            <a href="./1paymitra.html" class="text-gray-700 hover:text-primary font-medium"
+              >Home</a
+            >
+            <a href="#" class="text-gray-700 hover:text-primary font-medium"
+              >Services</a
+            >
+            <a
+              href="https://readdy.ai/home/5988b5c9-fc71-4978-b413-791afd6fa1a8/4ffead2b-6743-4a42-9489-f4c0a5ad9008"
+              data-readdy="true"
+              class="text-primary border-b-2 border-primary font-medium"
+              >Shop</a
+            >
+            <a href="#" class="text-gray-700 hover:text-primary font-medium"
+              >About</a
+            >
+            <a href="#" class="text-gray-700 hover:text-primary font-medium"
+              >Contact</a
+            >
+          </nav>
+          <div class="flex items-center space-x-4">
+            <div class="cart-wrapper relative">
+              <button
+                class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary relative"
+              >
+                <i class="ri-shopping-cart-2-line ri-lg"></i>
+                <span
+                  class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                  >3</span
+                >
+              </button>
+              <div
+                class="mini-cart absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-lg p-4 z-50"
+              >
+                <h4 class="font-medium text-gray-800 mb-3">
+                  Your Cart (3 items)
+                </h4>
+                <div class="space-y-3 max-h-60 overflow-y-auto">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-16 h-16 bg-gray-100 rounded flex-shrink-0 overflow-hidden"
+                    >
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520with%2520charging%2520case%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=cart1&orientation=squarish"
+                        class="w-full h-full object-cover object-top"
+                        alt="Wireless Earbuds"
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <h5 class="text-sm font-medium text-gray-800">
+                        Wireless Earbuds Pro
+                      </h5>
+                      <p class="text-xs text-gray-500">1 × $89.99</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500">
+                      <i class="ri-close-line"></i>
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-16 h-16 bg-gray-100 rounded flex-shrink-0 overflow-hidden"
+                    >
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520smartwatch%2520with%2520leather%2520strap%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=cart2&orientation=squarish"
+                        class="w-full h-full object-cover object-top"
+                        alt="Smart Watch"
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <h5 class="text-sm font-medium text-gray-800">
+                        Smart Watch Series 5
+                      </h5>
+                      <p class="text-xs text-gray-500">1 × $199.99</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500">
+                      <i class="ri-close-line"></i>
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-16 h-16 bg-gray-100 rounded flex-shrink-0 overflow-hidden"
+                    >
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520portable%2520bluetooth%2520speaker%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=cart3&orientation=squarish"
+                        class="w-full h-full object-cover object-top"
+                        alt="Bluetooth Speaker"
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <h5 class="text-sm font-medium text-gray-800">
+                        Portable Bluetooth Speaker
+                      </h5>
+                      <p class="text-xs text-gray-500">1 × $79.99</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500">
+                      <i class="ri-close-line"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="border-t border-gray-200 mt-3 pt-3">
+                  <div class="flex justify-between mb-3">
+                    <span class="text-sm text-gray-600">Subtotal:</span>
+                    <span class="text-sm font-medium text-gray-800"
+                      >$369.97</span
+                    >
+                  </div>
+                  <div class="flex gap-2">
+                    <a
+                      href="#"
+                      class="flex-1 bg-white text-primary border border-primary py-2 text-center text-sm rounded-button whitespace-nowrap hover:bg-primary hover:text-white transition-colors"
+                      >View Cart</a
+                    >
+                    <a
+                      href="#"
+                      class="flex-1 bg-primary text-white py-2 text-center text-sm rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors"
+                      >Checkout</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="bg-white text-primary border border-primary px-4 py-2 rounded-button whitespace-nowrap hover:bg-primary hover:text-white transition-colors"
+            >
+              Sign In
+            </button>
+            <button
+              class="bg-primary text-white px-4 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors"
+            >
+              Sign Up
+            </button>
+            <div class="md:hidden w-10 h-10 flex items-center justify-center">
+              <i class="ri-menu-line text-gray-700 ri-lg"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- Shop Hero Section -->
+      <section class="bg-white py-8 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-6"
+          >
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900 mb-2">Shop</h1>
+              <p class="text-gray-600">
+                Discover amazing products with exclusive deals and offers
+              </p>
+            </div>
+            <div class="w-full md:w-1/2 relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <i class="ri-search-line text-gray-400"></i>
+              </div>
+              <input
+                type="text"
+                placeholder="Search for products..."
+                class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+              />
+              <button class="absolute inset-y-0 right-0 px-3 flex items-center">
+                <i class="ri-mic-line text-gray-400 hover:text-primary"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Category Navigation -->
+      <section
+        class="bg-white py-6 border-b border-gray-200 sticky top-16 z-40"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex overflow-x-auto hide-scrollbar space-x-6 pb-2">
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 bg-primary bg-opacity-10 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-primary mb-1"
+              >
+                <i class="ri-apps-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-primary whitespace-nowrap"
+                >All</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-smartphone-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Electronics</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-t-shirt-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Fashion</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-home-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Home</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-hearts-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Beauty</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-gamepad-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Toys</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-basketball-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Sports</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-book-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Books</span
+              >
+            </button>
+            <button
+              class="flex flex-col items-center min-w-[80px] px-3 py-2 hover:bg-gray-100 rounded-lg"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-600 mb-1"
+              >
+                <i class="ri-car-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 whitespace-nowrap"
+                >Automotive</span
+              >
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- Main Shop Content -->
+      <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <div class="lg:w-1/4">
+              <div class="bg-white rounded-lg shadow-sm p-6 sticky top-44">
+                <div class="flex justify-between items-center mb-6">
+                  <h3 class="text-lg font-semibold text-gray-800">Filters</h3>
+                  <button class="text-sm text-primary hover:text-blue-700">
+                    Clear All
+                  </button>
+                </div>
+                <!-- Active Filters -->
+                <div class="mb-6">
+                  <h4 class="text-sm font-medium text-gray-700 mb-3">
+                    Active Filters:
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    <div
+                      class="flex items-center bg-blue-50 text-primary text-xs rounded-full px-3 py-1"
+                    >
+                      <span>Electronics</span>
+                      <button
+                        class="ml-1 w-4 h-4 flex items-center justify-center"
+                      >
+                        <i class="ri-close-line"></i>
+                      </button>
+                    </div>
+                    <div
+                      class="flex items-center bg-blue-50 text-primary text-xs rounded-full px-3 py-1"
+                    >
+                      <span>$50 - $200</span>
+                      <button
+                        class="ml-1 w-4 h-4 flex items-center justify-center"
+                      >
+                        <i class="ri-close-line"></i>
+                      </button>
+                    </div>
+                    <div
+                      class="flex items-center bg-blue-50 text-primary text-xs rounded-full px-3 py-1"
+                    >
+                      <span>4+ Stars</span>
+                      <button
+                        class="ml-1 w-4 h-4 flex items-center justify-center"
+                      >
+                        <i class="ri-close-line"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Price Range -->
+                <div class="mb-6 border-t border-gray-200 pt-6">
+                  <h4 class="text-sm font-medium text-gray-700 mb-3">
+                    Price Range
+                  </h4>
+                  <div class="mb-4">
+                    <input
+                      type="range"
+                      min="0"
+                      max="1000"
+                      value="200"
+                      class="custom-range"
+                      id="price-range"
+                    />
+                    <div class="flex justify-between mt-2">
+                      <span class="text-xs text-gray-500">$0</span>
+                      <span class="text-xs text-gray-500">$1000</span>
+                    </div>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-1/2">
+                      <label class="text-xs text-gray-500 mb-1 block"
+                        >Min</label
+                      >
+                      <input
+                        type="number"
+                        placeholder="$0"
+                        class="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div class="w-1/2">
+                      <label class="text-xs text-gray-500 mb-1 block"
+                        >Max</label
+                      >
+                      <input
+                        type="number"
+                        placeholder="$1000"
+                        class="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- Brands -->
+                <div class="mb-6 border-t border-gray-200 pt-6">
+                  <h4 class="text-sm font-medium text-gray-700 mb-3">Brands</h4>
+                  <div class="space-y-2 max-h-40 overflow-y-auto">
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" checked />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">Apple (42)</span>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" checked />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">Samsung (38)</span>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">Sony (27)</span>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">Google (19)</span>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">Bose (15)</span>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">JBL (12)</span>
+                    </label>
+                  </div>
+                </div>
+                <!-- Customer Ratings -->
+                <div class="mb-6 border-t border-gray-200 pt-6">
+                  <h4 class="text-sm font-medium text-gray-700 mb-3">
+                    Customer Ratings
+                  </h4>
+                  <div class="space-y-2">
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" checked />
+                      <span class="checkmark mr-2"></span>
+                      <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                        </div>
+                        <span class="text-sm text-gray-700 ml-1"
+                          >& Up (154)</span
+                        >
+                      </div>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-sm text-gray-700 ml-1"
+                          >& Up (287)</span
+                        >
+                      </div>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-sm text-gray-700 ml-1"
+                          >& Up (432)</span
+                        >
+                      </div>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-sm text-gray-700 ml-1"
+                          >& Up (568)</span
+                        >
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <!-- Availability -->
+                <div class="border-t border-gray-200 pt-6">
+                  <h4 class="text-sm font-medium text-gray-700 mb-3">
+                    Availability
+                  </h4>
+                  <div class="space-y-2">
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" checked />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700">In Stock (876)</span>
+                    </label>
+                    <label class="custom-checkbox flex items-center">
+                      <input type="checkbox" />
+                      <span class="checkmark mr-2"></span>
+                      <span class="text-sm text-gray-700"
+                        >Out of Stock (124)</span
+                      >
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Product Grid -->
+            <div class="lg:w-3/4">
+              <!-- Sort Options -->
+              <div
+                class="bg-white rounded-lg shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4"
+              >
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-600 mr-2">Sort by:</span>
+                  <div class="relative">
+                    <select
+                      class="appearance-none bg-gray-50 border border-gray-300 text-gray-700 py-2 pl-3 pr-8 rounded focus:outline-none focus:ring-primary focus:border-primary text-sm"
+                    >
+                      <option>Popularity</option>
+                      <option>Price: Low to High</option>
+                      <option>Price: High to Low</option>
+                      <option>Newest First</option>
+                      <option>Rating</option>
+                    </select>
+                    <div
+                      class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
+                    >
+                      <i class="ri-arrow-down-s-line text-gray-400"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm text-gray-600">View:</span>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center text-primary bg-blue-50 rounded"
+                  >
+                    <i class="ri-layout-grid-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-blue-50 rounded"
+                  >
+                    <i class="ri-list-check"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- Deals of the Day -->
+              <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                  <h2 class="text-xl font-bold text-gray-900">
+                    Deals of the Day
+                  </h2>
+                  <div class="flex items-center text-sm text-primary">
+                    <span class="mr-2">Ends in: 10:45:32</span>
+                    <i class="ri-time-line"></i>
+                  </div>
+                </div>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 left-3 z-10">
+                      <span
+                        class="bg-red-500 text-white text-xs font-medium px-2 py-1 rounded"
+                        >-25%</span
+                      >
+                    </div>
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520noise%2520cancelling%2520headphones%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=headphones&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Noise Cancelling Headphones"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Noise Cancelling Headphones
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-half-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(178)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$149.99</span
+                          >
+                          <span class="text-sm text-gray-500 line-through ml-2"
+                            >$199.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 left-3 z-10">
+                      <span
+                        class="bg-red-500 text-white text-xs font-medium px-2 py-1 rounded"
+                        >-30%</span
+                      >
+                    </div>
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520smart%2520home%2520security%2520camera%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=camera&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Smart Security Camera"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Smart Security Camera
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(93)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$69.99</span
+                          >
+                          <span class="text-sm text-gray-500 line-through ml-2"
+                            >$99.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 left-3 z-10">
+                      <span
+                        class="bg-red-500 text-white text-xs font-medium px-2 py-1 rounded"
+                        >-20%</span
+                      >
+                    </div>
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520smart%2520fitness%2520tracker%2520watch%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=fitness&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Fitness Tracker"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Fitness Tracker Pro
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-half-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(215)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$79.99</span
+                          >
+                          <span class="text-sm text-gray-500 line-through ml-2"
+                            >$99.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Featured Products -->
+              <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">
+                  Featured Products
+                </h2>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520with%2520charging%2520case%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=earbuds&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Wireless Earbuds Pro"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Wireless Earbuds Pro
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-half-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(128)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$89.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520smartwatch%2520with%2520leather%2520strap%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=smartwatch&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Smart Watch Series 5"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Smart Watch Series 5
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(95)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$199.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520portable%2520bluetooth%2520speaker%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=speaker&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Portable Bluetooth Speaker"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Portable Bluetooth Speaker
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(217)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$79.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- All Products -->
+              <div>
+                <h2 class="text-xl font-bold text-gray-900 mb-4">
+                  All Products
+                </h2>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520power%2520bank%2520with%2520USB%2520cables%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=powerbank&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="20000mAh Power Bank"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        20000mAh Power Bank
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-half-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(156)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$49.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520keyboard%2520and%2520mouse%2520combo%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=keyboard&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Wireless Keyboard and Mouse"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Wireless Keyboard and Mouse
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(87)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$59.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520smart%2520home%2520hub%2520device%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=smarthome&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Smart Home Hub"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Smart Home Hub
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-half-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(124)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$129.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520charging%2520pad%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=charger&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Wireless Charging Pad"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Wireless Charging Pad
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-line ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(76)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$29.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520tablet%2520device%2520with%2520stylus%2520pen%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=tablet&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Tablet with Stylus"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Tablet with Stylus
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(203)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$349.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="product-card bg-white rounded-lg shadow-sm overflow-hidden relative"
+                  >
+                    <div class="absolute top-3 right-3 z-10">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-400 hover:text-red-500 wishlist-icon"
+                      >
+                        <i class="ri-heart-line"></i>
+                      </button>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                      <img
+                        src="https://readdy.ai/api/search-image?query=Modern%2520gaming%2520controller%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=400&height=300&seq=controller&orientation=landscape"
+                        class="w-full h-full object-cover object-top product-image"
+                        alt="Gaming Controller"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-semibold text-gray-800 mb-1">
+                        Gaming Controller Pro
+                      </h3>
+                      <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-fill ri-xs"></i>
+                          <i class="ri-star-half-fill ri-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">(167)</span>
+                      </div>
+                      <div class="flex items-center justify-between mb-3">
+                        <div>
+                          <span class="text-lg font-bold text-gray-900"
+                            >$69.99</span
+                          >
+                        </div>
+                        <span
+                          class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
+                          >In Stock</span
+                        >
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <button
+                          class="bg-primary text-white px-3 py-2 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors text-sm flex-1"
+                        >
+                          Add to Cart
+                        </button>
+                        <button
+                          class="ml-2 w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        >
+                          <i class="ri-arrow-left-right-line text-gray-500"></i>
+                        </button>
+                      </div>
+                      <button
+                        class="w-full mt-2 text-sm text-primary hover:text-blue-700 quick-view"
+                      >
+                        Quick View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-10 flex justify-center">
+                  <nav class="flex items-center">
+                    <button
+                      class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-l-lg hover:bg-gray-100"
+                    >
+                      <i class="ri-arrow-left-s-line text-gray-500"></i>
+                    </button>
+                    <button
+                      class="w-10 h-10 flex items-center justify-center bg-primary text-white border border-primary"
+                    >
+                      1
+                    </button>
+                    <button
+                      class="w-10 h-10 flex items-center justify-center border border-gray-300 hover:bg-gray-100 text-gray-700"
+                    >
+                      2
+                    </button>
+                    <button
+                      class="w-10 h-10 flex items-center justify-center border border-gray-300 hover:bg-gray-100 text-gray-700"
+                    >
+                      3
+                    </button>
+                    <span
+                      class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 text-gray-500"
+                      >...</span
+                    >
+                    <button
+                      class="w-10 h-10 flex items-center justify-center border border-gray-300 hover:bg-gray-100 text-gray-700"
+                    >
+                      12
+                    </button>
+                    <button
+                      class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-r-lg hover:bg-gray-100"
+                    >
+                      <i class="ri-arrow-right-s-line text-gray-500"></i>
+                    </button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Recently Viewed -->
+      <section class="py-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-6">Recently Viewed</h2>
+          <div class="flex overflow-x-auto hide-scrollbar space-x-6 pb-4">
+            <div
+              class="flex-shrink-0 w-60 product-card bg-white rounded-lg shadow-sm overflow-hidden"
+            >
+              <div class="h-40 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Modern%2520noise%2520cancelling%2520headphones%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=300&height=200&seq=recent1&orientation=landscape"
+                  class="w-full h-full object-cover object-top product-image"
+                  alt="Noise Cancelling Headphones"
+                />
+              </div>
+              <div class="p-3">
+                <h3 class="font-medium text-gray-800 text-sm mb-1">
+                  Noise Cancelling Headphones
+                </h3>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-half-fill ri-xs"></i>
+                  </div>
+                  <span class="text-xs text-gray-500 ml-1">(178)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-gray-900">$149.99</span>
+                  <button
+                    class="bg-primary text-white p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  >
+                    <i class="ri-shopping-cart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-60 product-card bg-white rounded-lg shadow-sm overflow-hidden"
+            >
+              <div class="h-40 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Modern%2520smartwatch%2520with%2520leather%2520strap%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=300&height=200&seq=recent2&orientation=landscape"
+                  class="w-full h-full object-cover object-top product-image"
+                  alt="Smart Watch Series 5"
+                />
+              </div>
+              <div class="p-3">
+                <h3 class="font-medium text-gray-800 text-sm mb-1">
+                  Smart Watch Series 5
+                </h3>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-line ri-xs"></i>
+                  </div>
+                  <span class="text-xs text-gray-500 ml-1">(95)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-gray-900">$199.99</span>
+                  <button
+                    class="bg-primary text-white p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  >
+                    <i class="ri-shopping-cart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-60 product-card bg-white rounded-lg shadow-sm overflow-hidden"
+            >
+              <div class="h-40 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520with%2520charging%2520case%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=300&height=200&seq=recent3&orientation=landscape"
+                  class="w-full h-full object-cover object-top product-image"
+                  alt="Wireless Earbuds Pro"
+                />
+              </div>
+              <div class="p-3">
+                <h3 class="font-medium text-gray-800 text-sm mb-1">
+                  Wireless Earbuds Pro
+                </h3>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-half-fill ri-xs"></i>
+                  </div>
+                  <span class="text-xs text-gray-500 ml-1">(128)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-gray-900">$89.99</span>
+                  <button
+                    class="bg-primary text-white p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  >
+                    <i class="ri-shopping-cart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-60 product-card bg-white rounded-lg shadow-sm overflow-hidden"
+            >
+              <div class="h-40 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Modern%2520portable%2520bluetooth%2520speaker%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=300&height=200&seq=recent4&orientation=landscape"
+                  class="w-full h-full object-cover object-top product-image"
+                  alt="Portable Bluetooth Speaker"
+                />
+              </div>
+              <div class="p-3">
+                <h3 class="font-medium text-gray-800 text-sm mb-1">
+                  Portable Bluetooth Speaker
+                </h3>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                  </div>
+                  <span class="text-xs text-gray-500 ml-1">(217)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-gray-900">$79.99</span>
+                  <button
+                    class="bg-primary text-white p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  >
+                    <i class="ri-shopping-cart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-60 product-card bg-white rounded-lg shadow-sm overflow-hidden"
+            >
+              <div class="h-40 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Modern%2520power%2520bank%2520with%2520USB%2520cables%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=300&height=200&seq=recent5&orientation=landscape"
+                  class="w-full h-full object-cover object-top product-image"
+                  alt="20000mAh Power Bank"
+                />
+              </div>
+              <div class="p-3">
+                <h3 class="font-medium text-gray-800 text-sm mb-1">
+                  20000mAh Power Bank
+                </h3>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-fill ri-xs"></i>
+                    <i class="ri-star-half-fill ri-xs"></i>
+                  </div>
+                  <span class="text-xs text-gray-500 ml-1">(156)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-gray-900">$49.99</span>
+                  <button
+                    class="bg-primary text-white p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  >
+                    <i class="ri-shopping-cart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Quick View Modal (Hidden by default) -->
+      <div
+        id="quick-view-modal"
+        class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+      >
+        <div
+          class="bg-white rounded-lg shadow-xl max-w-4xl w-full p-6 relative"
+        >
+          <div
+            class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center cursor-pointer"
+            onclick="closeQuickViewModal()"
+          >
+            <i
+              class="ri-close-line text-gray-500 hover:text-gray-700 ri-lg"
+            ></i>
+          </div>
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="md:w-1/2">
+              <div class="bg-gray-100 rounded-lg overflow-hidden h-80">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520with%2520charging%2520case%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.%2520The%2520image%2520has%2520a%2520clean%252C%2520modern%2520aesthetic%2520with%2520a%2520light%2520gradient%2520background.&width=500&height=500&seq=quickview&orientation=squarish"
+                  class="w-full h-full object-cover object-top"
+                  alt="Wireless Earbuds Pro"
+                />
+              </div>
+              <div class="flex mt-4 gap-2">
+                <div
+                  class="w-20 h-20 bg-gray-100 rounded cursor-pointer overflow-hidden"
+                >
+                  <img
+                    src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520with%2520charging%2520case%2520on%2520a%2520clean%2520minimal%2520background.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=thumb1&orientation=squarish"
+                    class="w-full h-full object-cover object-top"
+                    alt="Thumbnail 1"
+                  />
+                </div>
+                <div
+                  class="w-20 h-20 bg-gray-100 rounded cursor-pointer overflow-hidden"
+                >
+                  <img
+                    src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520on%2520a%2520clean%2520minimal%2520background%2520showing%2520the%2520side%2520view.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=thumb2&orientation=squarish"
+                    class="w-full h-full object-cover object-top"
+                    alt="Thumbnail 2"
+                  />
+                </div>
+                <div
+                  class="w-20 h-20 bg-gray-100 rounded cursor-pointer overflow-hidden"
+                >
+                  <img
+                    src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520on%2520a%2520clean%2520minimal%2520background%2520showing%2520the%2520charging%2520case%2520open.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=thumb3&orientation=squarish"
+                    class="w-full h-full object-cover object-top"
+                    alt="Thumbnail 3"
+                  />
+                </div>
+                <div
+                  class="w-20 h-20 bg-gray-100 rounded cursor-pointer overflow-hidden"
+                >
+                  <img
+                    src="https://readdy.ai/api/search-image?query=Modern%2520wireless%2520earbuds%2520on%2520a%2520clean%2520minimal%2520background%2520showing%2520the%2520earbuds%2520in%2520use.%2520High-quality%2520professional%2520product%2520photography%2520with%2520soft%2520lighting%2520and%2520shadows.&width=100&height=100&seq=thumb4&orientation=squarish"
+                    class="w-full h-full object-cover object-top"
+                    alt="Thumbnail 4"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="md:w-1/2">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                Wireless Earbuds Pro
+              </h2>
+              <div class="flex items-center mb-4">
+                <div class="flex text-yellow-400">
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-half-fill"></i>
+                </div>
+                <span class="text-sm text-gray-500 ml-2">128 Reviews</span>
+              </div>
+              <div class="mb-4">
+                <span class="text-2xl font-bold text-gray-900">$89.99</span>
+                <span class="text-sm text-green-600 ml-2">In Stock</span>
+              </div>
+              <div class="mb-6">
+                <p class="text-gray-600">
+                  Experience premium sound quality with these wireless earbuds
+                  featuring active noise cancellation, touch controls, and up to
+                  30 hours of battery life with the charging case.
+                </p>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-sm font-medium text-gray-700 mb-2">Color</h3>
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 rounded-full bg-black border-2 border-gray-300"
+                  ></button>
+                  <button
+                    class="w-8 h-8 rounded-full bg-white border-2 border-primary"
+                  ></button>
+                  <button
+                    class="w-8 h-8 rounded-full bg-blue-500 border-2 border-gray-300"
+                  ></button>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-sm font-medium text-gray-700 mb-2">Quantity</h3>
+                <div class="flex items-center">
+                  <button
+                    class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-l-lg hover:bg-gray-100"
+                  >
+                    <i class="ri-subtract-line"></i>
+                  </button>
+                  <input
+                    type="number"
+                    value="1"
+                    min="1"
+                    class="w-16 h-10 border-t border-b border-gray-300 text-center"
+                  />
+                  <button
+                    class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-r-lg hover:bg-gray-100"
+                  >
+                    <i class="ri-add-line"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-4 mb-6">
+                <button
+                  class="flex-1 bg-primary text-white py-3 rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors"
+                >
+                  Add to Cart
+                </button>
+                <button
+                  class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                >
+                  <i class="ri-heart-line text-gray-500"></i>
+                </button>
+                <button
+                  class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                >
+                  <i class="ri-share-line text-gray-500"></i>
+                </button>
+              </div>
+              <div class="border-t border-gray-200 pt-4">
+                <div class="flex items-center text-sm text-gray-600 mb-2">
+                  <i class="ri-truck-line mr-2"></i>
+                  <span>Free shipping on orders over $50</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600 mb-2">
+                  <i class="ri-refresh-line mr-2"></i>
+                  <span>30-day return policy</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i class="ri-shield-check-line mr-2"></i>
+                  <span>2-year warranty</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div class="lg:col-span-2">
+            <a
+              href="#"
+              class="text-2xl font-['Pacifico'] text-white mb-4 inline-block"
+              >logo</a
+            >
+            <p class="text-gray-300 mb-4">
+              Your all-in-one platform for payments, bills, and shopping. We
+              make your financial life easier.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary transition-colors"
+              >
+                <i class="ri-facebook-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary transition-colors"
+              >
+                <i class="ri-twitter-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary transition-colors"
+              >
+                <i class="ri-instagram-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary transition-colors"
+              >
+                <i class="ri-linkedin-fill ri-lg"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://readdy.ai/home/5988b5c9-fc71-4978-b413-791afd6fa1a8/4ffead2b-6743-4a42-9489-f4c0a5ad9008"
+                  data-readdy="true"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Shop</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Shop Categories</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Electronics</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Fashion</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Home & Living</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Beauty</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Sports & Outdoors</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-1"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-300"
+                  >123 Payment Street, Financial District, New York, NY
+                  10004</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-300">+1 (800) 123-4567</span>
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-300">support@payease.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-gray-700">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 mb-4 md:mb-0">
+              &copy; 2025 PayEase. All rights reserved.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Terms of Service</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Privacy Policy</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Refund Policy</a
+              >
+              <div class="flex items-center space-x-3">
+                <i class="ri-visa-fill ri-lg"></i>
+                <i class="ri-mastercard-fill ri-lg"></i>
+                <i class="ri-paypal-fill ri-lg"></i>
+                <i class="ri-amazon-pay-fill ri-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Cart functionality
+        const cartButton = document.querySelector(".cart-wrapper button");
+        const miniCart = document.querySelector(".mini-cart");
+        let isCartOpen = false;
+        if (cartButton && miniCart) {
+          cartButton.addEventListener("click", function (e) {
+            e.stopPropagation();
+            isCartOpen = !isCartOpen;
+            if (isCartOpen) {
+              miniCart.classList.add("active");
+            } else {
+              miniCart.classList.remove("active");
+            }
+          });
+          miniCart.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+          document.addEventListener("click", function () {
+            if (isCartOpen) {
+              isCartOpen = false;
+              miniCart.classList.remove("active");
+            }
+          });
+        }
+        // Price range slider
+        const priceRange = document.getElementById("price-range");
+        if (priceRange) {
+          priceRange.addEventListener("input", function () {
+            // Update price display or filter products based on price range
+          });
+        }
+        // Quick view functionality
+        const quickViewButtons = document.querySelectorAll(".quick-view");
+        quickViewButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            document.getElementById("quick-view-modal").classList.remove("hidden");
+          });
+        });
+      });
+      function closeQuickViewModal() {
+        document.getElementById("quick-view-modal").classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>
