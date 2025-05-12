@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A M Acoustic Corporation - Voice Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #ef4444;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+            --success-color: #10b981;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 100%;
+            max-width: 420px;
+            height: 600px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .chatbot-container.active {
+            display: flex !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chatbot-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header-text h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .header-text p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .control-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .control-btn.close:hover {
+            background-color: var(--accent-color);
+        }
+
+        .chatbot-messages {
+            flex: –L;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            font-size: 14px;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message {
+            background-color: white;
+            color: var(--dark-color);
+            border-bottom-left-radius: 4px;
+            margin-right: auto;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+
+        .bot-message::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            bottom: 0;
+            border: 10px solid transparent;
+            border-right-color: white;
+            border-bottom: 0;
+            margin-bottom: 8px;
+        }
+
+        .user-message {
+            background-color: var(--secondary-color);
+            color: white;
+            border-bottom-right-radius: 4px;
+            margin-left: auto;
+        }
+
+        .user-message::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            bottom: 0;
+            border: 10px solid transparent;
+            border-left-color: var(--secondary-color);
+            border-bottom: 0;
+            margin-bottom: 8px;
+        }
+
+        .message-time {
+            display: block;
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .chatbot-input-area {
+            border-top: 1px solid #e0e0e0;
+            background-color: white;
+            padding: 15px;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            outline: none;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        #user-input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        #send-btn, #mic-btn, #voice-toggle-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        #send-btn:hover, #mic-btn:hover, #voice-toggle-btn:hover {
+            background-color: #2563eb;
+        }
+
+        #mic-btn.active {
+            background-color: var(--success-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .quick-reply-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .quick-reply-btn {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--secondary-color);
+            background-color: white;
+            color: var(--secondary-color);
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-reply-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-btn {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-btn:hover {
+            background-color: #1e40af;
+            transform: translateX(5px);
+        }
+
+        .product-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .product-btn {
+            padding: 12px;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: white;
+            color: var(--dark-color);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            text-align: center;
+        }
+
+        .product-btn i {
+            font-size: 20px;
+            color: var(--secondary-color);
+        }
+
+        .product-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .product-btn:hover i {
+            color: white;
+        }
+
+        .form-container {
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: var(--success-color);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: #059669;
+        }
+
+        .back-btn {
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .back-btn:hover {
+            background-color: #d1d5db;
+        }
+
+        .chatbot-launcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            transition: var(--transition);
+        }
+
+        .chatbot-launcher:hover {
+            transform: scale(1.1);
+            background-color: #2563eb;
+        }
+
+        .chatbot-launcher i {
+            font-size: 24px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 12px 16px;
+            background-color: white;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            width: fit-content;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+            margin-right: auto;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #9ca3af;
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        @media (max-width: 480px) {
+            .chatbot-container {
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+                height: 100vh;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <div class="header-content">
+                <img src="https://via.placeholder.com/40" alt="A M Acoustic Corporation Logo" class="logo">
+                <div class="header-text">
+                    <h3>A M Acoustic Corporation</h3>
+                    <p>Soundproofing Solutions</p>
+                </div>
+            </div>
+            <button class="control-btn close" id="close-btn" aria-label="Close chatbot"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chat-messages" aria-live="polite"></div>
+        <div class="chatbot-input-area">
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type or speak your message..." aria-label="Type or speak your message">
+                <button id="mic-btn" aria-label="Toggle microphone"><i class="fas fa-microphone"></i></button>
+                <button id="voice-toggle-btn" aria-label="Toggle voice output"><i class="fas fa-volume-up"></i></button>
+                <button id="send-btn" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div class="quick-reply-container" id="quick-reply-container"></div>
+        </div>
+    </div>
+    <button class="chatbot-launcher" id="chatbot-launcher" aria-label="Open chatbot">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const chatbotLauncher = document.getElementById('chatbot-launcher');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const closeBtn = document.getElementById('close-btn');
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const micBtn = document.getElementById('mic-btn');
+            const voiceToggleBtn = document.getElementById('voice-toggle-btn');
+            const quickReplyContainer = document.getElementById('quick-reply-container');
+
+            // State
+            let isChatOpen = false;
+            let currentState = 'main';
+            let currentProduct = '';
+            let isVoiceEnabled = true;
+            let isListening = false;
+
+            // Contact Details
+            const whatsappNumber = '+919999999999'; // Placeholder; update with actual number
+            const businessEmail = 'info@amacousticcorporation.co.in'; // Assuming based on website
+
+            // Speech Recognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            let recognition = SpeechRecognition ? new SpeechRecognition() : null;
+
+            // Validate DOM Elements
+            if (!chatbotLauncher || !chatbotContainer || !chatMessages || !closeBtn || !userInput || !sendBtn || !micBtn || !voiceToggleBtn || !quickReplyContainer) {
+                console.error('One or more DOM elements are missing');
+                return;
+            }
+
+            // Initialize Speech Recognition
+            if (recognition) {
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript.trim();
+                    userInput.value = transcript;
+                    sendMessage();
+                };
+
+                recognition.onerror = (event) => {
+                    micBtn.classList.remove('active');
+                    isListening = false;
+                    addBotMessage('Sorry, I couldn’t understand your voice input. Please try again or type your message.');
+                    speak('Sorry, I couldn’t understand your voice input. Please try again or type your message.');
+                };
+
+                recognition.onend = () => {
+                    micBtn.classList.remove('active');
+                    isListening = false;
+                };
+            } else {
+                micBtn.style.display = 'none';
+                addBotMessage('Voice input is not supported in your browser. Please type your message.');
+            }
+
+            // Toggle Microphone
+            micBtn.addEventListener('click', () => {
+                if (!recognition) return;
+                if (isListening) {
+                    recognition.stop();
+                    micBtn.classList.remove('active');
+                    isListening = false;
+                } else {
+                    recognition.start();
+                    micBtn.classList.add('active');
+                    isListening = true;
+                }
+            });
+
+            // Toggle Voice Output
+            voiceToggleBtn.addEventListener('click', () => {
+                isVoiceEnabled = !isVoiceEnabled;
+                voiceToggleBtn.classList.toggle('muted', !isVoiceEnabled);
+                voiceToggleBtn.innerHTML = `<i class="fas fa-volume-${isVoiceEnabled ? 'up' : 'mute'}"></i>`;
+                if (!isVoiceEnabled) {
+                    speechSynthesis.cancel();
+                }
+            });
+
+            // Open Chatbot
+            chatbotLauncher.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                isChatOpen = !isChatOpen;
+                if (isChatOpen) {
+                    chatbotContainer.classList.add('active');
+                    chatbotContainer.style.display = 'flex';
+                    if (!chatMessages.children.length) {
+                        showGreeting();
+                    }
+                } else {
+                    chatbotContainer.classList.remove('active');
+                    chatbotContainer.style.display = 'none';
+                    if (isListening && recognition) {
+                        recognition.stop();
+                        micBtn.classList.remove('active');
+                        isListening = false;
+                    }
+                }
+            }, { capture: true });
+
+            // Close Chatbot
+            closeBtn.addEventListener('click', () => {
+                isChatOpen = false;
+                chatbotContainer.classList.remove('active');
+                chatbotContainer.style.display = 'none';
+                if (isListening && recognition) {
+                    recognition.stop();
+                    micBtn.classList.remove('active');
+                    isListening = false;
+                }
+            });
+
+            // Prevent Closing on Inner Clicks
+            chatbotContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Send Message
+            sendBtn.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addUserMessage(message);
+                    userInput.value = '';
+                    showTypingIndicator();
+                    setTimeout(() => processUserMessage(message), 1000);
+                }
+            }
+
+            function showGreeting() {
+                const greeting = "Hi! 👋 Welcome to A M Acoustic Corporation, your trusted partner in soundproofing solutions. Speak or type to explore our products, request a quote, or schedule a consultation. How can I assist you today?";
+                addBotMessage(greeting);
+                speak(greeting);
+                showMainOptions();
+            }
+
+            function sanitizeInput(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function addUserMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user-message';
+                messageDiv.textContent = sanitizeInput(text);
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'message-time';
+                timeSpan.textContent = getCurrentTime();
+                messageDiv.appendChild(timeSpan);
+                chatMessages.appendChild(messageDiv);
+                scrollToBottom();
+            }
+
+            function addBotMessage(text) {
+                const typingIndicator = document.querySelector('.typing-indicator');
+                if (typingIndicator) typingIndicator.remove();
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message bot-message';
+                messageDiv.innerHTML = text;
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'message-time';
+                timeSpan.textContent = getCurrentTime();
+                messageDiv.appendChild(timeSpan);
+                chatMessages.appendChild(messageDiv);
+                scrollToBottom();
+                speak(text);
+            }
+
+            function speak(text) {
+                if (!isVoiceEnabled || !speechSynthesis) return;
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.pitch = 1;
+                utterance.rate = 1;
+                utterance.volume = 1;
+                speechSynthesis.speak(utterance);
+            }
+
+            function showTypingIndicator() {
+                const existingIndicator = document.querySelector('.typing-indicator');
+                if (existingIndicator) existingIndicator.remove();
+                const indicatorDiv = document.createElement('div');
+                indicatorDiv.className = 'typing-indicator';
+                for (let i = 0; i < 3; i++) {
+                    indicatorDiv.appendChild(document.createElement('div')).className = 'typing-dot';
+                }
+                chatMessages.appendChild(indicatorDiv);
+                scrollToBottom();
+            }
+
+            function showMainOptions() {
+                currentState = 'main';
+                clearQuickReplies();
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options-container';
+                const options = [
+                    { text: 'Explore Products', icon: 'fa-box', label: 'Explore products' },
+                    { text: 'Request a Quote', icon: 'fa-file-invoice', label: 'Request a quote' },
+                    { text: 'Schedule Consultation', icon: 'fa-calendar-check', label: 'Schedule consultation' },
+                    { text: 'Contact Information', icon: 'fa-envelope', label: 'View contact information' }
+                ];
+                options.forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerHTML = `<i class="fas ${option.icon}"></i> ${option.text}`;
+                    btn.setAttribute('aria-label', option.label);
+                    btn.addEventListener('click', () => handleMainOption(option.text));
+                    optionsDiv.appendChild(btn);
+                });
+                chatMessages.appendChild(optionsDiv);
+                addQuickReplies(['Products', 'Quote', 'Consultation']);
+                scrollToBottom();
+                if (isVoiceEnabled) {
+                    speak('Please select an option or speak your choice.');
+                }
+            }
+
+            function handleMainOption(option) {
+                if (option.includes('Products')) {
+                    showProductOptions();
+                } else if (option.includes('Quote')) {
+                    showQuoteForm();
+                } else if (option.includes('Consultation')) {
+                    showConsultationForm();
+                } else if (option.includes('Contact')) {
+                    showContactInfo();
+                }
+            }
+
+            function showProductOptions() {
+                currentState = 'product-options';
+                clearChat();
+                const message = "We offer a wide range of soundproofing solutions for industrial and architectural applications. Please select a product:";
+                addBotMessage(message);
+                speak(message);
+                const productOptionsDiv = document.createElement('div');
+                productOptionsDiv.className = 'product-options';
+                const products = [
+                    { name: 'Acoustic Enclosure', icon: 'fa-shield-alt', label: 'Acoustic enclosure' },
+                    { name: 'Soundproof Canopy', icon: 'fa-warehouse', label: 'Soundproof canopy' },
+                    { name: 'Audiometric Booth', icon: 'fa-headphones', label: 'Audiometric booth' },
+                    { name: 'Soundproof Cabin', icon: 'fa-door-closed', label: 'Soundproof cabin' },
+                    { name: 'Music Recording Room', icon: 'fa-microphone-alt', label: 'Music recording room' },
+                    { name: 'Telephone Booth', icon: 'fa-phone-square', label: 'Telephone booth' },
+                    { name: 'Generator Canopy', icon: 'fa-bolt', label: 'Generator canopy' },
+                    { name: 'STP Blower Enclosure', icon: 'fa-fan', label: 'STP blower enclosure' }
+                ];
+                products.forEach(product => {
+                    const btn = document.createElement('button');
+                    btn.className = 'product-btn';
+                    btn.innerHTML = `<i class="fas ${product.icon}"></i> ${product.name}`;
+                    btn.setAttribute('aria-label', product.label);
+                    btn.addEventListener('click', () => showProductDetails(product.name));
+                    productOptionsDiv.appendChild(btn);
+                });
+                chatMessages.appendChild(productOptionsDiv);
+                addBackButton('Back to Main Menu', showMainOptions);
+                addQuickReplies(['Acoustic Enclosure', 'Soundproof Canopy', 'Audiometric Booth']);
+                scrollToBottom();
+            }
+
+            function showProductDetails(productName) {
+                currentState = 'product-details';
+                currentProduct = productName;
+                clearChat();
+                const intro = `You've selected <strong>${productName}</strong>. Here's an overview:`;
+                addBotMessage(intro);
+                speak(intro);
+                const productDescriptions = {
+                    'Acoustic Enclosure': 'Our Sound Proof Acoustic Enclosure is designed for industrial noise control, featuring a modular CRCA sheet construction with 200mm thick acoustic panels. Achieves up to 75 dB noise reduction, ideal for testing setups.',
+                    'Soundproof Canopy': 'Custom-sized Soundproof Canopy for generators (e.g., 200 KVA), built with 100mm thick acoustic insulation and CRCA sheets. Ensures ≤75 dB noise levels with efficient ventilation.',
+                    'Audiometric Booth': 'A 4x4x7 ft booth for hearing tests, with 100mm thick Rockwool insulation and modular CRCA construction. Maintains internal sound levels below 75 dB, ANSI compliant.',
+                    'Soundproof Cabin': 'Modular cabin for industrial and architectural use, with 100mm thick insulation and double-glazed acoustic glass. Offers significant noise reduction and customizable finishes.',
+                    'Music Recording Room': 'Fully treated recording room with ceramic wool and Rockwool insulation, acoustic steel doors, and custom ventilation. Ideal for professional audio environments.',
+                    'Telephone Booth': 'Compact 1050x1050x2150 mm booth with 10mm toughened acoustic glass and 60mm thick panels. Reduces noise by 30-35 dB for private communication.',
+                    'Generator Canopy': 'Custom-sized canopy for generators, with 100mm thick Rockwool insulation and a 500-liter diesel tank. Maintains ≤75 dBA at 1 meter.',
+                    'STP Blower Enclosure': 'Soundproof enclosure for STP blowers, with 100mm thick insulation and modular CRCA construction. Achieves ≤75 dB noise levels, supplied in knock-down condition.'
+                };
+                const details = productDescriptions[productName] || 'This product offers advanced noise control with customizable options. Contact us for more details.';
+                addBotMessage(details);
+                speak(details);
+                const quoteBtn = document.createElement('button');
+                quoteBtn.className = 'option-btn';
+                quoteBtn.innerHTML = '<i class="fas fa-file-invoice"></i> Request Quote';
+                quoteBtn.setAttribute('aria-label', `Request quote for ${productName}`);
+                quoteBtn.style.marginTop = '15px';
+                quoteBtn.addEventListener('click', () => showQuoteForm(productName));
+                chatMessages.appendChild(quoteBtn);
+                addBackButton('Back to Products', showProductOptions);
+                scrollToBottom();
+            }
+
+            function sendToWhatsApp(formData, refNumber, formType) {
+                const message = `
+                    New ${formType} Submission
+                    Reference: ${refNumber}
+                    ${Array.from(formData.entries()).map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1).replace(/-/g, ' ')}: ${value}`).join('\n')}
+                `.trim();
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
+            }
+
+            function sendToEmail(formData, refNumber, formType) {
+                const emailBody = {
+                    to: businessEmail,
+                    subject: `New ${formType} Submission - Ref: ${refNumber}`,
+                    body: `
+                        New ${formType} Submission
+                        Reference: ${refNumber}
+                        ${Array.from(formData.entries()).map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1).replace(/-/g, ' ')}: ${value}`).join('\n')}
+                    `
+                };
+                // Simulated API call; replace with actual endpoint
+                fetch('https://amacousticcorporation.co.in/api/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(emailBody)
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Email API failed');
+                })
+                .catch(err => {
+                    addBotMessage('Failed to send email notification. Please contact us directly.');
+                    speak('Failed to send email notification. Please contact us directly.');
+                });
+            }
+
+            function showQuoteForm(productName = '') {
+                currentState = 'quote-form';
+                clearChat();
+                const message = `Please provide your details${productName ? ` to request a quote for ${productName}` : ''}. We'll get back to you with a tailored solution.`;
+                addBotMessage(message);
+                speak(message);
+                const form = document.createElement('form');
+                form.className = 'form-container';
+                const fields = [
+                    { id: 'full-name', label: 'Full Name', type: 'text', required: true },
+                    { id: 'email', label: 'Email Address', type: 'email', required: true },
+                    { id: 'phone', label: 'Phone Number', type: 'tel', required: true },
+                    { id: 'product', label: 'Product of Interest', type: 'text', value: productName, required: true },
+                    { id: 'details', label: 'Additional Details (e.g., dimensions, application)', type: 'textarea', required: false }
+                ];
+                fields.forEach(field => {
+                    const group = document.createElement('div');
+                    group.className = 'form-group';
+                    const label = document.createElement('label');
+                    label.htmlFor = field.id;
+                    label.textContent = field.label;
+                    let input;
+                    if (field.type === 'textarea') {
+                        input = document.createElement('textarea');
+                        input.id = field.id;
+                        input.rows = 3;
+                    } else {
+                        input = document.createElement('input');
+                        input.type = field.type;
+                        input.id = field.id;
+                        if (field.value) input.value = field.value;
+                    }
+                    input.setAttribute('aria-label', field.label);
+                    if (field.required) input.required = true;
+                    group.appendChild(label);
+                    group.appendChild(input);
+                    form.appendChild(group);
+                });
+                const submitBtn = document.createElement('button');
+                submitBtn.type = 'submit';
+                submitBtn.className = 'submit-btn';
+                submitBtn.textContent = 'Submit Quote Request';
+                submitBtn.setAttribute('aria-label', 'Submit quote request');
+                form.appendChild(submitBtn);
+                chatMessages.appendChild(form);
+                addBackButton('Back to Main Menu', showMainOptions);
+                scrollToBottom();
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target);
+                    const refNumber = 'AM-' + Math.floor(100000 + Math.random() * 900000);
+                    const successMessage = `Thank you for your quote request! We'll contact you within 24 hours with a customized solution.`;
+                    addBotMessage(successMessage);
+                    speak(successMessage);
+                    const refMessage = `Your reference number is: <strong>${refNumber}</strong>. Please quote this in all communications.`;
+                    addBotMessage(refMessage);
+                    speak(refMessage);
+                    sendToWhatsApp(formData, refNumber, 'Quote Request');
+                    sendToEmail(formData, refNumber, 'Quote Request');
+                    e.target.remove();
+                    addBackButton('Back to Main Menu', showMainOptions);
+                });
+            }
+
+            function showConsultationForm() {
+                currentState = 'consultation-form';
+                clearChat();
+                const message = "Schedule a consultation with our acoustic experts. Please provide your details and preferred time.";
+                addBotMessage(message);
+                speak(message);
+                const form = document.createElement('form');
+                form.className = 'form-container';
+                const fields = [
+                    { id: 'consultation-name', label: 'Your Name', type: 'text', required: true },
+                    { id: 'consultation-phone', label: 'Phone Number', type: 'tel', required: true },
+                    { id: 'consultation-time', label: 'Preferred Consultation Time', type: 'text', placeholder: 'e.g., Tomorrow between 2-4 PM', required: true },
+                    { id: 'consultation-details', label: 'Project Details', type: 'textarea', required: false }
+                ];
+                fields.forEach(field => {
+                    const group = document.createElement('div');
+                    group.className = 'form-group';
+                    const label = document.createElement('label');
+                    label.htmlFor = field.id;
+                    label.textContent = field.label;
+                    let input;
+                    if (field.type === 'textarea') {
+                        input = document.createElement('textarea');
+                        input.id = field.id;
+                        input.rows = 3;
+                    } else {
+                        input = document.createElement('input');
+                        input.type = field.type;
+                        input.id = field.id;
+                        if (field.placeholder) input.placeholder = field.placeholder;
+                    }
+                    input.setAttribute('aria-label', field.label);
+                    if (field.required) input.required = true;
+                    group.appendChild(label);
+                    group.appendChild(input);
+                    form.appendChild(group);
+                });
+                const submitBtn = document.createElement('button');
+                submitBtn.type = 'submit';
+                submitBtn.className = 'submit-btn';
+                submitBtn.textContent = 'Request Consultation';
+                submitBtn.setAttribute('aria-label', 'Request consultation');
+                form.appendChild(submitBtn);
+                chatMessages.appendChild(form);
+                addBackButton('Back to Main Menu', showMainOptions);
+                scrollToBottom();
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target);
+                    const refNumber = 'AM-' + Math.floor(100000 + Math.random() * 900000);
+                    const successMessage = "Thank you for your consultation request! We'll contact you at your preferred time to discuss your project.";
+                    addBotMessage(successMessage);
+                    speak(successMessage);
+                    const refMessage = `Your reference number is: <strong>${refNumber}</strong>. Please quote this in all communications.`;
+                    addBotMessage(refMessage);
+                    speak(refMessage);
+                    sendToWhatsApp(formData, refNumber, 'Consultation Request');
+                    sendToEmail(formData, refNumber, 'Consultation Request');
+                    e.target.remove();
+                    addBackButton('Back to Main Menu', showMainOptions);
+                });
+            }
+
+            function showContactInfo() {
+                currentState = 'contact-info';
+                clearChat();
+                const message = "Here's how you can reach us:";
+                addBotMessage(message);
+                speak(message);
+                const contactDiv = document.createElement('div');
+                contactDiv.className = 'options-container';
+                const contacts = [
+                    { text: '📧 Email: info@amacousticcorporation.co.in', icon: 'fa-envelope', label: 'Email us' },
+                    { text: '🌐 Website: www.amacousticcorporation.co.in', icon: 'fa-globe', label: 'Visit our website' },
+                    { text: '🏢 Office Hours: Mon-Sat, 9:00 AM to 6:00 PM', icon: 'fa-clock', label: 'Office hours' }
+                ];
+                contacts.forEach(contact => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.style.cursor = 'default';
+                    btn.innerHTML = `<i class="fas ${contact.icon}"></i> ${contact.text}`;
+                    btn.setAttribute('aria-label', contact.label);
+                    contactDiv.appendChild(btn);
+                });
+                chatMessages.appendChild(contactDiv);
+                addBackButton('Back to Main Menu', showMainOptions);
+                scrollToBottom();
+            }
+
+            function processUserMessage(message) {
+                message = message.toLowerCase();
+                if (currentState === 'main') {
+                    if (message.includes('product') || message.includes('soundproof') || message.includes('acoustic')) {
+                        showProductOptions();
+                    } else if (message.includes('quote') || message.includes('price') || message.includes('cost')) {
+                        showQuoteForm();
+                    } else if (message.includes('consult') || message.includes('meeting') || message.includes('schedule')) {
+                        showConsultationForm();
+                    } else if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
+                        showContactInfo();
+                    } else {
+                        const errorMessage = "I'm not sure I understand. Please select one of the options below or speak clearly:";
+                        addBotMessage(errorMessage);
+                        speak(errorMessage);
+                        showMainOptions();
+                    }
+                } else if (currentState === 'product-options') {
+                    const productKeywords = ['enclosure', 'canopy', 'audiometric', 'cabin', 'recording', 'telephone', 'generator', 'blower'];
+                    const selectedProduct = productKeywords.find(keyword => message.includes(keyword));
+                    if (selectedProduct) {
+                        let productName = '';
+                        if (selectedProduct === 'enclosure') productName = 'Acoustic Enclosure';
+                        else if (selectedProduct === 'canopy') productName = 'Soundproof Canopy';
+                        else if (selectedProduct === 'audiometric') productName = 'Audiometric Booth';
+                        else if (selectedProduct === 'cabin') productName = 'Soundproof Cabin';
+                        else if (selectedProduct === 'recording') productName = 'Music Recording Room';
+                        else if (selectedProduct === 'telephone') productName = 'Telephone Booth';
+                        else if (selectedProduct === 'generator') productName = 'Generator Canopy';
+                        else if (selectedProduct === 'blower') productName = 'STP Blower Enclosure';
+                        showProductDetails(productName);
+                    } else {
+                        const errorMessage = "Please select a product from the options below:";
+                        addBotMessage(errorMessage);
+                        speak(errorMessage);
+                        showProductOptions();
+                    }
+                } else {
+                    const message = "How else can I assist you?";
+                    addBotMessage(message);
+                    speak(message);
+                    showMainOptions();
+                }
+            }
+
+            function clearChat() {
+                chatMessages.innerHTML = '';
+            }
+
+            function clearQuickReplies() {
+                quickReplyContainer.innerHTML = '';
+            }
+
+            function addQuickReplies(replies) {
+                clearQuickReplies();
+                replies.forEach(reply => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-reply-btn';
+                    btn.textContent = reply;
+                    btn.setAttribute('aria-label', `Select ${reply}`);
+                    btn.addEventListener('click', () => {
+                        addUserMessage(reply);
+                        showTypingIndicator();
+                        setTimeout(() => processUserMessage(reply), 1000);
+                    });
+                    quickReplyContainer.appendChild(btn);
+                });
+            }
+
+            function addBackButton(text, clickHandler) {
+                const backBtn = document.createElement('button');
+                backBtn.className = 'back-btn';
+                backBtn.innerHTML = `<i class="fas fa-arrow-left"></i> ${text}`;
+                backBtn.setAttribute('aria-label', text);
+                backBtn.addEventListener('click', () => clickHandler());
+                chatMessages.appendChild(backBtn);
+                scrollToBottom();
+            }
+
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function getCurrentTime() {
+                return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        });
+    </script>
+</body>
+</html>
