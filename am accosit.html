@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AM Acoustic Corporation</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#FF6B00", secondary: "#0054A6" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Roboto', sans-serif;
+      }
+      h1, h2, h3, h4, h5 {
+      font-family: 'Poppins', sans-serif;
+      }
+      .sticky-contact {
+      position: fixed;
+      right: 2rem;
+      bottom: 2rem;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      }
+      .sticky-contact-btn {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .sticky-contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+      .sticky-contact-btn::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      }
+      .sticky-contact-btn:hover::before {
+      opacity: 1;
+      }
+      .enquiry-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      }
+      .enquiry-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+      }
+      .enquiry-popup-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      }
+      .enquiry-popup.active .enquiry-popup-content {
+      transform: translateY(0);
+      }
+      .enquiry-popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.3s ease;
+      }
+      .enquiry-popup-close:hover {
+      color: #000;
+      }
+      @media (max-width: 640px) {
+      .sticky-contact {
+      right: 1rem;
+      bottom: 1rem;
+      }
+      .sticky-contact-btn {
+      width: 3rem;
+      height: 3rem;
+      }
+      }
+      .hero-slider {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      }
+      .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      }
+      .slide.active {
+      opacity: 1;
+      }
+      .counter-value {
+      transition: all 0.5s ease-in-out;
+      }
+      .product-card {
+      transition: all 0.3s ease;
+      }
+      .product-card:hover {
+      transform: translateY(-10px);
+      }
+      .testimonial-slider {
+      position: relative;
+      overflow: hidden;
+      }
+      .testimonial-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      }
+      .testimonial-slide.active {
+      opacity: 1;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+      .custom-checkbox {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      user-select: none;
+      }
+      .custom-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      }
+      .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      }
+      .custom-checkbox:hover input ~ .checkmark {
+      border-color: #ccc;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+      background-color: #FF6B00;
+      border-color: #FF6B00;
+      }
+      .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+      display: block;
+      }
+      .custom-checkbox .checkmark:after {
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .nav-link {
+      position: relative;
+      }
+      .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #FF6B00;
+      transition: width 0.3s ease;
+      }
+      .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      }
+      .animate-fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .animate-fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header -->
+    <header
+      class="fixed w-full z-50 transition-all duration-300 bg-white shadow-md"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <a href="#" class="text-3xl font-['Pacifico'] text-primary"
+            >AM Acoustic</a
+          >
+          <nav class="hidden lg:flex items-center space-x-8">
+            <a
+              href="#"
+              class="nav-link active text-gray-800 hover:text-primary font-medium transition-colors"
+              >Home</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 hover:text-primary font-medium transition-colors"
+              >About</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 hover:text-primary font-medium transition-colors"
+              >Products</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 hover:text-primary font-medium transition-colors"
+              >Projects</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 hover:text-primary font-medium transition-colors"
+              >Testimonials</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 hover:text-primary font-medium transition-colors"
+              >Contact</a
+            >
+            <button
+              class="bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+            >
+              Get Quote
+            </button>
+          </nav>
+          <button class="lg:hidden w-10 h-10 flex items-center justify-center">
+            <i class="ri-menu-line ri-2x text-gray-700"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+      <div
+        class="bg-white h-full w-64 p-6 transform translate-x-0 transition-transform duration-300"
+      >
+        <div class="flex justify-between items-center mb-8">
+          <a href="#" class="text-2xl font-['Pacifico'] text-primary"
+            >AM Acoustic</a
+          >
+          <button class="w-8 h-8 flex items-center justify-center">
+            <i class="ri-close-line ri-2x text-gray-700"></i>
+          </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+          <a
+            href="#"
+            class="text-gray-800 hover:text-primary font-medium py-2 border-b border-gray-100"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 hover:text-primary font-medium py-2 border-b border-gray-100"
+            >About</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 hover:text-primary font-medium py-2 border-b border-gray-100"
+            >Products</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 hover:text-primary font-medium py-2 border-b border-gray-100"
+            >Projects</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 hover:text-primary font-medium py-2 border-b border-gray-100"
+            >Testimonials</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 hover:text-primary font-medium py-2 border-b border-gray-100"
+            >Contact</a
+          >
+          <button
+            class="bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all mt-4 whitespace-nowrap"
+          >
+            Get Quote
+          </button>
+        </nav>
+      </div>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero-slider pt-20">
+      <div
+        class="slide active"
+        style="background-image: url('https://readdy.ai/api/search-image?query=professional%20industrial%20acoustic%20sound%20booth%20with%20modern%20design%2C%20clean%20lines%2C%20industrial%20aesthetic%2C%20blue%20and%20orange%20color%20scheme%2C%20high-quality%20soundproofing%20materials%2C%20perfect%20for%20professional%20recording%20studios%20and%20industrial%20environments%2C%20high%20resolution%2C%20photorealistic&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;"
+      >
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-6 h-full flex items-center">
+          <div class="max-w-2xl text-white z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">
+              Advanced Acoustic Solutions
+            </h1>
+            <p class="text-xl mb-8">
+              Industry-leading sound isolation and noise control systems for any
+              environment
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Explore Products
+              </button>
+              <button
+                class="bg-white text-gray-800 px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="slide"
+        style="background-image: url('https://readdy.ai/api/search-image?query=industrial%20acoustic%20testing%20chamber%20with%20high-tech%20equipment%2C%20sound%20absorption%20panels%2C%20professional%20testing%20environment%2C%20blue%20and%20orange%20accents%2C%20clean%20modern%20design%2C%20showing%20acoustic%20measurement%20devices%20and%20testing%20setup%2C%20high%20resolution%2C%20photorealistic&width=1920&height=1080&seq=2&orientation=landscape'); background-size: cover; background-position: center;"
+      >
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-6 h-full flex items-center">
+          <div class="max-w-2xl text-white z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">
+              Custom Acoustic Engineering
+            </h1>
+            <p class="text-xl mb-8">
+              Tailored solutions for industrial, commercial and research
+              environments
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Our Services
+              </button>
+              <button
+                class="bg-white text-gray-800 px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Request Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="slide"
+        style="background-image: url('https://readdy.ai/api/search-image?query=modern%20industrial%20facility%20with%20acoustic%20treatment%20panels%20installed%20on%20walls%20and%20ceiling%2C%20professional%20sound%20isolation%20system%2C%20clean%20manufacturing%20environment%2C%20blue%20and%20orange%20color%20accents%2C%20showing%20acoustic%20engineering%20implementation%20in%20real-world%20setting%2C%20high%20resolution%2C%20photorealistic&width=1920&height=1080&seq=3&orientation=landscape'); background-size: cover; background-position: center;"
+      >
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-6 h-full flex items-center">
+          <div class="max-w-2xl text-white z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">
+              Precision Noise Control
+            </h1>
+            <p class="text-xl mb-8">
+              Expert solutions for even the most challenging acoustic
+              environments
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                View Projects
+              </button>
+              <button
+                class="bg-white text-gray-800 px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slider Controls -->
+      <div
+        class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-10"
+      >
+        <button
+          class="w-3 h-3 rounded-full bg-white bg-opacity-50 slider-dot active"
+          data-index="0"
+        ></button>
+        <button
+          class="w-3 h-3 rounded-full bg-white bg-opacity-50 slider-dot"
+          data-index="1"
+        ></button>
+        <button
+          class="w-3 h-3 rounded-full bg-white bg-opacity-50 slider-dot"
+          data-index="2"
+        ></button>
+      </div>
+      <button
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white bg-opacity-30 flex items-center justify-center text-white z-10 hover:bg-opacity-50 transition-all"
+      >
+        <i class="ri-arrow-left-s-line ri-2x"></i>
+      </button>
+      <button
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white bg-opacity-30 flex items-center justify-center text-white z-10 hover:bg-opacity-50 transition-all"
+      >
+        <i class="ri-arrow-right-s-line ri-2x"></i>
+      </button>
+    </section>
+    <!-- Key Statistics -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-in">
+          <h2 class="text-4xl font-bold mb-4">Trusted Industry Leader</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            For over two decades, AM Acoustic has delivered exceptional acoustic
+            solutions worldwide.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            class="bg-white p-8 rounded-lg shadow-md text-center animate-fade-in"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-building-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold mb-2">
+              <span class="counter-value" data-target="500">0</span>+
+            </h3>
+            <p class="text-gray-600 font-medium">Projects Completed</p>
+          </div>
+          <div
+            class="bg-white p-8 rounded-lg shadow-md text-center animate-fade-in"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-calendar-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold mb-2">
+              <span class="counter-value" data-target="25">0</span>
+            </h3>
+            <p class="text-gray-600 font-medium">Years Experience</p>
+          </div>
+          <div
+            class="bg-white p-8 rounded-lg shadow-md text-center animate-fade-in"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-global-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold mb-2">
+              <span class="counter-value" data-target="35">0</span>+
+            </h3>
+            <p class="text-gray-600 font-medium">Countries Served</p>
+          </div>
+          <div
+            class="bg-white p-8 rounded-lg shadow-md text-center animate-fade-in"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-customer-service-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold mb-2">
+              <span class="counter-value" data-target="98">0</span>%
+            </h3>
+            <p class="text-gray-600 font-medium">Client Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Product Highlights -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-in">
+          <h2 class="text-4xl font-bold mb-4">Our Premium Solutions</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover our range of industry-leading acoustic enclosures and noise
+            control systems.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden animate-fade-in"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=professional%20acoustic%20testing%20booth%20with%20advanced%20sound%20isolation%20features%2C%20high-quality%20materials%2C%20modern%20design%20with%20blue%20and%20orange%20accents%2C%20clean%20industrial%20aesthetic%2C%20perfect%20for%20audio%20testing%20environments%2C%20high%20resolution%2C%20photorealistic&width=600&height=400&seq=4&orientation=landscape"
+                alt="Acoustic Testing Booth"
+                class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Acoustic Testing Booths</h3>
+              <p class="text-gray-600 mb-4">
+                Precision-engineered testing environments with superior sound
+                isolation for accurate acoustic measurements.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline whitespace-nowrap"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </button>
+            </div>
+          </div>
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden animate-fade-in"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=industrial%20sound%20enclosure%20for%20machinery%2C%20heavy-duty%20construction%2C%20professional%20noise%20reduction%20system%2C%20modern%20design%20with%20blue%20and%20orange%20accents%2C%20clean%20industrial%20aesthetic%2C%20showing%20noise%20containment%20for%20industrial%20equipment%2C%20high%20resolution%2C%20photorealistic&width=600&height=400&seq=5&orientation=landscape"
+                alt="Industrial Enclosures"
+                class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Industrial Enclosures</h3>
+              <p class="text-gray-600 mb-4">
+                Heavy-duty sound isolation systems designed for industrial
+                machinery and manufacturing environments.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline whitespace-nowrap"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </button>
+            </div>
+          </div>
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden animate-fade-in"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=acoustic%20panels%20and%20baffles%20installed%20in%20modern%20office%20space%2C%20professional%20sound%20treatment%20solution%2C%20sleek%20design%20with%20blue%20and%20orange%20accents%2C%20clean%20contemporary%20aesthetic%2C%20showing%20acoustic%20treatment%20in%20commercial%20environment%2C%20high%20resolution%2C%20photorealistic&width=600&height=400&seq=6&orientation=landscape"
+                alt="Acoustic Panels"
+                class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Acoustic Panels & Baffles</h3>
+              <p class="text-gray-600 mb-4">
+                Customizable acoustic treatment solutions for offices, studios,
+                and commercial spaces.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline whitespace-nowrap"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <button
+            class="bg-secondary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+          >
+            View All Products
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="lg:w-2/5 animate-fade-in">
+            <img
+              src="https://readdy.ai/api/search-image?query=professional%20acoustic%20engineering%20team%20working%20in%20modern%20facility%2C%20diverse%20team%20of%20engineers%20and%20technicians%2C%20collaborative%20environment%2C%20showing%20acoustic%20testing%20and%20development%2C%20blue%20and%20orange%20color%20accents%2C%20clean%20industrial%20setting%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=7&orientation=landscape"
+              alt="About AM Acoustic"
+              class="w-full h-auto rounded-lg shadow-lg"
+            />
+          </div>
+          <div class="lg:w-3/5 animate-fade-in">
+            <h2 class="text-4xl font-bold mb-6">
+              About AM Acoustic Corporation
+            </h2>
+            <p class="text-lg text-gray-700 mb-6">
+              Founded in 2000, AM Acoustic Corporation has established itself as
+              a global leader in acoustic engineering and noise control
+              solutions. Our team of expert engineers and technicians are
+              dedicated to delivering exceptional sound management systems for
+              industrial, commercial, and research applications.
+            </p>
+            <div class="mb-8">
+              <h3 class="text-xl font-bold mb-4">Why Choose Us:</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <div
+                    class="w-6 h-6 mt-1 mr-3 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <span class="text-gray-700"
+                    >Industry-leading acoustic performance with certified
+                    testing</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-6 h-6 mt-1 mr-3 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <span class="text-gray-700"
+                    >Custom-engineered solutions tailored to your specific
+                    requirements</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-6 h-6 mt-1 mr-3 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <span class="text-gray-700"
+                    >Comprehensive service from design and manufacturing to
+                    installation</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-6 h-6 mt-1 mr-3 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-check-line ri-lg"></i>
+                  </div>
+                  <span class="text-gray-700"
+                    >Global experience with projects in over 35 countries</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <button
+              class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+            >
+              Learn More About Us
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Featured Projects -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-in">
+          <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explore our portfolio of successful acoustic solutions across
+            various industries.
+          </p>
+        </div>
+        <div class="mb-8 flex justify-center animate-fade-in">
+          <div class="inline-flex bg-gray-100 p-1 rounded-full">
+            <button
+              class="px-6 py-2 rounded-full bg-primary text-white whitespace-nowrap"
+            >
+              All Projects
+            </button>
+            <button
+              class="px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap"
+            >
+              Industrial
+            </button>
+            <button
+              class="px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap"
+            >
+              Commercial
+            </button>
+            <button
+              class="px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap"
+            >
+              Research
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            class="bg-white rounded-lg overflow-hidden shadow-md animate-fade-in"
+          >
+            <div class="h-64 overflow-hidden relative group">
+              <img
+                src="https://readdy.ai/api/search-image?query=large%20industrial%20manufacturing%20facility%20with%20comprehensive%20acoustic%20treatment%20installation%2C%20showing%20sound%20isolation%20enclosures%20around%20machinery%2C%20blue%20and%20orange%20color%20accents%2C%20clean%20industrial%20environment%2C%20professional%20acoustic%20engineering%20implementation%2C%20high%20resolution%2C%20photorealistic&width=600&height=400&seq=8&orientation=landscape"
+                alt="Manufacturing Plant"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-800 px-6 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <span
+                class="inline-block px-3 py-1 bg-blue-100 text-secondary text-sm font-medium rounded-full mb-3"
+                >Industrial</span
+              >
+              <h3 class="text-xl font-bold mb-2">
+                Manufacturing Plant Noise Reduction
+              </h3>
+              <p class="text-gray-600">
+                Complete acoustic treatment for a large manufacturing facility,
+                reducing noise levels by 35dB.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg overflow-hidden shadow-md animate-fade-in"
+          >
+            <div class="h-64 overflow-hidden relative group">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20corporate%20office%20with%20acoustic%20ceiling%20baffles%20and%20wall%20panels%2C%20elegant%20sound%20treatment%20solution%2C%20professional%20office%20environment%2C%20blue%20and%20orange%20color%20accents%2C%20clean%20contemporary%20design%2C%20showing%20acoustic%20treatment%20in%20open%20office%20space%2C%20high%20resolution%2C%20photorealistic&width=600&height=400&seq=9&orientation=landscape"
+                alt="Corporate Headquarters"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-800 px-6 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <span
+                class="inline-block px-3 py-1 bg-orange-100 text-primary text-sm font-medium rounded-full mb-3"
+                >Commercial</span
+              >
+              <h3 class="text-xl font-bold mb-2">
+                Corporate Headquarters Acoustics
+              </h3>
+              <p class="text-gray-600">
+                Custom acoustic treatment for open office spaces, meeting rooms,
+                and common areas.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg overflow-hidden shadow-md animate-fade-in"
+          >
+            <div class="h-64 overflow-hidden relative group">
+              <img
+                src="https://readdy.ai/api/search-image?query=advanced%20research%20laboratory%20with%20acoustic%20isolation%20chambers%2C%20scientific%20testing%20environment%2C%20high-tech%20research%20facility%2C%20blue%20and%20orange%20color%20accents%2C%20clean%20modern%20design%2C%20showing%20specialized%20acoustic%20research%20equipment%2C%20high%20resolution%2C%20photorealistic&width=600&height=400&seq=10&orientation=landscape"
+                alt="Research Laboratory"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-800 px-6 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <span
+                class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-sm font-medium rounded-full mb-3"
+                >Research</span
+              >
+              <h3 class="text-xl font-bold mb-2">
+                Acoustic Research Laboratory
+              </h3>
+              <p class="text-gray-600">
+                Precision acoustic chambers for a leading research institution
+                with strict sound isolation requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <button
+            class="bg-secondary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+          >
+            View All Projects
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Performance Metrics -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-in">
+          <h2 class="text-4xl font-bold mb-4">Performance Metrics</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our solutions deliver measurable results across different acoustic
+            parameters.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div class="bg-white p-6 rounded-lg shadow-md animate-fade-in">
+            <h3 class="text-2xl font-bold mb-4">
+              Noise Reduction by Product Type
+            </h3>
+            <div id="chart1" class="w-full h-80"></div>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md animate-fade-in">
+            <h3 class="text-2xl font-bold mb-4">
+              Sound Transmission Class (STC) Ratings
+            </h3>
+            <div id="chart2" class="w-full h-80"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonials -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-in">
+          <h2 class="text-4xl font-bold mb-4">What Our Clients Say</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Hear from organizations that have transformed their acoustic
+            environments with our solutions.
+          </p>
+        </div>
+        <div class="testimonial-slider relative h-96 animate-fade-in">
+          <div class="testimonial-slide active">
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20middle-aged%20male%20executive%20in%20business%20attire%2C%20neutral%20background%2C%20professional%20headshot%20style%2C%20high%20resolution%2C%20photorealistic&width=200&height=200&seq=11&orientation=squarish"
+                    alt="Robert Johnson"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold">Robert Johnson</h4>
+                  <p class="text-gray-600">
+                    Facilities Director, Global Manufacturing Inc.
+                  </p>
+                </div>
+                <div class="ml-auto text-primary">
+                  <i class="ri-double-quotes-l ri-3x opacity-20"></i>
+                </div>
+              </div>
+              <p class="text-lg text-gray-700 italic">
+                "AM Acoustic's industrial enclosures have completely transformed
+                our manufacturing environment. Not only did they meet our strict
+                noise reduction requirements, but their team provided
+                exceptional support throughout the entire process. The
+                improvement in working conditions has been remarkable, and we've
+                seen a measurable increase in productivity as a result."
+              </p>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20female%20executive%20in%20business%20attire%2C%20neutral%20background%2C%20professional%20headshot%20style%2C%20high%20resolution%2C%20photorealistic&width=200&height=200&seq=12&orientation=squarish"
+                    alt="Sarah Williams"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold">Sarah Williams</h4>
+                  <p class="text-gray-600">
+                    Chief Research Officer, Advanced Technologies Lab
+                  </p>
+                </div>
+                <div class="ml-auto text-primary">
+                  <i class="ri-double-quotes-l ri-3x opacity-20"></i>
+                </div>
+              </div>
+              <p class="text-lg text-gray-700 italic">
+                "The precision of AM Acoustic's testing chambers is unmatched.
+                Our research requires extremely controlled acoustic
+                environments, and their solutions have exceeded our
+                expectations. Their engineering team worked closely with us to
+                understand our unique requirements and delivered a custom
+                solution that has significantly advanced our research
+                capabilities."
+              </p>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20male%20architect%20in%20business%20casual%20attire%2C%20neutral%20background%2C%20professional%20headshot%20style%2C%20high%20resolution%2C%20photorealistic&width=200&height=200&seq=13&orientation=squarish"
+                    alt="Michael Chen"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold">Michael Chen</h4>
+                  <p class="text-gray-600">
+                    Senior Architect, Urban Design Partners
+                  </p>
+                </div>
+                <div class="ml-auto text-primary">
+                  <i class="ri-double-quotes-l ri-3x opacity-20"></i>
+                </div>
+              </div>
+              <p class="text-lg text-gray-700 italic">
+                "We've incorporated AM Acoustic's solutions into multiple
+                commercial projects, and the results have been outstanding.
+                Their acoustic panels and baffles not only provide excellent
+                sound control but also integrate beautifully with our
+                architectural designs. Their team's expertise in both acoustics
+                and aesthetics makes them our go-to partner for all our acoustic
+                requirements."
+              </p>
+            </div>
+          </div>
+          <!-- Testimonial Controls -->
+          <div
+            class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2"
+          >
+            <button
+              class="w-3 h-3 rounded-full bg-primary bg-opacity-50 testimonial-dot active"
+              data-index="0"
+            ></button>
+            <button
+              class="w-3 h-3 rounded-full bg-primary bg-opacity-50 testimonial-dot"
+              data-index="1"
+            ></button>
+            <button
+              class="w-3 h-3 rounded-full bg-primary bg-opacity-50 testimonial-dot"
+              data-index="2"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Call to Action -->
+    <section class="py-20 bg-secondary text-white">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center justify-between">
+          <div class="lg:w-2/3 mb-8 lg:mb-0">
+            <h2 class="text-4xl font-bold mb-4">
+              Ready to Transform Your Acoustic Environment?
+            </h2>
+            <p class="text-xl opacity-90">
+              Contact our team today to discuss your specific requirements and
+              discover how our solutions can work for you.
+            </p>
+          </div>
+          <div>
+            <button
+              class="bg-primary text-white px-8 py-4 !rounded-button font-medium hover:bg-opacity-90 transition-all text-lg whitespace-nowrap"
+            >
+              Request Consultation
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-in">
+          <h2 class="text-4xl font-bold mb-4">Contact Us</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Reach out to our team for inquiries, quotes, or to discuss your
+            acoustic requirements.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div class="animate-fade-in">
+            <form class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="name" class="block text-gray-700 font-medium mb-2"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="block text-gray-700 font-medium mb-2"
+                    >Email Address</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Your email"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="company"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Company</label
+                >
+                <input
+                  type="text"
+                  id="company"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Your company"
+                />
+              </div>
+              <div>
+                <label
+                  for="subject"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Subject</label
+                >
+                <select
+                  id="subject"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary pr-8 appearance-none bg-white"
+                  style="background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 24 24%22><path fill=%22%23666%22 d=%22M7 10l5 5 5-5z%22/></svg>'); background-position: right 10px center; background-repeat: no-repeat;"
+                >
+                  <option value="" selected disabled>Select a subject</option>
+                  <option value="quote">Request a Quote</option>
+                  <option value="info">Product Information</option>
+                  <option value="support">Technical Support</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="message"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full px-4 py-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Your message"
+                ></textarea>
+              </div>
+              <div>
+                <label class="custom-checkbox">
+                  <input type="checkbox" />
+                  <span class="checkmark"></span>
+                  <span class="ml-2"
+                    >I agree to receive communications from AM Acoustic</span
+                  >
+                </label>
+              </div>
+              <button
+                type="submit"
+                class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+          <div class="animate-fade-in">
+            <div class="bg-white p-8 rounded-lg shadow-md h-full">
+              <h3 class="text-2xl font-bold mb-6">Get in Touch</h3>
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-map-pin-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold mb-1">Headquarters</h4>
+                    <p class="text-gray-600">
+                      123 Acoustic Avenue, Suite 500<br />Boston, MA 02110, USA
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-phone-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold mb-1">Phone</h4>
+                    <p class="text-gray-600">+1 (800) 555-7890</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-mail-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold mb-1">Email</h4>
+                    <p class="text-gray-600">info@amacoustic.com</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-time-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold mb-1">Business Hours</h4>
+                    <p class="text-gray-600">
+                      Monday - Friday: 8:00 AM - 6:00 PM EST<br />Saturday -
+                      Sunday: Closed
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8">
+                <h4 class="text-lg font-bold mb-3">Follow Us</h4>
+                <div class="flex space-x-4">
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-linkedin-fill ri-lg"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-twitter-fill ri-lg"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-facebook-fill ri-lg"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-instagram-fill ri-lg"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+        >
+          <div>
+            <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 block"
+              >AM Acoustic</a
+            >
+            <p class="text-gray-400 mb-6">
+              Leading provider of premium acoustic solutions for industrial,
+              commercial, and research environments worldwide.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors"
+              >
+                <i class="ri-linkedin-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors"
+              >
+                <i class="ri-twitter-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors"
+              >
+                <i class="ri-facebook-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors"
+              >
+                <i class="ri-instagram-fill ri-lg"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Products</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Projects</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Testimonials</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-6">Products</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Acoustic Testing Booths</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Industrial Enclosures</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Acoustic Panels & Baffles</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Sound Barriers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Vibration Isolation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Custom Solutions</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-6">Newsletter</h3>
+            <p class="text-gray-400 mb-4">
+              Subscribe to our newsletter for the latest updates and acoustic
+              insights.
+            </p>
+            <form class="mb-4">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  class="w-full px-4 py-2 bg-gray-800 border-none rounded-l focus:outline-none focus:ring-2 focus:ring-primary text-white"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary px-4 py-2 rounded-r hover:bg-opacity-90 transition-all whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+            <div class="flex items-center space-x-4">
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i class="ri-visa-fill ri-lg text-gray-400"></i>
+              </div>
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i class="ri-mastercard-fill ri-lg text-gray-400"></i>
+              </div>
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i class="ri-paypal-fill ri-lg text-gray-400"></i>
+              </div>
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i class="ri-american-express-fill ri-lg text-gray-400"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 mb-4 md:mb-0">
+              © 2025 AM Acoustic Corporation. All rights reserved.
+            </p>
+            <div class="flex space-x-6">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Privacy Policy</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Terms of Service</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Sitemap</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Sticky Contact Icons -->
+    <div class="sticky-contact">
+      <a
+        href="https://wa.me/18005557890"
+        target="_blank"
+        class="sticky-contact-btn bg-green-500"
+        data-tooltip="Chat on WhatsApp"
+      >
+        <i class="ri-whatsapp-line ri-lg"></i>
+      </a>
+      <a
+        href="tel:+18005557890"
+        class="sticky-contact-btn bg-blue-500"
+        data-tooltip="Call Us"
+      >
+        <i class="ri-phone-line ri-lg"></i>
+      </a>
+      <button
+        class="sticky-contact-btn bg-primary"
+        data-tooltip="Quick Enquiry"
+        id="enquiryBtn"
+      >
+        <i class="ri-mail-line ri-lg"></i>
+      </button>
+    </div>
+    <!-- Enquiry Popup -->
+    <div class="enquiry-popup" id="enquiryPopup">
+      <div class="enquiry-popup-content">
+        <button class="enquiry-popup-close" id="closePopup">
+          <i class="ri-close-line ri-lg"></i>
+        </button>
+        <h3 class="text-2xl font-bold mb-6">Quick Enquiry</h3>
+        <form id="quickEnquiryForm" class="space-y-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Name</label>
+            <input
+              type="text"
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Email</label>
+            <input
+              type="email"
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Phone</label>
+            <input
+              type="tel"
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Message</label>
+            <textarea
+              rows="4"
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all"
+          >
+            Send Enquiry
+          </button>
+        </form>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Enquiry Popup
+        const enquiryBtn = document.getElementById("enquiryBtn");
+        const enquiryPopup = document.getElementById("enquiryPopup");
+        const closePopup = document.getElementById("closePopup");
+        const quickEnquiryForm = document.getElementById("quickEnquiryForm");
+        enquiryBtn.addEventListener("click", () => {
+          enquiryPopup.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+        closePopup.addEventListener("click", () => {
+          enquiryPopup.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+        enquiryPopup.addEventListener("click", (e) => {
+          if (e.target === enquiryPopup) {
+            enquiryPopup.classList.remove("active");
+            document.body.style.overflow = "";
+          }
+        });
+        quickEnquiryForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          // Here you would typically handle the form submission
+          // For now, we'll just show a success message
+          const formContent = quickEnquiryForm.innerHTML;
+          quickEnquiryForm.innerHTML = `
+          <div class="text-center py-8">
+            <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-green-100 rounded-full">
+              <i class="ri-check-line ri-2x text-green-500"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Thank You!</h4>
+            <p class="text-gray-600">We've received your enquiry and will get back to you shortly.</p>
+          </div>
+        `;
+          setTimeout(() => {
+            enquiryPopup.classList.remove("active");
+            document.body.style.overflow = "";
+            setTimeout(() => {
+              quickEnquiryForm.innerHTML = formContent;
+            }, 300);
+          }, 2000);
+        });
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".slider-dot");
+        function showSlide(index) {
+          slides.forEach((slide) => slide.classList.remove("active"));
+          dots.forEach((dot) => dot.classList.remove("active"));
+          slides[index].classList.add("active");
+          dots[index].classList.add("active");
+          currentSlide = index;
+        }
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slides.length;
+          showSlide(currentSlide);
+        }
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(currentSlide);
+        }
+        // Set up automatic sliding
+        let slideInterval = setInterval(nextSlide, 5000);
+        // Add click events to dots
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            clearInterval(slideInterval);
+            showSlide(index);
+            slideInterval = setInterval(nextSlide, 5000);
+          });
+        });
+        // Add click events to arrows
+        document
+          .querySelector(".hero-slider button:first-of-type")
+          .addEventListener("click", () => {
+            clearInterval(slideInterval);
+            prevSlide();
+            slideInterval = setInterval(nextSlide, 5000);
+          });
+        document
+          .querySelector(".hero-slider button:last-of-type")
+          .addEventListener("click", () => {
+            clearInterval(slideInterval);
+            nextSlide();
+            slideInterval = setInterval(nextSlide, 5000);
+          });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Testimonial Slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll(".testimonial-slide");
+        const testimonialDots = document.querySelectorAll(".testimonial-dot");
+        function showTestimonial(index) {
+          testimonials.forEach((testimonial) =>
+            testimonial.classList.remove("active"),
+          );
+          testimonialDots.forEach((dot) => dot.classList.remove("active"));
+          testimonials[index].classList.add("active");
+          testimonialDots[index].classList.add("active");
+          currentTestimonial = index;
+        }
+        // Set up automatic sliding
+        let testimonialInterval = setInterval(() => {
+          currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+          showTestimonial(currentTestimonial);
+        }, 6000);
+        // Add click events to dots
+        testimonialDots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            clearInterval(testimonialInterval);
+            showTestimonial(index);
+            testimonialInterval = setInterval(() => {
+              currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+              showTestimonial(currentTestimonial);
+            }, 6000);
+          });
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Animated Counter
+        const counters = document.querySelectorAll(".counter-value");
+        const speed = 200;
+        function animateCounters() {
+          counters.forEach((counter) => {
+            const target = parseInt(counter.getAttribute("data-target"));
+            const count = parseInt(counter.innerText);
+            const increment = Math.trunc(target / speed);
+            if (count < target) {
+              counter.innerText = count + increment;
+              setTimeout(() => animateCounters(), 1);
+            } else {
+              counter.innerText = target;
+            }
+          });
+        }
+        // Check if element is in viewport
+        function isInViewport(element) {
+          const rect = element.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <=
+              (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+        // Start animation when counters are in viewport
+        let counterStarted = false;
+        window.addEventListener("scroll", () => {
+          if (
+            !counterStarted &&
+            isInViewport(document.querySelector(".counter-value"))
+          ) {
+            counterStarted = true;
+            animateCounters();
+          }
+        });
+        // Check on load as well
+        if (isInViewport(document.querySelector(".counter-value"))) {
+          counterStarted = true;
+          animateCounters();
+        }
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll(".animate-fade-in");
+        function checkFade() {
+          fadeElements.forEach((element) => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            if (elementTop < window.innerHeight - elementVisible) {
+              element.classList.add("visible");
+            }
+          });
+        }
+        window.addEventListener("scroll", checkFade);
+        checkFade(); // Check on load
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Header scroll effect
+        const header = document.querySelector("header");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            header.classList.add("shadow-md");
+            header.classList.add("bg-white");
+          } else {
+            header.classList.remove("shadow-md");
+            if (window.scrollY === 0) {
+              header.classList.remove("bg-white");
+            }
+          }
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Charts
+        // Chart 1: Noise Reduction by Product Type
+        const chart1 = echarts.init(document.getElementById("chart1"));
+        const chart1Option = {
+          animation: false,
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#ddd",
+            borderWidth: 1,
+            textStyle: {
+              color: "#1f2937",
+            },
+          },
+          legend: {
+            data: ["Industrial Enclosures", "Testing Booths", "Acoustic Panels"],
+            bottom: 0,
+            textStyle: {
+              color: "#1f2937",
+            },
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "15%",
+            top: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            data: ["Low Freq", "Mid Freq", "High Freq", "Overall"],
+            axisLine: {
+              lineStyle: {
+                color: "#ddd",
+              },
+            },
+            axisLabel: {
+              color: "#1f2937",
+            },
+          },
+          yAxis: {
+            type: "value",
+            name: "dB Reduction",
+            nameTextStyle: {
+              color: "#1f2937",
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#ddd",
+              },
+            },
+            axisLabel: {
+              color: "#1f2937",
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#eee",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Industrial Enclosures",
+              type: "bar",
+              data: [25, 38, 45, 36],
+              itemStyle: {
+                color: "rgba(87, 181, 231, 1)",
+                borderRadius: 4,
+              },
+              emphasis: {
+                itemStyle: {
+                  color: "rgba(87, 181, 231, 0.8)",
+                },
+              },
+            },
+            {
+              name: "Testing Booths",
+              type: "bar",
+              data: [32, 42, 48, 41],
+              itemStyle: {
+                color: "rgba(141, 211, 199, 1)",
+                borderRadius: 4,
+              },
+              emphasis: {
+                itemStyle: {
+                  color: "rgba(141, 211, 199, 0.8)",
+                },
+              },
+            },
+            {
+              name: "Acoustic Panels",
+              type: "bar",
+              data: [18, 25, 32, 25],
+              itemStyle: {
+                color: "rgba(251, 191, 114, 1)",
+                borderRadius: 4,
+              },
+              emphasis: {
+                itemStyle: {
+                  color: "rgba(251, 191, 114, 0.8)",
+                },
+              },
+            },
+          ],
+        };
+        chart1.setOption(chart1Option);
+        // Chart 2: STC Ratings
+        const chart2 = echarts.init(document.getElementById("chart2"));
+        const chart2Option = {
+          animation: false,
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#ddd",
+            borderWidth: 1,
+            textStyle: {
+              color: "#1f2937",
+            },
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            top: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            data: ["Standard", "Premium", "Ultra", "Custom"],
+            axisLine: {
+              lineStyle: {
+                color: "#ddd",
+              },
+            },
+            axisLabel: {
+              color: "#1f2937",
+            },
+          },
+          yAxis: {
+            type: "value",
+            name: "STC Rating",
+            nameTextStyle: {
+              color: "#1f2937",
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#ddd",
+              },
+            },
+            axisLabel: {
+              color: "#1f2937",
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#eee",
+              },
+            },
+          },
+          series: [
+            {
+              data: [35, 45, 55, 65],
+              type: "line",
+              smooth: true,
+              symbol: "none",
+              lineStyle: {
+                width: 4,
+                color: "rgba(87, 181, 231, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "rgba(87, 181, 231, 0.3)",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(87, 181, 231, 0.1)",
+                  },
+                ]),
+              },
+              emphasis: {
+                lineStyle: {
+                  color: "rgba(87, 181, 231, 0.8)",
+                },
+              },
+            },
+          ],
+        };
+        chart2.setOption(chart2Option);
+        // Resize charts when window size changes
+        window.addEventListener("resize", function () {
+          chart1.resize();
+          chart2.resize();
+        });
+      });
+    </script>
+  </body>
+</html>
