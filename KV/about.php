@@ -251,80 +251,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <div>
-                    <h3 class="text-xl font-semibold mb-6">KV Associates</h3>
-                    <p class="text-gray-400 mb-6">Your trusted partner for comprehensive financial and business advisory services since 2005.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#c9a560] transition-colors">
-                            <i class="ri-facebook-fill"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#c9a560] transition-colors">
-                            <i class="ri-twitter-fill"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#c9a560] transition-colors">
-                            <i class="ri-linkedin-fill"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#c9a560] transition-colors">
-                            <i class="ri-instagram-fill"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="/about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="/services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="/portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a></li>
-                        <li><a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold mb-6">Services</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Tax Planning</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Business Advisory</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Financial Management</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Audit & Assurance</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Corporate Compliance</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold mb-6">Contact Info</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
-                                <i class="ri-map-pin-line text-[#c9a560]"></i>
-                            </div>
-                            <span class="text-gray-400">123 Business Avenue, Sector 18, Noida, Uttar Pradesh 201301, India</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-5 h-5 flex items-center justify-center mr-3">
-                                <i class="ri-phone-line text-[#c9a560]"></i>
-                            </div>
-                            <span class="text-gray-400">+91 98765 43210</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-5 h-5 flex items-center justify-center mr-3">
-                                <i class="ri-mail-line text-[#c9a560]"></i>
-                            </div>
-                            <span class="text-gray-400">info@kvassociates.com</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="pt-8 border-t border-gray-800 text-center text-gray-400">
-                <p>&copy; 2025 KV Associates. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<?php
+  include './footer.php'
+?>
 
     <script>
       
