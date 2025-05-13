@@ -1529,17 +1529,68 @@
       </form>
     </div>
 
-    <div id="franchiseForm" class="hidden">
-      <h3 class="text-xl font-semibold mb-4 text-[#c9a560]">Franchise Application</h3>
-      <form class="space-y-4">
-        <input type="text" placeholder="Full Name" class="w-full border px-4 py-2 rounded-md">
-        <input type="email" placeholder="Email Address" class="w-full border px-4 py-2 rounded-md">
-        <input type="text" placeholder="Location" class="w-full border px-4 py-2 rounded-md">
-        <button type="submit" class="bg-[#c9a560] text-white px-4 py-2 rounded-md w-full hover:bg-opacity-90">
-          Submit Franchise Request
-        </button>
-      </form>
-    </div>
+   <div id="franchiseForm" class="hidden">
+  <h3 class="text-xl font-semibold mb-4 text-[#c9a560]">Franchise Application</h3>
+  <form class="space-y-4">
+    <input type="text" placeholder="Full Name" class="w-full border px-4 py-2 rounded-md">
+    <input type="email" placeholder="Email Address" class="w-full border px-4 py-2 rounded-md">
+
+    <!-- State Dropdown -->
+    <select id="stateSelect" class="w-full border px-4 py-2 rounded-md">
+      <option value="">-- Select State --</option>
+      <option value="mp">Madhya Pradesh</option>
+      <option value="rj">Rajasthan</option>
+      <option value="gj">Gujarat</option>
+    </select>
+
+    <!-- District Dropdown -->
+    <select id="districtSelect" class="w-full border px-4 py-2 rounded-md" disabled>
+      <option value="">-- Select District --</option>
+    </select>
+
+    <button type="submit" class="bg-[#c9a560] text-white px-4 py-2 rounded-md w-full hover:bg-opacity-90">
+      Submit Franchise Request
+    </button>
+  </form>
+</div>
+
+<script>
+  const stateSelect = document.getElementById('stateSelect');
+  const districtSelect = document.getElementById('districtSelect');
+
+  const districts = {
+    mp: ["Indore", "Bhopal", "Jabalpur", "Gwalior"],
+    rj: ["Jaipur", "Jodhpur", "Udaipur", "Kota"],
+    gj: ["Ahmedabad", "Surat", "Vadodara", "Rajkot"]
+  };
+
+  stateSelect.addEventListener('change', () => {
+    const state = stateSelect.value;
+    districtSelect.innerHTML = '<option value="">-- Select District --</option>'; // Reset options
+
+    if (state && districts[state]) {
+      districtSelect.disabled = false;
+
+      districts[state].forEach(district => {
+        const option = document.createElement('option');
+        option.value = district;
+        option.textContent = district;
+        districtSelect.appendChild(option);
+      });
+    } else {
+      districtSelect.disabled = true;
+      alert("Please select a state first to see districts.");
+    }
+  });
+
+  // Optional: Prevent user from opening district dropdown before state
+  districtSelect.addEventListener('click', () => {
+    if (districtSelect.disabled) {
+      alert("Please select a state first.");
+    }
+  });
+</script>
+
 
   </div>
 </div>
