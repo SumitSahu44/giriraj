@@ -1620,7 +1620,7 @@
     
     
     
-    <!-- Modal call request call Background -->
+   <!-- Modal call request call Background -->
 <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
   <!-- Modal Box -->
   <div class="bg-white rounded-xl p-6 w-[90%] max-w-sm shadow-lg relative">
@@ -1633,21 +1633,20 @@
 
     <div class="space-y-3">
       <a
-        href="tel:+919876543210"
+        href="tel:+917909999901"
         class="block bg-[#fdf4e7] hover:bg-[#c9a560] hover:text-white text-[#c9a560] font-medium py-2 px-4 rounded-md transition text-center"
       >
-        +91 98765 43210
+        +91 7909999901
       </a>
       <a
-        href="tel:+911234567890"
+        href="tel:+917909999902"
         class="block bg-[#fdf4e7] hover:bg-[#c9a560] hover:text-white text-[#c9a560] font-medium py-2 px-4 rounded-md transition text-center"
       >
-        +91 12345 67890
+        +91 7909999902
       </a>
     </div>
   </div>
 </div>
-    
     
     
     
