@@ -1,0 +1,2519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlassWorks | Premium Glass & Aluminum Solutions</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#0066CC", secondary: "#333333" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Montserrat', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+          font-family: 'Poppins', sans-serif;
+      }
+      .glass-effect {
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .nav-link {
+          position: relative;
+      }
+      .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: #0066CC;
+          transition: width 0.3s ease;
+      }
+      .nav-link.active::after, .nav-link:hover::after {
+          width: 100%;
+      }
+      .btn-glow:hover {
+          box-shadow: 0 0 15px rgba(0, 102, 204, 0.6);
+      }
+      .service-card {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .service-card:hover {
+          transform: scale(1.05);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .team-card {
+          transition: transform 0.3s ease;
+      }
+      .team-card:hover {
+          transform: translateY(-10px);
+      }
+      .social-icon {
+          transition: transform 0.3s ease;
+      }
+      .social-icon:hover {
+          transform: scale(1.2);
+      }
+      input:focus + label, textarea:focus + label, input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label {
+          transform: translateY(-20px) scale(0.8);
+          color: #0066CC;
+      }
+      label {
+          transition: transform 0.3s ease, color 0.3s ease;
+          transform-origin: left top;
+      }
+      .hero-section {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://readdy.ai/api/search-image?query=modern%20glass%20building%20with%20elegant%20glass%20facade%2C%20architectural%20masterpiece%2C%20blue%20sky%2C%20clean%20lines%2C%20professional%20corporate%20architecture%20photography%2C%20ultra%20high%20quality%2C%20photorealistic%2C%20high-end%20commercial%20building&width=1920&height=1080&seq=1&orientation=landscape');
+          background-size: cover;
+          background-position: center;
+      }
+      .counter-value {
+          display: inline-block;
+      }
+      .timeline-item {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .timeline-item.visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
+      .gallery-item {
+          transition: transform 0.3s ease;
+      }
+      .gallery-item:hover {
+          transform: scale(1.05);
+      }
+      .testimonial-slide {
+          opacity: 0;
+          transition: opacity 0.5s ease;
+      }
+      .testimonial-slide.active {
+          opacity: 1;
+      }
+      .filter-btn.active {
+          background-color: #0066CC;
+          color: white;
+      }
+      .custom-checkbox {
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          user-select: none;
+      }
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+      }
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #ddd;
+          border-radius: 4px;
+          transition: all 0.3s ease;
+      }
+      .custom-checkbox:hover input ~ .checkmark {
+          border-color: #ccc;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+          background-color: #0066CC;
+          border-color: #0066CC;
+      }
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+      .custom-checkbox .checkmark:after {
+          left: 6px;
+          top: 2px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .custom-switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 24px;
+      }
+      .custom-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+          border-radius: 34px;
+      }
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .slider {
+          background-color: #0066CC;
+      }
+      input:checked + .slider:before {
+          transform: translateX(26px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="fixed w-full z-50 glass-effect">
+      <div
+        class="container mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <a href="#" class="font-['Pacifico'] text-3xl text-primary"
+          >GlassWorks</a
+        >
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#home"
+            class="nav-link active text-secondary hover:text-primary transition-colors"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link text-secondary hover:text-primary transition-colors"
+            >About</a
+          >
+          <a
+            href="#services"
+            class="nav-link text-secondary hover:text-primary transition-colors"
+            >Services</a
+          >
+          <a
+            href="#products"
+            class="nav-link text-secondary hover:text-primary transition-colors"
+            >Products</a
+          >
+          <a
+            href="#gallery"
+            class="nav-link text-secondary hover:text-primary transition-colors"
+            >Gallery</a
+          >
+          <a
+            href="#testimonials"
+            class="nav-link text-secondary hover:text-primary transition-colors"
+            >Testimonials</a
+          >
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <a
+            href="#contact"
+            class="hidden md:block bg-primary text-white px-6 py-2 !rounded-button shadow-md hover:bg-opacity-90 transition-all btn-glow whitespace-nowrap"
+            >Contact Us</a
+          >
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden w-10 h-10 flex items-center justify-center text-secondary"
+          >
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white shadow-lg absolute w-full"
+      >
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+          <a
+            href="#home"
+            class="text-secondary hover:text-primary py-2 border-b border-gray-100"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="text-secondary hover:text-primary py-2 border-b border-gray-100"
+            >About</a
+          >
+          <a
+            href="#services"
+            class="text-secondary hover:text-primary py-2 border-b border-gray-100"
+            >Services</a
+          >
+          <a
+            href="#products"
+            class="text-secondary hover:text-primary py-2 border-b border-gray-100"
+            >Products</a
+          >
+          <a
+            href="#gallery"
+            class="text-secondary hover:text-primary py-2 border-b border-gray-100"
+            >Gallery</a
+          >
+          <a
+            href="#testimonials"
+            class="text-secondary hover:text-primary py-2 border-b border-gray-100"
+            >Testimonials</a
+          >
+          <a href="#contact" class="text-secondary hover:text-primary py-2"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="hero-section min-h-screen flex items-center justify-center text-white"
+    >
+      <div class="container mx-auto px-4 text-center w-full">
+        <h1
+          class="text-4xl md:text-6xl font-bold mb-6 opacity-0"
+          id="hero-title"
+        >
+          Premium Glass & Aluminum Solutions
+        </h1>
+        <p
+          class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-0"
+          id="hero-subtitle"
+        >
+          Transforming spaces with elegant glass partitions, facades, and custom
+          aluminum works since 1995
+        </p>
+        <div class="flex justify-center space-x-4 opacity-0" id="hero-cta">
+          <a
+            href="#services"
+            class="bg-primary text-white px-8 py-3 !rounded-button shadow-lg hover:bg-opacity-90 transition-all btn-glow whitespace-nowrap"
+            >Our Services</a
+          >
+          <a
+            href="#contact"
+            class="bg-white text-primary px-8 py-3 !rounded-button shadow-lg hover:bg-opacity-90 transition-all whitespace-nowrap"
+            >Get a Quote</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">
+            Our Premium Services
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            We offer a comprehensive range of glass and aluminum solutions
+            tailored to meet your specific needs.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Service 1 -->
+          <div class="service-card bg-white rounded shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20glass%20partition%20in%20an%20office%20space%2C%20clean%20design%2C%20transparent%20glass%20walls%2C%20aluminum%20frames%2C%20professional%20office%20environment%2C%20bright%20and%20airy%20workspace%2C%20high-end%20commercial%20interior&width=600&height=400&seq=2&orientation=landscape"
+                alt="Glass Partitions"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4"
+              >
+                <i class="ri-layout-2-line ri-lg text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Glass Partitions
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Create elegant and functional spaces with our custom glass
+                partition solutions for offices and commercial spaces.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card bg-white rounded shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20glass%20facade%20on%20a%20commercial%20building%2C%20sleek%20design%2C%20blue-tinted%20glass%2C%20aluminum%20framing%2C%20sunlight%20reflection%2C%20contemporary%20architecture%2C%20urban%20setting&width=600&height=400&seq=3&orientation=landscape"
+                alt="Structural Glazing"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4"
+              >
+                <i class="ri-building-line ri-lg text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Structural Glazing
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Transform your building's exterior with our cutting-edge
+                structural glazing solutions for modern facades.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card bg-white rounded shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20aluminum%20door%20installation%2C%20sleek%20design%2C%20glass%20panels%2C%20metallic%20finish%2C%20contemporary%20entrance%2C%20commercial%20building%2C%20professional%20craftsmanship&width=600&height=400&seq=4&orientation=landscape"
+                alt="Aluminum Works"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4"
+              >
+                <i class="ri-door-line ri-lg text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Aluminum Works
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Custom aluminum doors, windows, and facades designed for
+                durability, aesthetics, and energy efficiency.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="service-card bg-white rounded shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20glass%20shower%20enclosure%2C%20frameless%20design%2C%20clear%20glass%2C%20chrome%20hardware%2C%20luxury%20bathroom%2C%20marble%20tiles%2C%20contemporary%20interior%20design%2C%20high-end%20residential%20bathroom&width=600&height=400&seq=5&orientation=landscape"
+                alt="Shower Enclosures"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4"
+              >
+                <i class="ri-drop-line ri-lg text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Shower Enclosures
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Elegant frameless and semi-frameless shower enclosures for
+                residential and commercial bathrooms.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="service-card bg-white rounded shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20glass%20balustrade%20on%20staircase%2C%20sleek%20design%2C%20transparent%20glass%20panels%2C%20stainless%20steel%20fixtures%2C%20contemporary%20interior%2C%20luxury%20home%2C%20architectural%20detail&width=600&height=400&seq=6&orientation=landscape"
+                alt="Glass Railings"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4"
+              >
+                <i class="ri-layout-row-line ri-lg text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Glass Railings
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Enhance safety and aesthetics with our custom glass railings for
+                staircases, balconies, and terraces.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="service-card bg-white rounded shadow-md overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20glass%20table%20top%20with%20beveled%20edges%2C%20clear%20glass%2C%20polished%20finish%2C%20contemporary%20furniture%2C%20luxury%20interior%2C%20professional%20craftsmanship&width=600&height=400&seq=7&orientation=landscape"
+                alt="Custom Glass Works"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4"
+              >
+                <i class="ri-tools-line ri-lg text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Custom Glass Works
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Specialized glass solutions including tabletops, mirrors,
+                decorative glass, and custom installations.
+              </p>
+              <a href="#" class="text-primary font-medium flex items-center">
+                Learn More
+                <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Stat 1 -->
+          <div class="glass-effect p-8 rounded text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mx-auto mb-4"
+            >
+              <i class="ri-building-4-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-secondary mb-2">
+              <span class="counter-value" data-target="750">0</span>+
+            </h3>
+            <p class="text-gray-600">Projects Completed</p>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="glass-effect p-8 rounded text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mx-auto mb-4"
+            >
+              <i class="ri-user-smile-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-secondary mb-2">
+              <span class="counter-value" data-target="500">0</span>+
+            </h3>
+            <p class="text-gray-600">Happy Clients</p>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="glass-effect p-8 rounded text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mx-auto mb-4"
+            >
+              <i class="ri-team-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-secondary mb-2">
+              <span class="counter-value" data-target="50">0</span>+
+            </h3>
+            <p class="text-gray-600">Expert Team Members</p>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="glass-effect p-8 rounded text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mx-auto mb-4"
+            >
+              <i class="ri-calendar-check-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-secondary mb-2">
+              <span class="counter-value" data-target="28">0</span>
+            </h3>
+            <p class="text-gray-600">Years of Experience</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">
+              About GlassWorks
+            </h2>
+            <p class="text-gray-600 mb-6">
+              Founded in 1995, GlassWorks has established itself as a leading
+              provider of premium glass and aluminum solutions across the
+              region. With a commitment to quality craftsmanship and innovative
+              design, we have successfully completed over 750 projects for
+              commercial and residential clients.
+            </p>
+            <p class="text-gray-600 mb-6">
+              Our team of skilled professionals brings decades of combined
+              experience to every project, ensuring exceptional results that
+              exceed client expectations. We pride ourselves on our attention to
+              detail, use of high-quality materials, and dedication to customer
+              satisfaction.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#contact"
+                class="bg-primary text-white px-6 py-2 !rounded-button shadow-md hover:bg-opacity-90 transition-all btn-glow whitespace-nowrap"
+                >Contact Us</a
+              >
+              <a
+                href="#services"
+                class="border border-primary text-primary px-6 py-2 !rounded-button hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+                >Our Services</a
+              >
+            </div>
+          </div>
+          <div class="md:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=professional%20glass%20installation%20team%20working%20on%20a%20modern%20building%20facade%2C%20workers%20in%20safety%20gear%2C%20glass%20panels%20being%20installed%2C%20construction%20site%2C%20teamwork%2C%20commercial%20building%20project%2C%20sunny%20day&width=600&height=500&seq=8&orientation=portrait"
+              alt="About GlassWorks"
+              class="rounded shadow-lg w-full"
+            />
+          </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="mt-20">
+          <h3
+            class="text-2xl md:text-3xl font-bold text-secondary mb-10 text-center"
+          >
+            Our Journey
+          </h3>
+
+          <div class="relative">
+            <!-- Timeline Line -->
+            <div
+              class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"
+            ></div>
+
+            <!-- Timeline Items -->
+            <div class="timeline-container">
+              <!-- Item 1 -->
+              <div class="timeline-item mb-16 relative">
+                <div class="flex flex-col md:flex-row items-center">
+                  <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                    <div
+                      class="bg-primary text-white inline-block px-4 py-1 rounded mb-2"
+                    >
+                      1995
+                    </div>
+                    <h4 class="text-xl font-bold text-secondary mb-2">
+                      Company Founded
+                    </h4>
+                    <p class="text-gray-600">
+                      GlassWorks was established with a vision to provide
+                      premium glass solutions with exceptional craftsmanship.
+                    </p>
+                  </div>
+                  <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center z-10"
+                  >
+                    <i class="ri-flag-line text-white"></i>
+                  </div>
+                  <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="timeline-item mb-16 relative">
+                <div class="flex flex-col md:flex-row items-center">
+                  <div class="md:w-1/2 md:pr-12"></div>
+                  <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center z-10"
+                  >
+                    <i class="ri-building-line text-white"></i>
+                  </div>
+                  <div class="md:w-1/2 md:pl-12 mb-6 md:mb-0">
+                    <div
+                      class="bg-primary text-white inline-block px-4 py-1 rounded mb-2"
+                    >
+                      2002
+                    </div>
+                    <h4 class="text-xl font-bold text-secondary mb-2">
+                      First Major Commercial Project
+                    </h4>
+                    <p class="text-gray-600">
+                      Completed our first major commercial project, establishing
+                      our reputation in the industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="timeline-item mb-16 relative">
+                <div class="flex flex-col md:flex-row items-center">
+                  <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                    <div
+                      class="bg-primary text-white inline-block px-4 py-1 rounded mb-2"
+                    >
+                      2010
+                    </div>
+                    <h4 class="text-xl font-bold text-secondary mb-2">
+                      Expansion of Services
+                    </h4>
+                    <p class="text-gray-600">
+                      Expanded our service offerings to include aluminum works
+                      and structural glazing solutions.
+                    </p>
+                  </div>
+                  <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center z-10"
+                  >
+                    <i class="ri-expand-left-right-line text-white"></i>
+                  </div>
+                  <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="timeline-item relative">
+                <div class="flex flex-col md:flex-row items-center">
+                  <div class="md:w-1/2 md:pr-12"></div>
+                  <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center z-10"
+                  >
+                    <i class="ri-award-line text-white"></i>
+                  </div>
+                  <div class="md:w-1/2 md:pl-12 mb-6 md:mb-0">
+                    <div
+                      class="bg-primary text-white inline-block px-4 py-1 rounded mb-2"
+                    >
+                      2023
+                    </div>
+                    <h4 class="text-xl font-bold text-secondary mb-2">
+                      Industry Recognition
+                    </h4>
+                    <p class="text-gray-600">
+                      Received multiple industry awards for excellence in design
+                      and implementation of glass solutions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="mt-20">
+          <h3
+            class="text-2xl md:text-3xl font-bold text-secondary mb-10 text-center"
+          >
+            Our Leadership Team
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Team Member 1 -->
+            <div class="team-card bg-white rounded shadow-md overflow-hidden">
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20a%20middle-aged%20male%20CEO%2C%20confident%20pose%2C%20formal%20attire%2C%20neutral%20background%2C%20corporate%20headshot%2C%20executive%20portrait&width=400&height=500&seq=9&orientation=portrait"
+                  alt="Michael Richardson"
+                  class="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div class="p-6">
+                <h4 class="text-xl font-bold text-secondary mb-1">
+                  Michael Richardson
+                </h4>
+                <p class="text-primary mb-4">CEO & Founder</p>
+                <p class="text-gray-600 mb-4">
+                  With over 30 years of industry experience, Michael leads our
+                  company with vision and expertise.
+                </p>
+                <div class="flex space-x-3">
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-linkedin-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-twitter-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-mail-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-card bg-white rounded shadow-md overflow-hidden">
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20a%20female%20operations%20director%2C%20confident%20pose%2C%20business%20attire%2C%20neutral%20background%2C%20corporate%20headshot%2C%20executive%20portrait&width=400&height=500&seq=10&orientation=portrait"
+                  alt="Sarah Johnson"
+                  class="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div class="p-6">
+                <h4 class="text-xl font-bold text-secondary mb-1">
+                  Sarah Johnson
+                </h4>
+                <p class="text-primary mb-4">Operations Director</p>
+                <p class="text-gray-600 mb-4">
+                  Sarah oversees all operational aspects of our business,
+                  ensuring excellence in every project.
+                </p>
+                <div class="flex space-x-3">
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-linkedin-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-twitter-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-mail-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-card bg-white rounded shadow-md overflow-hidden">
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20a%20male%20technical%20director%2C%20confident%20pose%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20corporate%20headshot%2C%20technical%20expert%20portrait&width=400&height=500&seq=11&orientation=portrait"
+                  alt="David Chen"
+                  class="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div class="p-6">
+                <h4 class="text-xl font-bold text-secondary mb-1">
+                  David Chen
+                </h4>
+                <p class="text-primary mb-4">Technical Director</p>
+                <p class="text-gray-600 mb-4">
+                  David brings technical expertise and innovation to our design
+                  and implementation processes.
+                </p>
+                <div class="flex space-x-3">
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-linkedin-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-twitter-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i class="ri-mail-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">
+            Our Products
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Explore our range of premium glass and aluminum products designed
+            for durability, aesthetics, and functionality.
+          </p>
+        </div>
+
+        <!-- Product Filters -->
+        <div class="flex flex-wrap justify-center mb-10 gap-2">
+          <button
+            class="filter-btn active bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="all"
+          >
+            All Products
+          </button>
+          <button
+            class="filter-btn bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="partitions"
+          >
+            Partitions
+          </button>
+          <button
+            class="filter-btn bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="doors"
+          >
+            Doors & Windows
+          </button>
+          <button
+            class="filter-btn bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="railings"
+          >
+            Railings
+          </button>
+          <button
+            class="filter-btn bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="custom"
+          >
+            Custom Works
+          </button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div
+            class="product-item bg-white rounded shadow-md overflow-hidden"
+            data-category="partitions"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=frameless%20glass%20partition%20system%20in%20modern%20office%2C%20clear%20glass%20panels%2C%20minimal%20hardware%2C%20contemporary%20design%2C%20professional%20installation&width=600&height=400&seq=12&orientation=landscape"
+                alt="Frameless Glass Partition"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Frameless Glass Partition
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Elegant frameless glass partitions with minimal hardware for a
+                clean, modern look.
+              </p>
+              <div class="flex justify-between items-center">
+                <button
+                  class="view-details text-primary font-medium flex items-center"
+                  data-product="product1"
+                >
+                  View Details
+                  <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+                <span class="text-gray-800 font-medium">From $120/sqm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="product-item bg-white rounded shadow-md overflow-hidden"
+            data-category="doors"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20aluminum%20sliding%20door%20with%20glass%20panels%2C%20sleek%20design%2C%20metallic%20finish%2C%20contemporary%20entrance%2C%20residential%20setting&width=600&height=400&seq=13&orientation=landscape"
+                alt="Aluminum Sliding Doors"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Aluminum Sliding Doors
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Smooth-operating aluminum sliding doors with various glass
+                options and finishes.
+              </p>
+              <div class="flex justify-between items-center">
+                <button
+                  class="view-details text-primary font-medium flex items-center"
+                  data-product="product2"
+                >
+                  View Details
+                  <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+                <span class="text-gray-800 font-medium">From $350/unit</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="product-item bg-white rounded shadow-md overflow-hidden"
+            data-category="railings"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20glass%20balustrade%20system%2C%20frameless%20design%2C%20stainless%20steel%20fixtures%2C%20contemporary%20staircase%2C%20luxury%20interior&width=600&height=400&seq=14&orientation=landscape"
+                alt="Glass Balustrades"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Glass Balustrades
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Sleek glass balustrades with stainless steel fixtures for
+                staircases and balconies.
+              </p>
+              <div class="flex justify-between items-center">
+                <button
+                  class="view-details text-primary font-medium flex items-center"
+                  data-product="product3"
+                >
+                  View Details
+                  <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+                <span class="text-gray-800 font-medium">From $180/m</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div
+            class="product-item bg-white rounded shadow-md overflow-hidden"
+            data-category="partitions"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=semi-framed%20glass%20partition%20system%2C%20aluminum%20frames%2C%20glass%20panels%2C%20modern%20office%20divider%2C%20professional%20installation&width=600&height=400&seq=15&orientation=landscape"
+                alt="Semi-Framed Partitions"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Semi-Framed Partitions
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Semi-framed glass partitions with aluminum profiles for enhanced
+                stability.
+              </p>
+              <div class="flex justify-between items-center">
+                <button
+                  class="view-details text-primary font-medium flex items-center"
+                  data-product="product4"
+                >
+                  View Details
+                  <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+                <span class="text-gray-800 font-medium">From $95/sqm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div
+            class="product-item bg-white rounded shadow-md overflow-hidden"
+            data-category="doors"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20aluminum%20casement%20window%2C%20sleek%20design%2C%20glass%20panel%2C%20metallic%20finish%2C%20contemporary%20building%2C%20residential%20setting&width=600&height=400&seq=16&orientation=landscape"
+                alt="Aluminum Casement Windows"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Casement Windows
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Energy-efficient aluminum casement windows with various opening
+                options.
+              </p>
+              <div class="flex justify-between items-center">
+                <button
+                  class="view-details text-primary font-medium flex items-center"
+                  data-product="product5"
+                >
+                  View Details
+                  <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+                <span class="text-gray-800 font-medium">From $220/unit</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div
+            class="product-item bg-white rounded shadow-md overflow-hidden"
+            data-category="custom"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=custom%20glass%20table%20top%2C%20beveled%20edges%2C%20clear%20glass%2C%20polished%20finish%2C%20contemporary%20furniture%2C%20luxury%20interior&width=600&height=400&seq=17&orientation=landscape"
+                alt="Custom Glass Tabletops"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Custom Glass Tabletops
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Bespoke glass tabletops with various edge treatments and
+                thickness options.
+              </p>
+              <div class="flex justify-between items-center">
+                <button
+                  class="view-details text-primary font-medium flex items-center"
+                  data-product="product6"
+                >
+                  View Details
+                  <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+                <span class="text-gray-800 font-medium">Custom Quote</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div
+      id="product-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden"
+    >
+      <div
+        class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h3 id="modal-title" class="text-2xl font-bold text-secondary">
+              Product Details
+            </h3>
+            <button
+              id="close-modal"
+              class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700"
+            >
+              <i class="ri-close-line ri-lg"></i>
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div id="modal-image" class="h-64 md:h-80 rounded overflow-hidden">
+              <img
+                src=""
+                alt="Product Image"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div>
+              <h4
+                id="modal-subtitle"
+                class="text-xl font-bold text-secondary mb-4"
+              >
+                Product Specifications
+              </h4>
+              <div id="modal-specs" class="space-y-4">
+                <!-- Content will be dynamically inserted -->
+              </div>
+              <div class="mt-8">
+                <a
+                  href="#contact"
+                  class="bg-primary text-white px-6 py-2 !rounded-button shadow-md hover:bg-opacity-90 transition-all btn-glow whitespace-nowrap inline-block"
+                  >Request Quote</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">
+            Project Gallery
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Browse through our portfolio of completed projects showcasing our
+            expertise in glass and aluminum solutions.
+          </p>
+        </div>
+
+        <!-- Gallery Filters -->
+        <div class="flex flex-wrap justify-center mb-10 gap-2">
+          <button
+            class="gallery-filter active bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="all"
+          >
+            All Projects
+          </button>
+          <button
+            class="gallery-filter bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="commercial"
+          >
+            Commercial
+          </button>
+          <button
+            class="gallery-filter bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="residential"
+          >
+            Residential
+          </button>
+          <button
+            class="gallery-filter bg-white text-secondary px-6 py-2 !rounded-button shadow-sm hover:bg-primary hover:text-white transition-all whitespace-nowrap"
+            data-filter="institutional"
+          >
+            Institutional
+          </button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Gallery Item 1 -->
+          <div
+            class="gallery-item rounded overflow-hidden shadow-md"
+            data-category="commercial"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20office%20with%20glass%20partitions%2C%20open%20workspace%2C%20contemporary%20design%2C%20bright%20interior%2C%20professional%20environment%2C%20corporate%20setting&width=600&height=400&seq=18&orientation=landscape"
+              alt="Commercial Office"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-secondary">
+                Skyline Corporate Offices
+              </h3>
+              <p class="text-gray-600">
+                Glass partitions for open workspace concept
+              </p>
+            </div>
+          </div>
+
+          <!-- Gallery Item 2 -->
+          <div
+            class="gallery-item rounded overflow-hidden shadow-md"
+            data-category="residential"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20home%20with%20glass%20balustrade%20on%20staircase%2C%20contemporary%20interior%2C%20luxury%20residence%2C%20elegant%20design%2C%20open%20concept%20living%20space&width=600&height=400&seq=19&orientation=landscape"
+              alt="Residential Staircase"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-secondary">
+                Lakeside Residence
+              </h3>
+              <p class="text-gray-600">
+                Custom glass balustrades for modern staircase
+              </p>
+            </div>
+          </div>
+
+          <!-- Gallery Item 3 -->
+          <div
+            class="gallery-item rounded overflow-hidden shadow-md"
+            data-category="commercial"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20retail%20storefront%20with%20glass%20facade%2C%20aluminum%20framing%2C%20contemporary%20design%2C%20shopping%20mall%2C%20commercial%20space%2C%20clean%20lines&width=600&height=400&seq=20&orientation=landscape"
+              alt="Retail Storefront"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-secondary">
+                Metro Fashion Boutique
+              </h3>
+              <p class="text-gray-600">
+                Structural glazing for retail storefront
+              </p>
+            </div>
+          </div>
+
+          <!-- Gallery Item 4 -->
+          <div
+            class="gallery-item rounded overflow-hidden shadow-md"
+            data-category="institutional"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20university%20building%20with%20glass%20facade%2C%20academic%20institution%2C%20contemporary%20architecture%2C%20educational%20facility%2C%20campus%20building&width=600&height=400&seq=21&orientation=landscape"
+              alt="University Building"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-secondary">
+                Central University Library
+              </h3>
+              <p class="text-gray-600">
+                Curtain wall system for academic building
+              </p>
+            </div>
+          </div>
+
+          <!-- Gallery Item 5 -->
+          <div
+            class="gallery-item rounded overflow-hidden shadow-md"
+            data-category="residential"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20bathroom%20with%20frameless%20glass%20shower%20enclosure%2C%20luxury%20interior%2C%20marble%20tiles%2C%20contemporary%20design%2C%20residential%20bathroom&width=600&height=400&seq=22&orientation=landscape"
+              alt="Bathroom Shower"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-secondary">
+                Oceanview Penthouse
+              </h3>
+              <p class="text-gray-600">
+                Frameless shower enclosures for luxury bathrooms
+              </p>
+            </div>
+          </div>
+
+          <!-- Gallery Item 6 -->
+          <div
+            class="gallery-item rounded overflow-hidden shadow-md"
+            data-category="commercial"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20hotel%20lobby%20with%20glass%20railings%2C%20luxury%20interior%2C%20contemporary%20design%2C%20hospitality%20space%2C%20elegant%20architecture&width=600&height=400&seq=23&orientation=landscape"
+              alt="Hotel Lobby"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-secondary">
+                Grand Plaza Hotel
+              </h3>
+              <p class="text-gray-600">
+                Custom glass railings for mezzanine level
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Lightbox -->
+    <div
+      id="gallery-lightbox"
+      class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden"
+    >
+      <div class="max-w-5xl w-full p-4">
+        <div class="relative">
+          <img
+            id="lightbox-image"
+            src=""
+            alt="Gallery Image"
+            class="w-full h-auto max-h-[80vh] object-contain"
+          />
+          <button
+            id="close-lightbox"
+            class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-white hover:bg-opacity-30"
+          >
+            <i class="ri-close-line ri-lg"></i>
+          </button>
+          <button
+            id="prev-image"
+            class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-white hover:bg-opacity-30"
+          >
+            <i class="ri-arrow-left-s-line ri-lg"></i>
+          </button>
+          <button
+            id="next-image"
+            class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-white hover:bg-opacity-30"
+          >
+            <i class="ri-arrow-right-s-line ri-lg"></i>
+          </button>
+        </div>
+        <div class="mt-4 text-center text-white">
+          <h3 id="lightbox-title" class="text-xl font-bold"></h3>
+          <p id="lightbox-description" class="text-gray-300"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">
+            Client Testimonials
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Hear what our clients have to say about their experience working
+            with GlassWorks.
+          </p>
+        </div>
+
+        <!-- Testimonials Slider -->
+        <div class="relative max-w-4xl mx-auto">
+          <div class="testimonials-container overflow-hidden">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-slide active glass-effect p-8 rounded">
+              <div class="flex flex-col md:flex-row items-center">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                  <div class="w-24 h-24 rounded-full overflow-hidden mx-auto">
+                    <img
+                      src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20a%20male%20CEO%2C%20confident%20pose%2C%20business%20attire%2C%20neutral%20background%2C%20corporate%20headshot&width=200&height=200&seq=24&orientation=squarish"
+                      alt="Robert Thompson"
+                      class="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="flex mb-4">
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                  </div>
+                  <p class="text-gray-600 italic mb-6">
+                    "GlassWorks transformed our office space with their stunning
+                    glass partitions. The quality of workmanship and attention
+                    to detail was exceptional. Their team was professional,
+                    efficient, and delivered the project on time and within
+                    budget. I highly recommend their services."
+                  </p>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary">
+                      Robert Thompson
+                    </h4>
+                    <p class="text-primary">CEO, Thompson Enterprises</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-slide glass-effect p-8 rounded hidden">
+              <div class="flex flex-col md:flex-row items-center">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                  <div class="w-24 h-24 rounded-full overflow-hidden mx-auto">
+                    <img
+                      src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20a%20female%20architect%2C%20confident%20pose%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20corporate%20headshot&width=200&height=200&seq=25&orientation=squarish"
+                      alt="Jennifer Williams"
+                      class="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="flex mb-4">
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                  </div>
+                  <p class="text-gray-600 italic mb-6">
+                    "As an architect, I've worked with many glass contractors,
+                    but GlassWorks stands out for their technical expertise and
+                    innovative solutions. They collaborated closely with our
+                    design team to implement a complex structural glazing system
+                    for our client's headquarters. The results exceeded
+                    everyone's expectations."
+                  </p>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary">
+                      Jennifer Williams
+                    </h4>
+                    <p class="text-primary">
+                      Principal Architect, Williams & Associates
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-slide glass-effect p-8 rounded hidden">
+              <div class="flex flex-col md:flex-row items-center">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                  <div class="w-24 h-24 rounded-full overflow-hidden mx-auto">
+                    <img
+                      src="https://readdy.ai/api/search-image?query=professional%20business%20portrait%20of%20a%20male%20property%20developer%2C%20confident%20pose%2C%20formal%20attire%2C%20neutral%20background%2C%20corporate%20headshot&width=200&height=200&seq=26&orientation=squarish"
+                      alt="Daniel Martinez"
+                      class="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="flex mb-4">
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-fill text-yellow-400"></i>
+                    <i class="ri-star-half-fill text-yellow-400"></i>
+                  </div>
+                  <p class="text-gray-600 italic mb-6">
+                    "We've partnered with GlassWorks on multiple residential
+                    developments, and they consistently deliver high-quality
+                    products and installation services. Their aluminum window
+                    systems have been particularly impressive, offering
+                    excellent energy efficiency and aesthetic appeal. Their team
+                    is reliable and professional."
+                  </p>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary">
+                      Daniel Martinez
+                    </h4>
+                    <p class="text-primary">
+                      Development Director, Horizon Properties
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Navigation -->
+          <div class="flex justify-center mt-8 space-x-2">
+            <button
+              class="testimonial-dot w-3 h-3 rounded-full bg-primary opacity-100"
+            ></button>
+            <button
+              class="testimonial-dot w-3 h-3 rounded-full bg-primary opacity-30"
+            ></button>
+            <button
+              class="testimonial-dot w-3 h-3 rounded-full bg-primary opacity-30"
+            ></button>
+          </div>
+
+          <!-- Testimonial Arrows -->
+          <button
+            id="prev-testimonial"
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-primary hover:bg-primary hover:text-white transition-all"
+          >
+            <i class="ri-arrow-left-s-line"></i>
+          </button>
+          <button
+            id="next-testimonial"
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-primary hover:bg-primary hover:text-white transition-all"
+          >
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+        </div>
+
+        <!-- Client Logos -->
+        <div class="mt-20">
+          <h3 class="text-xl font-bold text-secondary mb-8 text-center">
+            Trusted By
+          </h3>
+          <div
+            class="flex flex-wrap justify-center items-center gap-8 md:gap-16"
+          >
+            <div class="flex flex-col items-center">
+              <i class="ri-building-4-fill ri-3x text-gray-400"></i>
+              <span class="mt-2 text-gray-600">Skyline Corp</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <i class="ri-home-4-fill ri-3x text-gray-400"></i>
+              <span class="mt-2 text-gray-600">Horizon Properties</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <i class="ri-hotel-fill ri-3x text-gray-400"></i>
+              <span class="mt-2 text-gray-600">Grand Hotels</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <i class="ri-shopping-bag-fill ri-3x text-gray-400"></i>
+              <span class="mt-2 text-gray-600">Metro Retail</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <i class="ri-government-fill ri-3x text-gray-400"></i>
+              <span class="mt-2 text-gray-600">Central University</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">
+            Contact Us
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Get in touch with our team to discuss your glass and aluminum needs.
+            We're here to help bring your vision to life.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Contact Form -->
+          <div class="bg-white rounded shadow-md p-8">
+            <h3 class="text-2xl font-bold text-secondary mb-6">
+              Send Us a Message
+            </h3>
+            <form id="contact-form">
+              <div class="mb-6 relative">
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full px-4 py-3 border-none bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-primary text-gray-800"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  for="name"
+                  class="absolute left-4 top-3 text-gray-500 pointer-events-none"
+                  >Full Name</label
+                >
+              </div>
+              <div class="mb-6 relative">
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-4 py-3 border-none bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-primary text-gray-800"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  for="email"
+                  class="absolute left-4 top-3 text-gray-500 pointer-events-none"
+                  >Email Address</label
+                >
+              </div>
+              <div class="mb-6 relative">
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-3 border-none bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-primary text-gray-800"
+                  placeholder=" "
+                />
+                <label
+                  for="phone"
+                  class="absolute left-4 top-3 text-gray-500 pointer-events-none"
+                  >Phone Number</label
+                >
+              </div>
+              <div class="mb-6">
+                <div class="relative">
+                  <textarea
+                    id="message"
+                    rows="5"
+                    class="w-full px-4 py-3 border-none bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-primary text-gray-800"
+                    placeholder=" "
+                    required
+                  ></textarea>
+                  <label
+                    for="message"
+                    class="absolute left-4 top-3 text-gray-500 pointer-events-none"
+                    >Your Message</label
+                  >
+                </div>
+              </div>
+              <div class="mb-6">
+                <label class="custom-checkbox mb-2 block">
+                  <input type="checkbox" required />
+                  <span class="checkmark"></span>
+                  I agree to the privacy policy and terms of service
+                </label>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-primary text-white py-3 !rounded-button shadow-md hover:bg-opacity-90 transition-all btn-glow whitespace-nowrap"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <!-- Contact Information -->
+          <div>
+            <div class="bg-white rounded shadow-md p-8 mb-8">
+              <h3 class="text-2xl font-bold text-secondary mb-6">
+                Contact Information
+              </h3>
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-map-pin-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary mb-1">
+                      Our Location
+                    </h4>
+                    <p class="text-gray-600">
+                      123 Business Avenue, Suite 500<br />New York, NY 10001
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-phone-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary mb-1">
+                      Phone Number
+                    </h4>
+                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                    <p class="text-gray-600">+1 (555) 987-6543</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-mail-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary mb-1">
+                      Email Address
+                    </h4>
+                    <p class="text-gray-600">info@glassworks.com</p>
+                    <p class="text-gray-600">sales@glassworks.com</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4"
+                  >
+                    <i class="ri-time-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-secondary mb-1">
+                      Business Hours
+                    </h4>
+                    <p class="text-gray-600">
+                      Monday - Friday: 8:00 AM - 6:00 PM
+                    </p>
+                    <p class="text-gray-600">Saturday: 9:00 AM - 1:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="bg-white rounded shadow-md p-8">
+              <h3 class="text-xl font-bold text-secondary mb-4">
+                Connect With Us
+              </h3>
+              <div class="flex space-x-4">
+                <a
+                  href="#"
+                  class="social-icon w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                >
+                  <i class="ri-facebook-fill ri-lg"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                >
+                  <i class="ri-instagram-line ri-lg"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                >
+                  <i class="ri-linkedin-fill ri-lg"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all"
+                >
+                  <i class="ri-twitter-fill ri-lg"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-[#25D366] hover:text-white transition-all"
+                >
+                  <i class="ri-whatsapp-fill ri-lg"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div
+          class="mt-16 rounded overflow-hidden shadow-md h-96"
+          style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"
+        ></div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="fixed bottom-6 right-6 z-40">
+      <button
+        id="whatsapp-widget"
+        class="w-16 h-16 flex items-center justify-center bg-[#25D366] rounded-full shadow-lg hover:bg-opacity-90 transition-all"
+      >
+        <i class="ri-whatsapp-fill ri-2x text-white"></i>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Company Info -->
+          <div>
+            <a
+              href="#"
+              class="font-['Pacifico'] text-3xl text-white mb-4 inline-block"
+              >GlassWorks</a
+            >
+            <p class="text-gray-300 mb-6">
+              Premium glass and aluminum solutions for commercial and
+              residential projects since 1995.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center bg-white bg-opacity-10 rounded-full text-white hover:bg-primary transition-all"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center bg-white bg-opacity-10 rounded-full text-white hover:bg-primary transition-all"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center bg-white bg-opacity-10 rounded-full text-white hover:bg-primary transition-all"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center bg-white bg-opacity-10 rounded-full text-white hover:bg-primary transition-all"
+              >
+                <i class="ri-twitter-fill"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#home"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#products"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Products</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#gallery"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Gallery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">Our Services</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Glass Partitions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Structural Glazing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Aluminum Works</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Shower Enclosures</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Glass Railings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Custom Glass Works</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">Newsletter</h4>
+            <p class="text-gray-300 mb-4">
+              Subscribe to our newsletter for the latest updates and offers.
+            </p>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your Email"
+                class="flex-1 px-4 py-2 !rounded-button rounded-r-none border-none text-gray-800 focus:outline-none"
+              />
+              <button
+                type="submit"
+                class="bg-primary text-white px-4 py-2 !rounded-button rounded-l-none hover:bg-opacity-90 transition-all whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-400 mb-4 md:mb-0">
+            &copy; 2025 GlassWorks. All rights reserved.
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Terms of Service</a
+            >
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Sitemap</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuBtn.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+        });
+
+        // Hero Animations
+        gsap.to("#hero-title", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        gsap.to("#hero-subtitle", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.3,
+          ease: "power3.out",
+        });
+
+        gsap.to("#hero-cta", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.6,
+          ease: "power3.out",
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+
+              // Close mobile menu if open
+              mobileMenu.classList.add("hidden");
+            }
+          });
+        });
+
+        // Counter Animation
+        const counterElements = document.querySelectorAll(".counter-value");
+
+        function animateCounter(el) {
+          const target = parseInt(el.getAttribute("data-target"));
+          const duration = 2000; // 2 seconds
+          const stepTime = 50; // update every 50ms
+          const totalSteps = duration / stepTime;
+          const stepSize = target / totalSteps;
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += stepSize;
+            el.textContent = Math.round(current);
+
+            if (current >= target) {
+              el.textContent = target;
+              clearInterval(timer);
+            }
+          }, stepTime);
+        }
+
+        // Intersection Observer for counters
+        const counterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 },
+        );
+
+        counterElements.forEach((counter) => {
+          counterObserver.observe(counter);
+        });
+
+        // Timeline Animation
+        const timelineItems = document.querySelectorAll(".timeline-item");
+
+        const timelineObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                timelineObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 },
+        );
+
+        timelineItems.forEach((item) => {
+          timelineObserver.observe(item);
+        });
+
+        // Product Filters
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const productItems = document.querySelectorAll(".product-item");
+
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterBtns.forEach((b) => b.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filter = this.getAttribute("data-filter");
+
+            // Show/hide products based on filter
+            productItems.forEach((item) => {
+              if (filter === "all" || item.getAttribute("data-category") === filter) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Product Modal
+        const viewDetailsButtons = document.querySelectorAll(".view-details");
+        const productModal = document.getElementById("product-modal");
+        const closeModalButton = document.getElementById("close-modal");
+        const modalTitle = document.getElementById("modal-title");
+        const modalImage = document
+          .getElementById("modal-image")
+          .querySelector("img");
+        const modalSpecs = document.getElementById("modal-specs");
+
+        // Product data
+        const productData = {
+          product1: {
+            title: "Frameless Glass Partition",
+            image:
+              "https://readdy.ai/api/search-image?query=frameless%20glass%20partition%20system%20in%20modern%20office%2C%20detailed%20view%2C%20clear%20glass%20panels%2C%20minimal%20hardware%2C%20contemporary%20design%2C%20professional%20installation&width=600&height=400&seq=27&orientation=landscape",
+            specs: [
+              { label: "Glass Thickness", value: "10mm / 12mm Tempered Glass" },
+              { label: "Hardware", value: "Stainless Steel / Aluminum" },
+              { label: "Max Height", value: "3.0 meters" },
+              { label: "Sound Insulation", value: "Up to 35dB" },
+              {
+                label: "Applications",
+                value: "Offices, Meeting Rooms, Commercial Spaces",
+              },
+              {
+                label: "Customization",
+                value: "Available (Frosted, Tinted, Printed)",
+              },
+            ],
+          },
+          product2: {
+            title: "Aluminum Sliding Doors",
+            image:
+              "https://readdy.ai/api/search-image?query=aluminum%20sliding%20door%20with%20glass%20panels%2C%20detailed%20view%2C%20sleek%20design%2C%20metallic%20finish%2C%20contemporary%20entrance%2C%20residential%20setting&width=600&height=400&seq=28&orientation=landscape",
+            specs: [
+              { label: "Frame Material", value: "Premium Aluminum Alloy" },
+              { label: "Glass Type", value: "Double Glazed Tempered Glass" },
+              { label: "Thickness", value: "1.4mm - 2.0mm" },
+              {
+                label: "Finish Options",
+                value: "Powder Coated, Anodized, Wood Grain",
+              },
+              { label: "Security Features", value: "Multi-point Locking System" },
+              { label: "Energy Efficiency", value: "Thermal Break Available" },
+            ],
+          },
+          product3: {
+            title: "Glass Balustrades",
+            image:
+              "https://readdy.ai/api/search-image?query=glass%20balustrade%20system%2C%20detailed%20view%2C%20frameless%20design%2C%20stainless%20steel%20fixtures%2C%20contemporary%20staircase%2C%20luxury%20interior&width=600&height=400&seq=29&orientation=landscape",
+            specs: [
+              { label: "Glass Type", value: "12mm / 15mm Tempered Laminated Glass" },
+              {
+                label: "Support System",
+                value: "Stainless Steel Posts / Channel System",
+              },
+              { label: "Handrail Options", value: "Stainless Steel, Wood, Glass" },
+              { label: "Max Load", value: "Complies with Building Codes (0.74kN/m)" },
+              {
+                label: "Applications",
+                value: "Staircases, Balconies, Terraces, Mezzanines",
+              },
+              { label: "Finish Options", value: "Clear, Frosted, Tinted" },
+            ],
+          },
+          product4: {
+            title: "Semi-Framed Partitions",
+            image:
+              "https://readdy.ai/api/search-image?query=semi-framed%20glass%20partition%20system%2C%20detailed%20view%2C%20aluminum%20frames%2C%20glass%20panels%2C%20modern%20office%20divider%2C%20professional%20installation&width=600&height=400&seq=30&orientation=landscape",
+            specs: [
+              { label: "Frame Material", value: "Aluminum Alloy" },
+              { label: "Glass Thickness", value: "6mm / 8mm Tempered Glass" },
+              { label: "Max Height", value: "3.5 meters" },
+              { label: "Sound Insulation", value: "Up to 40dB" },
+              { label: "Applications", value: "Offices, Commercial Spaces, Retail" },
+              {
+                label: "Customization",
+                value: "Frame Color, Glass Type, Door Options",
+              },
+            ],
+          },
+          product5: {
+            title: "Casement Windows",
+            image:
+              "https://readdy.ai/api/search-image?query=aluminum%20casement%20window%2C%20detailed%20view%2C%20glass%20panel%2C%20metallic%20finish%2C%20contemporary%20building%2C%20residential%20setting&width=600&height=400&seq=31&orientation=landscape",
+            specs: [
+              { label: "Frame Material", value: "Premium Aluminum Alloy" },
+              { label: "Glass Type", value: "Single/Double Glazed Tempered Glass" },
+              { label: "Opening Options", value: "Inward/Outward, Top Hung" },
+              { label: "Weather Resistance", value: "Water/Air Tight Seals" },
+              { label: "Security Features", value: "Multi-point Locking System" },
+              { label: "Energy Efficiency", value: "Thermal Break Available" },
+            ],
+          },
+          product6: {
+            title: "Custom Glass Tabletops",
+            image:
+              "https://readdy.ai/api/search-image?query=custom%20glass%20table%20top%2C%20detailed%20view%2C%20beveled%20edges%2C%20clear%20glass%2C%20polished%20finish%2C%20contemporary%20furniture%2C%20luxury%20interior&width=600&height=400&seq=32&orientation=landscape",
+            specs: [
+              { label: "Glass Type", value: "Tempered / Laminated Glass" },
+              { label: "Thickness Options", value: "8mm / 10mm / 12mm / 15mm" },
+              {
+                label: "Edge Treatments",
+                value: "Flat Polish, Beveled, Pencil, Ogee",
+              },
+              { label: "Shape Options", value: "Custom Shapes Available" },
+              { label: "Finish Options", value: "Clear, Frosted, Tinted, Painted" },
+              {
+                label: "Applications",
+                value: "Dining Tables, Coffee Tables, Desks, Countertops",
+              },
+            ],
+          },
+        };
+
+        viewDetailsButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const productId = this.getAttribute("data-product");
+            const product = productData[productId];
+
+            modalTitle.textContent = product.title;
+            modalImage.src = product.image;
+            modalImage.alt = product.title;
+
+            // Clear previous specs
+            modalSpecs.innerHTML = "";
+
+            // Add specs
+            product.specs.forEach((spec) => {
+              const specRow = document.createElement("div");
+              specRow.className =
+                "flex justify-between border-b border-gray-100 py-2";
+              specRow.innerHTML = `
+                                  <span class="text-gray-600">${spec.label}</span>
+                                  <span class="text-gray-800 font-medium">${spec.value}</span>
+                              `;
+              modalSpecs.appendChild(specRow);
+            });
+
+            productModal.classList.remove("hidden");
+          });
+        });
+
+        closeModalButton.addEventListener("click", function () {
+          productModal.classList.add("hidden");
+        });
+
+        // Gallery Filters
+        const galleryFilters = document.querySelectorAll(".gallery-filter");
+        const galleryItems = document.querySelectorAll(".gallery-item");
+
+        galleryFilters.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            // Remove active class from all buttons
+            galleryFilters.forEach((b) => b.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filter = this.getAttribute("data-filter");
+
+            // Show/hide gallery items based on filter
+            galleryItems.forEach((item) => {
+              if (filter === "all" || item.getAttribute("data-category") === filter) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Gallery Lightbox
+        const galleryLightbox = document.getElementById("gallery-lightbox");
+        const lightboxImage = document.getElementById("lightbox-image");
+        const lightboxTitle = document.getElementById("lightbox-title");
+        const lightboxDescription = document.getElementById("lightbox-description");
+        const closeLightbox = document.getElementById("close-lightbox");
+        const prevImage = document.getElementById("prev-image");
+        const nextImage = document.getElementById("next-image");
+
+        let currentImageIndex = 0;
+        const visibleGalleryItems = () =>
+          Array.from(galleryItems).filter((item) => item.style.display !== "none");
+
+        galleryItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            const items = visibleGalleryItems();
+            currentImageIndex = items.indexOf(this);
+
+            const img = this.querySelector("img");
+            const title = this.querySelector("h3").textContent;
+            const description = this.querySelector("p").textContent;
+
+            lightboxImage.src = img.src;
+            lightboxTitle.textContent = title;
+            lightboxDescription.textContent = description;
+
+            galleryLightbox.classList.remove("hidden");
+          });
+        });
+
+        closeLightbox.addEventListener("click", function () {
+          galleryLightbox.classList.add("hidden");
+        });
+
+        prevImage.addEventListener("click", function () {
+          const items = visibleGalleryItems();
+          currentImageIndex = (currentImageIndex - 1 + items.length) % items.length;
+
+          const item = items[currentImageIndex];
+          const img = item.querySelector("img");
+          const title = item.querySelector("h3").textContent;
+          const description = item.querySelector("p").textContent;
+
+          lightboxImage.src = img.src;
+          lightboxTitle.textContent = title;
+          lightboxDescription.textContent = description;
+        });
+
+        nextImage.addEventListener("click", function () {
+          const items = visibleGalleryItems();
+          currentImageIndex = (currentImageIndex + 1) % items.length;
+
+          const item = items[currentImageIndex];
+          const img = item.querySelector("img");
+          const title = item.querySelector("h3").textContent;
+          const description = item.querySelector("p").textContent;
+
+          lightboxImage.src = img.src;
+          lightboxTitle.textContent = title;
+          lightboxDescription.textContent = description;
+        });
+
+        // Testimonial Slider
+        const testimonialSlides = document.querySelectorAll(".testimonial-slide");
+        const testimonialDots = document.querySelectorAll(".testimonial-dot");
+        const prevTestimonial = document.getElementById("prev-testimonial");
+        const nextTestimonial = document.getElementById("next-testimonial");
+
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+          testimonialSlides.forEach((slide) => {
+            slide.classList.add("hidden");
+            slide.classList.remove("active");
+          });
+
+          testimonialDots.forEach((dot) => {
+            dot.classList.remove("opacity-100");
+            dot.classList.add("opacity-30");
+          });
+
+          testimonialSlides[index].classList.remove("hidden");
+          setTimeout(() => {
+            testimonialSlides[index].classList.add("active");
+          }, 10);
+
+          testimonialDots[index].classList.remove("opacity-30");
+          testimonialDots[index].classList.add("opacity-100");
+
+          currentTestimonial = index;
+        }
+
+        prevTestimonial.addEventListener("click", function () {
+          let newIndex =
+            (currentTestimonial - 1 + testimonialSlides.length) %
+            testimonialSlides.length;
+          showTestimonial(newIndex);
+        });
+
+        nextTestimonial.addEventListener("click", function () {
+          let newIndex = (currentTestimonial + 1) % testimonialSlides.length;
+          showTestimonial(newIndex);
+        });
+
+        testimonialDots.forEach((dot, index) => {
+          dot.addEventListener("click", function () {
+            showTestimonial(index);
+          });
+        });
+
+        // Auto rotate testimonials
+        let testimonialInterval = setInterval(() => {
+          let newIndex = (currentTestimonial + 1) % testimonialSlides.length;
+          showTestimonial(newIndex);
+        }, 5000);
+
+        // Pause rotation on hover
+        const testimonialContainer = document.querySelector(
+          ".testimonials-container",
+        );
+        testimonialContainer.addEventListener("mouseenter", function () {
+          clearInterval(testimonialInterval);
+        });
+
+        testimonialContainer.addEventListener("mouseleave", function () {
+          testimonialInterval = setInterval(() => {
+            let newIndex = (currentTestimonial + 1) % testimonialSlides.length;
+            showTestimonial(newIndex);
+          }, 5000);
+        });
+
+        // Contact Form
+        const contactForm = document.getElementById("contact-form");
+
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Simulate form submission
+          const submitButton = this.querySelector('button[type="submit"]');
+          const originalText = submitButton.textContent;
+
+          submitButton.textContent = "Sending...";
+          submitButton.disabled = true;
+
+          setTimeout(() => {
+            alert("Thank you for your message! We will get back to you soon.");
+            this.reset();
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+          }, 1500);
+        });
+
+        // WhatsApp Widget
+        const whatsappWidget = document.getElementById("whatsapp-widget");
+
+        whatsappWidget.addEventListener("click", function () {
+          window.open("https://wa.me/15551234567", "_blank");
+        });
+
+        // Navbar Active State
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        function highlightNavLink() {
+          const scrollY = window.pageYOffset;
+
+          sections.forEach((section) => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute("id");
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+              navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${sectionId}`) {
+                  link.classList.add("active");
+                }
+              });
+            }
+          });
+        }
+
+        window.addEventListener("scroll", highlightNavLink);
+
+        // Initialize page
+        highlightNavLink();
+      });
+    </script>
+  </body>
+</html>
