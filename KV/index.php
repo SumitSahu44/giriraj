@@ -1614,15 +1614,80 @@
         </a>
       </div>
     </div>
+    
+    
+    
+    
+    
+    
+   <!-- Modal call request call Background -->
+<div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+  <!-- Modal Box -->
+  <div class="bg-white rounded-xl p-6 w-[90%] max-w-sm shadow-lg relative">
+    <!-- Close Button -->
+    <button onclick="closeContactModal()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-lg font-bold">
+      &times;
+    </button>
+
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">📞 Contact Numbers</h2>
+
+    <div class="space-y-3">
+      <a
+        href="tel:+917909999901"
+        class="block bg-[#fdf4e7] hover:bg-[#c9a560] hover:text-white text-[#c9a560] font-medium py-2 px-4 rounded-md transition text-center"
+      >
+        +91 7909999901
+      </a>
+      <a
+        href="tel:+917909999902"
+        class="block bg-[#fdf4e7] hover:bg-[#c9a560] hover:text-white text-[#c9a560] font-medium py-2 px-4 rounded-md transition text-center"
+      >
+        +91 7909999902
+      </a>
+    </div>
+  </div>
+</div>
+    
+    
+    
+    
+    <script>
+  function openContactModal() {
+    document.getElementById("contactModal").classList.remove("hidden");
+    document.getElementById("contactModal").classList.add("flex");
+  }
+
+  function closeContactModal() {
+    document.getElementById("contactModal").classList.add("hidden");
+    document.getElementById("contactModal").classList.remove("flex");
+  }
+
+  // Optional: close modal when clicking outside the box
+  window.addEventListener("click", function (e) {
+    const modal = document.getElementById("contactModal");
+    const box = modal.querySelector("div");
+    if (!box.contains(e.target) && !e.target.closest("button")) {
+      closeContactModal();
+    }
+  });
+</script>
+
+    
+    
+    
+    
+    
+    
 
     <div class="fixed right-0 top-1/2 -translate-y-1/2 z-40">
       <div class="flex flex-col space-y-4">
-        <button
-          class="bg-[#c9a560] text-white px-4 py-3 !rounded-l-button whitespace-nowrap hover:bg-opacity-90 transition-all shadow-md"
-        >
-          <i class="ri-phone-line ri-sm mr-2"></i>
-          Request Callback
-        </button>
+             <button
+                  onclick="openContactModal()"
+                  class="bg-[#c9a560] text-white px-4 py-3 rounded-l-lg whitespace-nowrap hover:bg-opacity-90 transition-all shadow-md   z-40"
+                >
+                  <i class="ri-phone-line ri-sm mr-2"></i>
+                  Request Callback
+                </button>
                  <button
               onclick="document.getElementById('applyModal').classList.remove('hidden')"
               class="bg-[#c9a560] text-white px-4 py-3 !rounded-l-button whitespace-nowrap hover:bg-opacity-90 transition-all shadow-md"
