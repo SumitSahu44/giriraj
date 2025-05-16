@@ -160,37 +160,41 @@
 
 <body class="bg-white">
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-primary font-['Pacifico'] text-3xl">Piyush Sanwaliya</a>
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-primary font-['Pacifico'] text-3xl">
+            <img src="./images/looooooo-removebg-preview.png" alt="Logo" class="h-14">
+        </a>
 
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-white hover:text-primary transition-colors">Home</a>
-                <a href="#about" class="nav-link text-white hover:text-primary transition-colors">About</a>
-                <a href="#gallery" class="nav-link text-white hover:text-primary transition-colors">Gallery</a>
-                <a href="#testimonials"
-                    class="nav-link text-white hover:text-primary transition-colors">Testimonials</a>
-                <a href="#contact" class="nav-link text-white hover:text-primary transition-colors">Contact</a>
-            </div>
-
-            <div class="md:hidden flex items-center">
-                <button id="menu-toggle" class="text-white w-10 h-10 flex items-center justify-center">
-                    <i class="ri-menu-line ri-2x"></i>
-                </button>
-            </div>
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#home" class="nav-link text-black hover:text-primary transition-colors">Home</a>
+            <a href="#about" class="nav-link text-black hover:text-primary transition-colors">About</a>
+            <a href="#gallery" class="nav-link text-black hover:text-primary transition-colors">Gallery</a>
+            <a href="#testimonials" class="nav-link text-black hover:text-primary transition-colors">Testimonials</a>
+            <a href="#contact" class="nav-link text-black hover:text-primary transition-colors">Contact</a>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-95 w-full">
-            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
-                <a href="#home" class="text-white hover:text-primary py-2 transition-colors">Home</a>
-                <a href="#about" class="text-white hover:text-primary py-2 transition-colors">About</a>
-                <a href="#gallery" class="text-white hover:text-primary py-2 transition-colors">Gallery</a>
-                <a href="#testimonials" class="text-white hover:text-primary py-2 transition-colors">Testimonials</a>
-                <a href="#contact" class="text-white hover:text-primary py-2 transition-colors">Contact</a>
-            </div>
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden flex items-center">
+            <button id="menu-toggle" class="text-black w-10 h-10 flex items-center justify-center">
+                <i class="ri-menu-line ri-2x"></i>
+            </button>
         </div>
-    </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white w-full shadow-md">
+        <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+            <a href="#home" class="text-black hover:text-primary py-2 transition-colors">Home</a>
+            <a href="#about" class="text-black hover:text-primary py-2 transition-colors">About</a>
+            <a href="#gallery" class="text-black hover:text-primary py-2 transition-colors">Gallery</a>
+            <a href="#testimonials" class="text-black hover:text-primary py-2 transition-colors">Testimonials</a>
+            <a href="#contact" class="text-black hover:text-primary py-2 transition-colors">Contact</a>
+        </div>
+    </div>
+</nav>
+
 
     <!-- Hero Section -->
     <section id="home" class="hero-section h-screen flex items-center w-full">
@@ -426,6 +430,96 @@
             </div>
         </div>
     </section>
+
+
+
+ <!-- Artist Section -->
+
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-6 md:px-12 py-12 reveal">
+    <!-- Text Content -->
+    <div class="order-2 md:order-1 text-center md:text-left">
+        <h3 class="text-3xl md:text-4xl mb-4 font-semibold text-gray-800">The Piyush Sanwaliya</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            Looking to install a Murti at your home, temple, or organization? Let’s talk! We create sculptures that inspire generations.
+        </p>
+
+        <!-- Features -->
+        <div class="mb-6 space-y-2">
+            <div class="flex items-center justify-center md:justify-start">
+                <div class="w-6 h-6 flex items-center justify-center mr-2">
+                    <i class="ri-time-line text-primary text-xl"></i>
+                </div>
+                <span class="text-gray-700">Meet the Artist</span>
+            </div>
+            <div class="flex items-center justify-center md:justify-start">
+                <div class="w-6 h-6 flex items-center justify-center mr-2">
+                    <i class="ri-music-line text-primary text-xl"></i>
+                </div>
+                <span class="text-gray-700">Revive traditional Indian art</span>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <a href="#" class="inline-block px-6 py-3 bg-primary text-white uppercase text-sm tracking-wider font-medium rounded-lg shadow hover:bg-primary/90 transition">
+            Explore Sky Lounge
+        </a>
+    </div>
+
+    <!-- Image -->
+    <div class="order-1 md:order-2">
+        <img src="images/img1.png" alt="Piyush Sanwaliya"
+            class="w-[80%] max-w-md h-90 object-contain mx-auto" />
+    </div>
+</div>
+
+        </div>
+
+    <section id="dining" class="py-20 md:py-32 bg-gray-50">
+   
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-6 md:px-12 py-12 reveal">
+    <!-- Text Content -->
+    <div class="order-2 md:order-1 text-center md:text-left">
+        <h3 class="text-3xl md:text-4xl mb-4 font-semibold text-gray-800">The Piyush Sanwaliya</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            Looking to install a Murti at your home, temple, or organization? Let’s talk! We create sculptures that inspire generations.
+        </p>
+
+        <!-- Features -->
+        <div class="mb-6 space-y-2">
+            <div class="flex items-center justify-center md:justify-start">
+                <div class="w-6 h-6 flex items-center justify-center mr-2">
+                    <i class="ri-time-line text-primary text-xl"></i>
+                </div>
+                <span class="text-gray-700">Meet the Artist</span>
+            </div>
+            <div class="flex items-center justify-center md:justify-start">
+                <div class="w-6 h-6 flex items-center justify-center mr-2">
+                    <i class="ri-music-line text-primary text-xl"></i>
+                </div>
+                <span class="text-gray-700">Revive traditional Indian art</span>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <a href="#" class="inline-block px-6 py-3 bg-primary text-white uppercase text-sm tracking-wider font-medium rounded-lg shadow hover:bg-primary/90 transition">
+            Explore Sky Lounge
+        </a>
+    </div>
+
+    <!-- Image -->
+    <div class="order-1 md:order-2">
+        <img src="images/img1.png" alt="Piyush Sanwaliya"
+            class="w-[80%] max-w-md h-90 object-contain mx-auto" />
+    </div>
+</div>
+
+        </div>
+    </section>
+
+
+
+
+
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="py-20 bg-white">
@@ -724,6 +818,11 @@
                     </div>
                 </div>
 
+                <a href="https://www.instagram.com/piyush.sanwaliya_art.wala/"
+        class="floating-whatsapp fixed mt-4 bottom-[100px] right-6 w-16 h-16 flex items-center justify-center bg-primary rounded-full shadow-lg z-50 hover:bg-opacity-90 transition-colors">
+        <i class="ri-instagram-fill text-black ri-2x"></i>
+    </a>
+  
                 <div>
                     <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
                     <ul class="space-y-3">
@@ -802,11 +901,11 @@
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', function () {
                 if (window.scrollY > 50) {
-                    navbar.classList.add('bg-black', 'shadow-md');
-                    navbar.classList.remove('bg-transparent');
+                    navbar.classList.add('bg-white', 'shadow-md');
+                    navbar.classList.remove('bg-white');
                 } else {
-                    navbar.classList.remove('bg-black', 'shadow-md');
-                    navbar.classList.add('bg-transparent');
+                    navbar.classList.remove('bg-white', 'shadow-md');
+                    navbar.classList.add('bg-white');
                 }
             });
 
