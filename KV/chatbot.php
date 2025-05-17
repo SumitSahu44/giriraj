@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
+            --primary-color: #c9a560;
+            --secondary-color: #c9a560;
             --accent-color: #ef4444;
             --light-color: #f3f4f6;
             --dark-color: #1f2937;
@@ -220,7 +220,7 @@
         }
 
         #send-btn:hover, #mic-btn:hover, #voice-toggle-btn:hover {
-            background-color: #2563eb;
+            background-color: var(--primary-color);
         }
 
         #mic-btn.active {
@@ -282,7 +282,7 @@
         }
 
         .option-btn:hover {
-            background-color: #1e40af;
+            background-color: #c9a560;
             transform: translateX(5px);
         }
 
@@ -401,9 +401,9 @@
         .chatbot-launcher {
             position: fixed;
             bottom: 90px;
-            right: 20px;
-            width: 65px;
-            height: 65px;
+            right: 21px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             background-color: var(--secondary-color);
             color: white;
@@ -419,7 +419,7 @@
 
         .chatbot-launcher:hover {
             transform: scale(1.1);
-            background-color: #2563eb;
+            background-color: var(--primary-color);
         }
 
         .chatbot-launcher i {
@@ -468,7 +468,7 @@
     </style>
 </head>
 <body>
-    <div class="chatbot-container" id="chatbot-container">
+   <div class="chatbot-container" id="chatbot-container">
         <div class="chatbot-header">
             <div class="header-content">
                 <img src="https://via.placeholder.com/40" alt="KV Associates Logo" class="logo">
@@ -850,32 +850,43 @@
                 window.open(whatsappUrl, '_blank');
             }
 
-            function sendToEmail(formData, refNumber, formType) {
-                console.log('Sending email (simulated)'); // Debug
-                const emailBody = {
-                    to: businessEmail,
-                    subject: `New ${formType} Submission - Ref: ${refNumber}`,
-                    body: `
-                        New ${formType} Submission
-                        Reference: ${refNumber}
-                        ${Array.from(formData.entries()).map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1).replace(/-/g, ' ')}: ${value}`).join('\n')}
-                    `
-                };
-                fetch('https://kvassociateindia.com/api/send-email.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(emailBody)
-                })
-                .then(res => {
-                    if (!res.ok) throw new Error('Email API failed');
-                    console.log('Email sent successfully (simulated)');
-                })
-                .catch(err => {
-                    console.error('Email sending error:', err);
-                    addBotMessage('Failed to send email notification. Please contact us directly.');
-                    speak('Failed to send email notification. Please contact us directly.');
-                });
+         function sendToEmail(formData, refNumber, formType) {
+        console.log('Sending email for:', formType, refNumber); // Debug
+        const formDataObj = Object.fromEntries(formData.entries());
+        const emailBody = {
+            to: 'sumitkumarsahu141@gmail.com',
+            subject: `New ${formType} Submission - Ref: ${refNumber}`,
+            body: `
+                New ${formType} Submission
+                Reference: ${refNumber}
+                ${Object.entries(formDataObj).map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1).replace(/-/g, ' ')}: ${value}`).join('\n')}
+            `
+        };
+
+        // Send to PHP backend
+        fetch('./api/chatbot.php', { // Adjust path if PHP file is in a different directory
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailBody)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`Email API failed with status: ${res.status}`);
             }
+            return res.json();
+        })
+        .then(data => {
+            console.log('Email sent successfully:', data);
+            addBotMessage('Your submission has been successfully sent to our team!');
+            speak('Your submission has been successfully sent to our team!');
+        })
+        .catch(err => {
+            console.error('Email sending error:', err);
+            addBotMessage('Failed to send email notification. Please contact us directly at sumitkumarsahu141@gmail.com.');
+            speak('Failed to send email notification. Please contact us directly.');
+        });
+    }
+
 
             function showApplicationForm(loanType) {
                 console.log('Showing application form for:', loanType); // Debug
@@ -1199,5 +1210,6 @@
             }
         });
     </script>
+ 
 </body>
 </html>
