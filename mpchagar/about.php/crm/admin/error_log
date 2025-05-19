@@ -1,0 +1,20 @@
+[25-Nov-2024 11:54:30 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:55:18 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:55:21 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:55:34 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:55:43 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:55:56 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:56:04 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:56:26 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:57:14 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:57:20 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:58:05 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 11:58:09 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 12:00:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.StudentEmail, tblstudent.StudentFathername, tblstudent.StudentCourse, tblstuden' at line 1 in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php:179
+Stack trace:
+#0 /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php(179): PDOStatement->execute()
+#1 {main}
+  thrown in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 179
+[25-Nov-2024 12:01:31 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
+[25-Nov-2024 12:01:31 UTC] PHP Warning:  Undefined property: stdClass::$StudentName in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 195
+[25-Nov-2024 12:02:03 UTC] PHP Warning:  Undefined property: stdClass::$RecieptDate in /home3/thediann/mpchagar.com/crm/admin/invoice-detail.php on line 193
