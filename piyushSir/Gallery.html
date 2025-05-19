@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyush Sanwaliya Art Wala - Divine Temple Designer</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#D4AF37', secondary: '#000000' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Lora', serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Cinzel', serif;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%), url('./images/bg.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ornamental-border {
+            position: relative;
+        }
+
+        .ornamental-border::before,
+        .ornamental-border::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            /* background-image: url('./images/bg.png'); */
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .ornamental-border::before {
+            top: -10px;
+            left: -10px;
+            transform: rotate(0deg);
+        }
+
+        .ornamental-border::after {
+            bottom: -10px;
+            right: -10px;
+            transform: rotate(180deg);
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .testimonial-card {
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: "" ;
+ position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 60px;
+            color: rgba(212, 175, 55, 0.2);
+            font-family: 'Cinzel', serif;
+        }
+
+        .floating-whatsapp {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #D4AF37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+
+        .divine-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .divine-glow:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+        }
+
+
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+
+          .reel-item {
+            transition: all 0.3s ease;
+        }
+
+        .reel-item:hover {
+            transform: scale(1.05);
+        }
+
+        .reel-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .reel-item:hover .reel-overlay {
+            opacity: 1;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #carousel {
+  overflow-x: scroll;
+  display: flex;
+}
+
+
+ .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
+  gap: 20px;
+}
+    .gallery-item {
+      background: #1f2937; /* gray-800 */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 15px;
+      color: #d1d5db; /* gray-300 */
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-item img {
+  height: 300px; /* Pehle 240px tha, ab badhaya */
+  object-fit: cover;
+  border-radius: 0.375rem;
+}
+   
+  
+    </style>
+</head>
+
+<body class="bg-white">
+  <!-- Navbar -->
+ 
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      
+      <!-- Logo -->
+      <a href="#" class="text-xl font-bold text-blue-600">
+        <img src="images/logo-removebg-preview.png" alt="Logo" class="h-[60px] object-cover">
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="text-black hover:text-blue-600">Home</a>
+        <a href="#about" class="text-black hover:text-blue-600">About</a>
+        <a href="#gallery" class="text-black hover:text-blue-600">Gallery</a>
+        <a href="#testimonials" class="text-black hover:text-blue-600">Testimonials</a>
+        <a href="#contact" class="text-black hover:text-blue-600">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-black">
+          <i id="menu-icon" class="ri-menu-line ri-2x"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white px-6 py-4">
+      <a href="#home" class="block py-2 text-black hover:text-blue-600">Home</a>
+      <a href="#about" class="block py-2 text-black hover:text-blue-600">About</a>
+      <a href="#gallery" class="block py-2 text-black hover:text-blue-600">Gallery</a>
+      <a href="#testimonials" class="block py-2 text-black hover:text-blue-600">Testimonials</a>
+      <a href="#contact" class="block py-2 text-black hover:text-blue-600">Contact</a>
+    </div>
+  </nav>
+
+ <script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuIcon = document.getElementById("menu-icon");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+
+    if (mobileMenu.classList.contains("hidden")) {
+      menuIcon.classList.remove("ri-close-line");
+      menuIcon.classList.add("ri-menu-line");
+    } else {
+      menuIcon.classList.remove("ri-menu-line");
+      menuIcon.classList.add("ri-close-line");
+    }
+  });
+
+  // ✅ Close menu when any mobile link is clicked
+  const mobileLinks = mobileMenu.querySelectorAll("a");
+  mobileLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+      menuIcon.classList.remove("ri-close-line");
+      menuIcon.classList.add("ri-menu-line");
+    });
+  });
+</script>
+
+ <!-- Gallery Section -->
+<section class="py-20 bg-gray-100 text-white" id="gallery">
+  <div class="container mt-8 mx-auto px-4" >
+    <h2 class="text-4xl font-bold text-center text-black mb-10">Divine Gallery</h2>
+
+    <!-- Filter Buttons -->
+<div class="flex justify-center mb-8 flex-wrap gap-3">
+  <button class="px-4 py-2 bg-yellow-500 rounded-md hover:bg-yellow-600 filter-btn" data-filter="All">All</button>
+  <button class="px-4 py-2 bg-yellow-500 rounded-md hover:bg-yellow-600 filter-btn" data-filter="Home Temples">Home Temples</button>
+ <a href="#Video's"><button class="px-4 py-2 bg-yellow-500 rounded-md hover:bg-yellow-600 filter-btn" data-filter="Video's">Video's</button></a> 
+  <button class="px-4 py-2 bg-yellow-500 rounded-md hover:bg-yellow-600 filter-btn" data-filter="3D/4D Painting">3D/4D Painting</button>
+  <button class="px-4 py-2 bg-yellow-500 rounded-md hover:bg-yellow-600 filter-btn" data-filter="Custom Art">Custom Art</button>
+</div>
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" >
+      
+    
+
+      <!-- Gallery Item: Temple -->
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="text-black All"  >
+        <img src="images/A.jpeg" alt=" Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+       <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/h.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/c.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/d.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/e.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/f.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/g.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/i.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/j.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home All">
+        <img src="images/k.jpeg" alt="Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black"> Temple</h3>
+        <p class="mb-3 text-sm text-black">Beautiful design for pooja room.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+
+
+
+      <!-- hometem -->
+
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home Temples">
+        <img src="home tem/1.jpeg" alt="Marble Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Marble Home Temple</h3>
+        <p class="mb-3 text-sm text-black">Premium marble craftsmanship.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home Temples">
+        <img src="home tem/2.jpeg" alt="Marble Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Marble Home Temple</h3>
+        <p class="mb-3 text-sm text-black">Premium marble craftsmanship.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home Temples">
+         <video class="w-full h-60 object-cover rounded-md mb-4" controls muted autoplay loop>
+          <source src="home tem/3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <h3 class="text-xl font-semibold text-black">Marble Home Temple</h3>
+        <p class="mb-3 text-sm text-black">Premium marble craftsmanship.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      
+      
+      
+       
+    </div>
+
+
+    <!-- Gallery Item: Custom Art -->
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Custom Art">
+        <img src="custom/WhatsApp Image 2025-05-17 at 4.43.40 PM (1).jpeg" alt="Custom Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Customized Artwork</h3>
+        <p class="mb-3 text-sm text-black">Made to your personal vision.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+       <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Custom Art">
+        <img src="custom/WhatsApp Image 2025-05-17 at 4.44.15 PM.jpeg" alt="Custom Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Customized Artwork</h3>
+        <p class="mb-3 text-sm text-black">Made to your personal vision.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+       <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Custom Art">
+        <img src="custom/WhatsApp Image 2025-05-17 at 4.47.13 PM.jpeg" alt="Custom Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Customized Artwork</h3>
+        <p class="mb-3 text-sm text-black">Made to your personal vision.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+    
+
+
+<!-- Gallery Item: 3D/4D Painting -->
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="3D/4D Painting">
+        <img src="3D4D/1.jpeg" alt="3D Wall Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">3D Wall Painting</h3>
+        <p class="mb-3 text-sm text-black">Realistic texture and vibrant colors.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="3D/4D Painting">
+        <img src="3D4D/3.jpg" alt="3D Wall Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">3D Wall Painting</h3>
+        <p class="mb-3 text-sm text-black">Realistic texture and vibrant colors.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="3D/4D Painting">
+        <img src="3D4D/4 (1).jpg" alt="3D Wall Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">3D Wall Painting</h3>
+        <p class="mb-3 text-sm text-black">Realistic texture and vibrant colors.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="3D/4D Painting">
+        <img src="3D4D/4 (2).jpg" alt="3D Wall Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">3D Wall Painting</h3>
+        <p class="mb-3 text-sm text-black">Realistic texture and vibrant colors.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="3D/4D Painting">
+        <img src="3D4D/5.jpg " alt="3D Wall Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">3D Wall Painting</h3>
+        <p class="mb-3 text-sm text-black">Realistic texture and vibrant colors.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <!-- Gallery Item: Custom Art -->
+      <!-- <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Custom Art">
+        <img src="custom/WhatsApp Image 2025-05-17 at 4.43.40 PM (1).jpeg" alt="Custom Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Customized Artwork</h3>
+        <p class="mb-3 text-sm text-black">Made to your personal vision.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+       <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Custom Art">
+        <img src="custom/WhatsApp Image 2025-05-17 at 4.44.15 PM.jpeg" alt="Custom Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Customized Artwork</h3>
+        <p class="mb-3 text-sm text-black">Made to your personal vision.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+       <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Custom Art">
+        <img src="custom/WhatsApp Image 2025-05-17 at 4.47.13 PM.jpeg" alt="Custom Art" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Customized Artwork</h3>
+        <p class="mb-3 text-sm text-black">Made to your personal vision.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div> -->
+
+    
+
+      <!-- Gallery Item: Home Temple -->
+      <!-- <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home Temples">
+        <img src="home tem/1.jpeg" alt="Marble Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Marble Home Temple</h3>
+        <p class="mb-3 text-sm text-black">Premium marble craftsmanship.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home Temples">
+        <img src="home tem/2.jpeg" alt="Marble Temple" class="w-full h-60 object-cover rounded-md mb-4">
+        <h3 class="text-xl font-semibold text-black">Marble Home Temple</h3>
+        <p class="mb-3 text-sm text-black">Premium marble craftsmanship.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      </div>
+
+
+
+<div class="bg-white rounded-lg shadow-lg p-4 gallery-item" data-category="Home Temples">
+         <video class="w-full h-60 object-cover rounded-md mb-4" controls muted autoplay loop>
+          <source src="home tem/3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <h3 class="text-xl font-semibold text-black">Marble Home Temple</h3>
+        <p class="mb-3 text-sm text-black">Premium marble craftsmanship.</p>
+        <a href="https://wa.me/+919876543210?text=I'm interested in the Premium Sanwaliya Ji Idol"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                WhatsApp to Order
+                            </a>
+      
+      
+      
+       
+    </div> -->
+  </div>
+
+   
+
+  <!-- Show More Button -->
+<div class="text-center mt-8">
+  <button id="showMoreBtn" class="bg-yellow-700 text-white py-2 px-6 rounded">Show More</button>
+</div>
+</section>
+
+
+ <!-- 3D&4D Wall Painting Section -->
+  <div class="mt-20" id="threed ">
+<section class="py-12 bg-gray-100 " >
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl  font-bold text-gray-800 ml-3  mb-8"><span  class="text-primary">  3D&4D Wall </span> Painting</h2>
+
+    <!-- Carousel Wrapper -->
+    <div class="relative">
+      <!-- Left Arrow -->
+      <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow">
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Carousel -->
+      <div id="carousel" class="overflow-hidden">
+        <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out will-change-transform space-x-4">
+          <!-- Cards Start -->
+          <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/1.jpeg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 1</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+ <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/4 (2).jpg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 2</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+
+           <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/3.jpg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 3</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+
+           <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/4 (1).jpg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 4</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+
+           <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/5.jpg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 5</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+
+           <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/6.jpg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 6</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+
+           <div class="min-w-[calc(33.333%-1rem)] bg-white border rounded-lg shadow hover:shadow-md transition">
+            <img src="3D4D/1.jpeg" loading="lazy" alt="Design 1" class="rounded-t-lg w-full object-cover h-48">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">Design 7</h3>
+              <p class="text-gray-600 text-sm mb-2">It all begins with an idea.</p>
+              <span class="text-xs text-gray-400">May 16, 2025</span>
+            </div>
+          </div>
+
+          <!-- Add more cards here as needed -->
+          <!-- Example: -->
+          <!-- <div class="..."> ... </div> -->
+
+        </div>
+      </div>
+
+      <!-- ✅ Right Arrow placed correctly -->
+      <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow">
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+
+<!-- Home Temple Section -->
+<section class="py-12 bg-white pt-10px" id="home-temple">
+  <div class="max-w-7x1 mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 ml-3 mb-8"><span class="text-primary">Home</span> Temple</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Image 1 -->
+      <div class="bg-white border rounded-lg shadow hover:shadow-md transition">
+        <img src="home tem/1.jpeg" loading="lazy" alt="Home Temple Design 1" class="rounded-t-lg w-full object-cover h-60">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-1">Temple Design 1</h3>
+          <p class="text-gray-600 text-sm mb-2">Peaceful & Elegant home temple design.</p>
+          <span class="text-xs text-gray-400">May 17, 2025</span>
+        </div>
+      </div>
+
+      <!-- Image 2 -->
+      <div class="bg-white border rounded-lg shadow hover:shadow-md transition">
+        <img src="home tem/2.jpeg" loading="lazy" alt="Home Temple Design 2" class="rounded-t-lg w-full object-cover h-60">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-1">Temple Design 2</h3>
+          <p class="text-gray-600 text-sm mb-2">Modern touch with spiritual vibes.</p>
+          <span class="text-xs text-gray-400">May 17, 2025</span>
+        </div>
+      </div>
+
+      <!-- Reel/Video File -->
+      <div class=" bg-white border rounded-lg shadow hover:shadow-md transition">
+        <video class="rounded-t-lg w-full object-cover h-60" controls muted autoplay loop>
+          <source src="home tem/3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-1">Temple Video </h3>
+          <p class="text-gray-600 text-sm mb-2">Experience the craftsmanship in motion.</p>
+          <span class="text-xs text-gray-400">May 17, 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section >
+
+
+
+
+<!-- Instagram Reels Section -->
+      <div  class="py-20 bg-gray-100" id="Video's">
+        <div class="container mx-auto mt-8  px-6"> 
+            <h2 class="text-3xl md:text-4xl font-bold text-align: center; mb-16 relative inline-block mx-auto  ">
+                <span class="text-primary" id="reels">Video</span>'s
+                <div class="h-1 w-24 bg-primary mx-auto mt-4"></div>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+ <!-- Reel Item 1 -->
+                <div class="reel-item rounded-lg overflow-hidden shadow-lg divine-glow animate-slide-in" data-category="Reels">
+                    <div class="relative" >
+                        <video class="w-full h-80 object-cover object-center" poster="" muted controls>
+                            <source src="                WhatsApp Video 2025-05-16 at 5.23.35 PM.mp4" type="video/mp4">
+                            Your browser does not support the video tag. 
+                        </video>
+                        <!-- <div class="reel-overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center p-6">
+                            <h3 class="text-xl text-white font-semibold mb-2">Crafting a Sanwaliya Ji Idol</h3>
+                            <p class="text-white text-center mb-4">Behind-the-scenes of our handcrafted process</p>
+                            <a href="https://instagram.com/piyush.sanwaliya_art.wala" target="_blank"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                View on Instagram
+                            </a>
+                        </div> -->
+                    </div>
+                </div> 
+
+                <!-- Reel Item 2 -->
+                <div class="reel-item rounded-lg overflow-hidden shadow-lg divine-glow animate-slide-in" data-category="Reels">
+                    <div class="relative">
+                        <video class="w-full h-80 object-cover object-center" poster="" muted controls>
+                            <source src="reels/video 1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- <div class="reel-overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center p-6">
+                            <h3 class="text-xl text-white font-semibold mb-2">Luxury Temple Installation</h3>
+                            <p class="text-white text-center mb-4">Showcasing a custom temple setup</p>
+                            <a href="https://instagram.com/piyush.sanwaliya_art.wala" target="_blank"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                View on Instagram
+                            </a>
+                        </div> -->
+                     </div>
+                </div>
+
+                <!-- Reel Item 3 -->
+                <div class="reel-item rounded-lg overflow-hidden shadow-lg divine-glow animate-slide-in" data-category="Reels">
+                    <div class="relative">
+                        <video class="w-full h-80 object-cover object-center" poster=""  muted controls>
+                            <source src="reels/video 2.mp4" type="video/mp4">
+
+                            
+                            
+                        <!-- </video> --> 
+                        <!-- <div class="reel-overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center p-6">
+                            <h3 class="text-xl text-white font-semibold mb-2">Artisan at Work</h3>
+                            <p class="text-white text-center mb-4">Piyush creating a masterpiece</p>
+                            <a href="https://instagram.com/piyush.sanwaliya_art.wala" target="_blank"
+                                class="px-6 py-2 bg-primary text-black hover:bg-opacity-90 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                                View on Instagram
+                            </a>
+                        </div>  -->
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-7">
+                <a href="https://instagram.com/piyush.sanwaliya_art.wala" target="_blank"
+                    class="inline-flex items-center px-8 py-3 bg-black text-primary hover:bg-gray-900 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">
+                    <i class="ri-instagram-line mr-2 ri-lg"></i>
+                    Watch More Reels
+                </a>
+            </div>
+        </div>
+
+</div>
+
+
+</section>
+
+  
+
+
+
+
+
+    
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <a href="#" class="text-primary font-['Pacifico'] text-3xl mb-6 inline-block">Piyush Sanwaliya</a>
+                    <p class="text-gray-400 mb-6">
+                        Premium home temples and handcrafted Sanwaliya Ji idols created with devotion and exquisite
+                        craftsmanship.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-black transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-black transition-colors">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-black transition-colors">
+                            <i class="ri-youtube-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-black transition-colors">
+                            <i class="ri-whatsapp-line"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="https://www.instagram.com/piyush.sanwaliya_art.wala/"
+        class="floating-whatsapp fixed mt-4 bottom-[100px] right-6 w-16 h-16 flex items-center justify-center bg-primary rounded-full shadow-lg z-50 hover:bg-opacity-90 transition-colors">
+        <i class="ri-instagram-fill text-black ri-2x"></i>
+    </a>
+  
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-primary transition-colors">Gallery</a>
+                        </li>
+                        <li><a href="#testimonials"
+                                class="text-gray-400 hover:text-primary transition-colors">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Products</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Sanwaliya Ji
+                                Idols</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Home Temples</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Wall-Mounted
+                                Temples</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Travel-Size Idols</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Custom Designs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="ri-map-pin-line mt-1 mr-3 text-primary"></i>
+                            <span class="text-gray-400">49 ,MR9 Rd ,Bajrang nagar Indore , <a href=""> (M.P) </a></span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-phone-line mr-3 text-primary"></i>
+                            <span class="text-gray-400">+91 9876543210</span>
+                        </li>
+
+                        <li class="flex items-center">
+                            <i class="ri-phone-line mr-3 text-primary"></i>
+                            <span class="text-gray-400">+91 9887179272</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-mail-line mr-3 text-primary"></i>
+                            <span class="text-gray-400">contact@piyushsanwaliya.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-instagram-line mr-3 text-primary"></i>
+                            <span class="text-gray-400">@piyush.sanwaliya_art.wala</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">
+                    &copy; 2025 Piyush Sanwaliya Art Wala. All rights reserved.
+                </p>
+
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Shipping Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+919876543210"
+        class="floating-whatsapp fixed bottom-6 right-6 w-16 h-16 flex items-center justify-center bg-primary rounded-full shadow-lg z-50 hover:bg-opacity-90 transition-colors">
+        <i class="ri-whatsapp-fill text-black ri-2x"></i>
+    </a>
+
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  // ------------------ Carousel Scroll ------------------
+  const track = document.getElementById("carousel-track");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let scrollAmount = 0;
+  let cardWidth = track.querySelector(".card").offsetWidth + 16;
+
+  function updateScroll() {
+    track.style.transform = `translateX(-${scrollAmount}px)`;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    const maxScroll = track.scrollWidth - track.parentElement.offsetWidth;
+    if (scrollAmount < maxScroll) {
+      scrollAmount += cardWidth;
+      updateScroll();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (scrollAmount > 0) {
+      scrollAmount -= cardWidth;
+      updateScroll();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    scrollAmount = 0;
+    cardWidth = track.querySelector(".card").offsetWidth + 16;
+    updateScroll();
+  });
+
+  // ------------------ Mobile Menu Toggle ------------------
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle.addEventListener('click', function () {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // ------------------ Smooth Scroll for Anchor Links ------------------
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      }
+    });
+  });
+
+  // ------------------ Gallery Filter + Show More ------------------
+  const galleryItems = document.querySelectorAll(".gallery-item");
+  const showMoreBtn = document.getElementById("showMoreBtn");
+  const filterBtns = document.querySelectorAll(".filter-btn");
+
+  let currentFilter = "All";
+  let itemsToShow = 6;
+
+  function updateGallery() {
+    let shownCount = 0;
+
+    galleryItems.forEach(item => {
+      const category = item.getAttribute("data-category");
+      const matchesFilter = currentFilter === "All" || category === currentFilter;
+
+      if (matchesFilter && shownCount < itemsToShow) {
+        item.classList.remove("hidden");
+        shownCount++;
+      } else {
+        item.classList.add("hidden");
+      }
+    });
+
+    const totalMatching = Array.from(galleryItems).filter(item =>
+      currentFilter === "All" || item.getAttribute("data-category") === currentFilter
+    ).length;
+
+    showMoreBtn.textContent = itemsToShow < totalMatching ? "Show More" : "Show Less";
+    showMoreBtn.style.display = totalMatching > 6 ? "block" : "none";
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach(b => b.classList.remove("bg-yellow-700"));
+      btn.classList.add("bg-yellow-700");
+
+      currentFilter = btn.getAttribute("data-filter");
+      itemsToShow = 6;
+      updateGallery();
+    });
+  });
+
+  showMoreBtn.addEventListener("click", () => {
+    const totalMatching = Array.from(galleryItems).filter(item =>
+      currentFilter === "All" || item.getAttribute("data-category") === currentFilter
+    ).length;
+
+    if (itemsToShow < totalMatching) {
+      itemsToShow += 6;
+    } else {
+      itemsToShow = 6;
+    }
+
+    updateGallery();
+  });
+
+  updateGallery(); // Initial call
+});
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      const showMoreBtn = document.getElementById("showMoreBtn");
+      const filterBtns = document.querySelectorAll(".filter-btn");
+
+      let currentFilter = "All";
+      let itemsToShow = 6;
+
+      function updateGallery() {
+        let shownCount = 0;
+
+        galleryItems.forEach(item => {
+          const category = item.getAttribute("data-category");
+          const matchesFilter = currentFilter === "All" || category === currentFilter;
+
+          if (matchesFilter && shownCount < itemsToShow) {
+            item.classList.remove("hidden");
+            shownCount++;
+          } else {
+            item.classList.add("hidden");
+          }
+        });
+
+        const totalMatching = Array.from(galleryItems).filter(item =>
+          currentFilter === "All" || item.getAttribute("data-category") === currentFilter
+        ).length;
+
+        showMoreBtn.textContent = itemsToShow < totalMatching ? "Show More" : "Show Less";
+        showMoreBtn.style.display = totalMatching > 6 ? "inline-block" : "none";
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          currentFilter = btn.getAttribute("data-filter");
+          itemsToShow = 6;
+          updateGallery();
+        });
+      });
+
+      showMoreBtn.addEventListener("click", () => {
+        const totalMatching = Array.from(galleryItems).filter(item =>
+          currentFilter === "All" || item.getAttribute("data-category") === currentFilter
+        ).length;
+
+        if (itemsToShow < totalMatching) {
+          itemsToShow += 6;
+        } else {
+          itemsToShow = 6;
+        }
+
+        updateGallery();
+      });
+
+      updateGallery();
+    });
+
+</script>
+
+
+  
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
