@@ -1,0 +1,51 @@
+.mhead{
+    margin: 22px 0 !important;
+    background-color:#3b3b3bd8;
+    border-radius: 8px;
+}
+.mhead h4{
+   
+    padding: 15px 0; 
+    color: #fefefe !important;
+}
+
+.btm-btns{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    float: right;
+    /*margin-left: 8px;*/
+}
+
+.btm-btns button{
+   font-size: 14px;
+   padding:0.175rem  0.75rem;   
+   margin-bottom:8px;
+}
+
+.btn-group{
+    float: right;
+    margin-bottom: 12px;
+}
+
+.user-permission li{
+    list-style: none;
+}
+
+
+#support{
+    background-color: #fefefe;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 25px 0;
+}
+
+#support p{
+    line-height: 35px;
+    font-size: 17px;
+}
+.btm-btns .col{
+    flex: none;
+}
+.btm-btns button{
+    margin-right: 5px;
+}

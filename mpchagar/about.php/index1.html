@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>401 Unauthorized</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .error-container h1 {
+            font-size: 80px;
+            color: #e74c3c;
+            margin: 0;
+        }
+
+        .error-container p {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0 20px;
+        }
+
+        .error-container i {
+            font-size: 50px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .error-container a {
+            font-size: 16px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .error-container a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .error-container h1 {
+                font-size: 60px;
+            }
+
+            .error-container p {
+                font-size: 16px;
+            }
+
+            .error-container a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h1>401</h1>
+        <p>Excessive server resource usage can degrade website performance, causing slow load times and potential downtime.</p>
+        <!--<a href="/">Go Back to Home</a>-->
+    </div>
+
+</body>
+</html>
