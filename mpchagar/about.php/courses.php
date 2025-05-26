@@ -6,7 +6,7 @@
         <h1 class="breadcumb-title">Our Courses</h1>
         <ul class="breadcumb-menu">
           <li><a href="home-medical-clinic.html">Home</a></li>
-          <li>Our Courses</li> 
+          <li>Our Popular Courses</li> 
         </ul>
       </div> 
     </div>
