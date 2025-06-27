@@ -1,6 +1,7 @@
 <?php include "header.php";?>
- 
-    <div class="breadcumb-wrapper" data-bg-src="<?=$wspath?>assets/img/bg/breadcumb-bg.jpg">
+
+
+<div class="breadcumb-wrapper" data-bg-src="<?=$wspath?>assets/img/bg/breadcumb-bg.jpg">
     <div class="container">
       <div class="breadcumb-content">
         <h1 class="breadcumb-title">News & Events</h1>
