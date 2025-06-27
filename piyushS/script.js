@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             galleryItems.forEach(item => {
                 const itemCategory = item.getAttribute('data-category');
-
                 if (category === 'All' || itemCategory === category) {
                     item.style.display = 'block';
                 } else {
