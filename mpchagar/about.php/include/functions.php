@@ -3,7 +3,4 @@
         global $db;
         return mysqli_query($db, $query);
     }
-    
-    
-
 ?>
